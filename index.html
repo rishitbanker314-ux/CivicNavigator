@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivicNavigator — Your Election Guide</title>
+  <meta name="description" content="CivicNavigator is an AI-powered election guide that helps you understand the voting process, check your eligibility, and navigate every step of your election journey." />
+  <meta name="keywords" content="election guide, voting, voter registration, election navigator, civic engagement" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <!-- Ambient background -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" id="nav-logo" aria-label="CivicNavigator Home">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 2L2 8v12l12 6 12-6V8L14 2z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+            <path d="M14 8l-6 3v6l6 3 6-3v-6l-6-3z" fill="url(#logoGrad)" opacity="0.3"/>
+            <path d="M14 11v6M11 14h6" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26">
+                <stop stop-color="#6C63FF"/>
+                <stop offset="1" stop-color="#00D4AA"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">CivicNavigator</span>
+      </a>
+      <div class="nav-links">
+        <a href="#guide" class="nav-link">Process Flow</a>
+        <a href="#scenario" class="nav-link">Interactive Scenario</a>
+        <a href="#assistant" class="nav-link nav-link-cta">AI Assistant</a>
+        <div id="google_translate_element" style="margin-left: 10px;"></div>
+      </div>
+      <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-badge" aria-hidden="true">
+          <span class="badge-dot"></span>
+          AI-Powered Election Guide
+        </div>
+        <h1 id="hero-title" class="hero-title">
+          Navigate Your <span class="gradient-text">Election Journey</span> With Confidence
+        </h1>
+        <p class="hero-subtitle">
+          CivicNavigator walks you through every step — from checking your eligibility to casting your vote via EVM. Non-partisan, accurate, and personalized to your constituency.
+        </p>
+        <div class="hero-actions">
+          <a href="#guide" class="btn btn-primary" id="hero-start-btn">
+            Start Your Guide
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#assistant" class="btn btn-secondary" id="hero-ask-btn">
+            Ask a Question
+          </a>
+        </div>
+        <div class="hero-stats" aria-label="Key statistics">
+          <div class="stat-item">
+            <span class="stat-number" id="stat-steps">6</span>
+            <span class="stat-label">Easy Steps</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number" id="stat-states">50</span>
+            <span class="stat-label">States Covered</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number" id="stat-topics">12+</span>
+            <span class="stat-label">Topics Explained</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card-stack">
+          <div class="hero-card hc-1">
+            <div class="hc-icon">🗳️</div>
+            <div class="hc-text">Register to Vote</div>
+          </div>
+          <div class="hero-card hc-2">
+            <div class="hc-icon">📋</div>
+            <div class="hc-text">Check Eligibility</div>
+          </div>
+          <div class="hero-card hc-3">
+            <div class="hc-icon">📍</div>
+            <div class="hc-text">Find Polling Place</div>
+          </div>
+          <div class="hero-card hc-4">
+            <div class="hc-icon">✅</div>
+            <div class="hc-text">Cast Your Vote</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Wizard -->
+    <section id="profile" class="section profile-section" aria-labelledby="profile-title">
+      <div class="section-header">
+        <span class="section-tag">Personalize</span>
+        <h2 id="profile-title" class="section-title">Build Your Voting Plan</h2>
+        <p class="section-desc">Answer 4 quick questions. We'll show only the steps that apply to you — nothing extra.</p>
+      </div>
+      <div class="wizard-card" id="wizard-card">
+        <div class="wizard-progress-track" aria-hidden="true">
+          <div class="wizard-step-dot active" id="wdot-0"></div>
+          <div class="wizard-step-line"></div>
+          <div class="wizard-step-dot" id="wdot-1"></div>
+          <div class="wizard-step-line"></div>
+          <div class="wizard-step-dot" id="wdot-2"></div>
+          <div class="wizard-step-line"></div>
+          <div class="wizard-step-dot" id="wdot-3"></div>
+        </div>
+        <div class="wizard-body" id="wizard-body">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Personalized / Full Voting Guide -->
+    <section id="guide" class="section guide-section" aria-labelledby="guide-title">
+      <div class="section-header">
+        <span class="section-tag" id="guide-tag">Step-by-Step</span>
+        <h2 id="guide-title" class="section-title">Your Voting Guide</h2>
+        <p class="section-desc" id="guide-desc">Complete the profile above to see your personalized steps, or browse all steps below.</p>
+      </div>
+      <div id="guide-plan-banner" class="guide-plan-banner" style="display:none;">
+        <!-- Profile summary injected by JS -->
+      </div>
+      <div class="guide-grid" id="guide-grid" role="list">
+        <!-- Steps injected by JS -->
+      </div>
+      <div class="guide-reset-row" id="guide-reset-row" style="display:none;">
+        <button class="guide-reset-btn" id="guide-reset-btn" onclick="window.__resetProfile()">
+          ↺ Update my profile
+        </button>
+      </div>
+    </section>
+
+    <!-- Eligibility Checker -->
+    <section id="eligibility" class="section eligibility-section" aria-labelledby="eligibility-title">
+      <div class="section-header">
+        <span class="section-tag">Quick Check</span>
+        <h2 id="eligibility-title" class="section-title">Am I Eligible to Vote?</h2>
+        <p class="section-desc">Answer a few quick questions to understand your voter eligibility status.</p>
+      </div>
+      <div class="eligibility-card" id="eligibility-card">
+        <div class="elig-progress" id="elig-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="elig-progress-bar" id="elig-progress-bar"></div>
+        </div>
+        <div class="elig-question-area" id="elig-question-area">
+          <!-- Questions are rendered by JS -->
+        </div>
+        <div class="elig-result" id="elig-result" style="display:none;">
+          <!-- Result rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Polling Locator Section (Google Maps) -->
+    <section id="locator" class="section locator-section" aria-labelledby="locator-title">
+      <div class="section-header">
+        <span class="section-tag">Find Location</span>
+        <h2 id="locator-title" class="section-title">Find Your Polling Place</h2>
+        <p class="section-desc">Enter your Zip Code to find voting locations near you via Google Maps.</p>
+      </div>
+      <div class="locator-container">
+        <div class="locator-input-row">
+          <input type="text" id="zip-input" placeholder="Enter Zip Code (e.g. 90210)" />
+          <button id="find-poll-btn" class="btn-primary">Find Location</button>
+        </div>
+        <div id="map-container" class="map-container" style="display:none; margin-top:20px;">
+          <iframe id="poll-map" width="100%" height="400" style="border:0; border-radius:var(--radius-md);" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Simple Timeline -->
+    <section id="timeline" class="section timeline-section" aria-labelledby="timeline-title">
+      <div class="section-header">
+        <span class="section-tag">Process Flow</span>
+        <h2 id="timeline-title" class="section-title">Election Timeline</h2>
+        <p class="section-desc">A simple, relative timeline showing what you need to do and when.</p>
+      </div>
+      <div class="timeline-sequence">
+        <span class="seq-step">Step 1</span> <span class="seq-arrow">→</span>
+        <span class="seq-step">Step 2</span> <span class="seq-arrow">→</span>
+        <span class="seq-step">Step 3</span> <span class="seq-arrow">→</span>
+        <span class="seq-step">Step 4</span> <span class="seq-arrow">→</span>
+        <span class="seq-step">Step 5</span> <span class="seq-arrow">→</span>
+        <span class="seq-step">Step 6</span>
+      </div>
+      <div class="timeline-container" id="timeline-container" role="list">
+        <!-- Timeline items rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Interactive Scenario -->
+    <section id="scenario" class="section scenario-section" aria-labelledby="scenario-title">
+      <div class="section-header">
+        <span class="section-tag">Learn By Doing</span>
+        <h2 id="scenario-title" class="section-title">Interactive Scenario</h2>
+        <p class="section-desc">Test your knowledge! Make choices to learn how the election process works in practice.</p>
+      </div>
+      <div class="scenario-container" id="scenario-container">
+        <!-- Scenario content rendered by JS -->
+      </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section id="assistant" class="section assistant-section" aria-labelledby="assistant-title">
+      <div class="section-header">
+        <span class="section-tag">AI Assistant</span>
+        <h2 id="assistant-title" class="section-title">Ask CivicNavigator</h2>
+        <p class="section-desc">Have a question about the election process? Get clear, non-partisan answers instantly.</p>
+      </div>
+      <div class="chat-container" id="chat-container">
+        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages">
+          <!-- Messages rendered by JS -->
+        </div>
+        <form class="chat-input-area" id="chat-form" aria-label="Ask a question">
+          <div class="chat-suggestions" id="chat-suggestions">
+            <button type="button" class="suggestion-chip" data-q="Am I eligible to vote?">Am I eligible to vote?</button>
+            <button type="button" class="suggestion-chip" data-q="How do I register to vote?">How do I register to vote?</button>
+            <button type="button" class="suggestion-chip" data-q="How do I verify my registration?">Verify registration</button>
+            <button type="button" class="suggestion-chip" data-q="How do I find my polling place?">Find polling place</button>
+            <button type="button" class="suggestion-chip" data-q="What ID do I need to vote?">What ID do I need?</button>
+            <button type="button" class="suggestion-chip" data-q="How do I find official election results?">Official results</button>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Ask about the election process..." autocomplete="off" aria-label="Type your question" />
+            <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 10l7-7m0 0l7 7m-7-7v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(90 10 10)"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text">CivicNavigator</span>
+        <p class="footer-tagline">Empowering informed civic participation.</p>
+      </div>
+      <div class="footer-disclaimer">
+        <p>CivicNavigator provides general election guidance. For official information, always verify with the Election Commission of India. This tool does not endorse any candidate or party.</p>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 CivicNavigator. Non-partisan election guide.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
