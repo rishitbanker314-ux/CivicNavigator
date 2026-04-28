@@ -360,51 +360,52 @@
   // No extra info. No repetition. Correct order only.
   const ACTION_PLAN = {
     register: [
-      'Check eligibility (18+ Indian citizen)',
-      'Register via NVSP or Voter Helpline',
+      'Submit Form 6 for registration',
       'Verify name in electoral roll',
-      'Locate polling booth',
-      'Vote using EVM at assigned booth'
+      'Locate assigned polling booth',
+      'Bring approved ID to booth',
+      'Cast vote using EVM'
     ],
     verify: [
-      'Go to the ECI Electoral Search portal',
-      'Search using your EPIC number or personal details',
-      'Confirm your assigned Part Number and Polling Booth',
-      'File Form 8 if corrections are needed'
+      'Verify name in electoral roll',
+      'Locate assigned polling booth',
+      'Bring approved ID to booth',
+      'Cast vote using EVM'
     ],
     polling: [
-      'Go to the ECI Booth Locator or Voter Helpline App',
-      'Enter your EPIC number or details',
-      'Note your exact Polling Station name and Part Number',
-      'Plan your route before Polling Day'
+      'Locate assigned polling booth',
+      'Go to the booth on Polling Day',
+      'Bring approved ID to booth',
+      'Cast vote using EVM'
     ],
     id: [
-      'Check the ECI list of approved IDs (Aadhaar, Passport, PAN, etc.)',
-      'Find your original EPIC or an approved alternative ID',
-      'Bring the original document to the polling booth'
+      'Bring approved ID to booth',
+      'Show ID to Polling Officer',
+      'Cast vote using EVM'
     ],
     mail: [
-      'Confirm you fall under the absentee voter category (85+ years, PwD, essential service)',
-      'Obtain Form 12D from the local election office',
-      'Fill and submit it within 5 days of election notification',
-      'Follow instructions to cast your postal ballot'
+      'Verify eligibility for postal ballot',
+      'Submit Form 12D for postal ballot',
+      'Receive postal ballot from Returning Officer',
+      'Submit marked postal ballot'
     ],
     early: [
-      'Check the designated Polling Day for your constituency',
-      'Understand that general early voting is not available',
-      'Make arrangements to vote on your specific Polling Day'
+      'Verify exact Polling Day for your constituency',
+      'Locate assigned polling booth',
+      'Cast vote using EVM on designated day'
     ],
     provisional: [
-      'Inform the Presiding Officer immediately',
-      'Provide your EPIC or valid ID proof',
-      'Request a Tendered Ballot paper',
-      'Fill it out and hand it directly to the Presiding Officer'
+      'Report to Presiding Officer immediately',
+      'Provide your approved ID proof',
+      'Request a Tendered Ballot',
+      'Fill and submit the Tendered Ballot'
     ],
     eligibility: [
-      'Visit the ECI Voter Portal',
-      'Review the age requirement (18+) and cutoff dates',
-      'Confirm you are an ordinarily resident Indian citizen',
-      'Ensure you have valid proof documents before applying'
+      'Verify eligibility (18+ Indian citizen)',
+      'Submit Form 6 for registration',
+      'Verify name in electoral roll',
+      'Locate assigned polling booth',
+      'Cast vote using EVM'
     ]
   };
 
