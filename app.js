@@ -1207,11 +1207,10 @@
     const card = document.createElement('div');
     card.className = `chat-msg bot risk-card${level ? ' risk-card-' + level : ''}`;
     card.innerHTML = `
-      <div class="msg-label risk-label">📊 If You Do Nothing</div>
-      ${cfg ? `<div class="risk-badge ${cfg.cls}">${cfg.emoji} ${cfg.label} &mdash; <em>${reason}</em></div>` : ''}
-      <div class="risk-row"><span class="risk-icon">🟨</span><span><strong>What happens:</strong> ${risk.nothing}</span></div>
-      <div class="risk-row"><span class="risk-icon">🟠</span><span><strong>What can go wrong:</strong> ${risk.wrong}</span></div>
-      <div class="risk-row"><span class="risk-icon">🔴</span><span><strong>Impact on voting:</strong> ${risk.impact}</span></div>
+      <div class="msg-section-header"><strong>Predict:</strong></div>
+      <div class="msg-bullet"><strong>What happens if user takes no action:</strong> ${risk.nothing}</div>
+      <div class="msg-bullet"><strong>What could go wrong:</strong> ${risk.wrong}</div>
+      <div class="msg-bullet"><strong>Impact on their ability to vote:</strong> ${risk.impact}</div>
     `;
     container.appendChild(card);
     container.scrollTop = container.scrollHeight;
