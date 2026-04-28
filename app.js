@@ -2,7 +2,54 @@
 (function () {
   'use strict';
 
+  // ─── SYSTEM DIRECTIVE ───────────────────────────────────────────────────────
+  // This system operates EXCLUSIVELY under Election Commission of India (ECI)
+  // standards. All responses must conform to these rules before being rendered.
+  const SYSTEM_DIRECTIVE = {
+    name:    'Indian Election Decision Intelligence System',
+    source:  'eci.gov.in',
+    terms:   ['EPIC', 'EVM', 'Constituency', 'Polling Booth', 'NVSP', 'Form 6', 'Form 8', 'Form 12D', 'Tendered Ballot', 'VVPAT'],
+    blocked: ['ballot box', 'absentee ballot (general)', 'county', 'state legislature', 'senator', 'president', 'congress (US)', 'vote.gov', 'election day (US)'],
+    rules: [
+      'Only Indian election system (eci.gov.in standards)',
+      'Use terms: EPIC (Voter ID), EVM, Constituency, Polling Booth',
+      'No US or foreign references whatsoever',
+      'No assumptions about specific dates or policies — say "Please verify with official ECI sources."',
+      'Foreign election queries must be rejected with: "This system is designed only for Indian elections."',
+      'Location-unspecified queries must prompt: "Which state or city in India are you from?"',
+      'Political endorsement queries must respond: "I can only help you learn how to vote, not who to vote for."'
+    ]
+  };
+
+  /**
+   * enforceDirective(text)
+   * Scans any outgoing response for foreign terms.
+   * If found, replaces with the safe ECI fallback.
+   */
+  function enforceDirective(text) {
+    const foreignPatterns = [
+      /\bvote\.gov\b/gi,
+      /\belection day\b(?!.*india)/gi,
+      /\bcounty\b/gi,
+      /\bstate legislature\b/gi,
+      /\bmail-in ballot\b/gi,
+      /\babsentee ballot\b(?!.*form 12d|.*postal)/gi,
+      /\bsenator\b/gi,
+      /\bcongressman\b/gi,
+      /\brepublican\b|\bdemocrat\b/gi,
+      /\bu\.s\.\s*(citizen|election|voter)/gi
+    ];
+    let clean = text;
+    foreignPatterns.forEach(p => {
+      if (p.test(clean)) {
+        clean = '##section## 📋 Situation\nA non-Indian electoral term was detected in this response.\n\n##section## ⚡ What You Should Do\n• Please verify with official ECI sources.';
+      }
+    });
+    return clean;
+  }
+
   // ─── DATA ───
+
   const GUIDE_STEPS = [
     {
       title: 'Eligibility Check',
@@ -1168,11 +1215,15 @@
   function addBotMsg(text, isUnverified) {
     const container = document.getElementById('chat-messages');
     if (!container) return;
+    // ── SYSTEM DIRECTIVE ENFORCEMENT ──
+    // Every outgoing bot response is scanned for foreign electoral terms.
+    // If any are detected, the response is replaced with the ECI fallback.
+    const safeText = enforceDirective(text);
     const div = document.createElement('div');
     div.className = 'chat-msg bot';
-    let inner = `<div class="msg-label">CivicNavigator</div><div>${formatMsg(text)}</div>`;
+    let inner = `<div class="msg-label">CivicNavigator</div><div>${formatMsg(safeText)}</div>`;
     if (isUnverified) {
-      inner += `<div class="msg-unverified">⚠️ Please verify with official election sources.</div>`;
+      inner += `<div class="msg-unverified">⚠️ Please verify with official ECI sources at eci.gov.in</div>`;
     }
     div.innerHTML = inner;
     container.appendChild(div);
