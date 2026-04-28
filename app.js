@@ -252,20 +252,20 @@
   ];
 
   const QA_BANK = {
-    'eligibility': '##section## 📋 Situation\nYou need to know if you can vote.\n\n##section## 🟢 Risk Level\nLow — Checking eligibility is informational only.\n\n##section## 🟠 What Could Go Wrong\nAssuming you are eligible without checking can lead to denied enrollment.\n\n##section## ⚡ What You Should Do\n• Visit ECI Voter Portal\n• Check age and residency rules\n• Confirm Indian citizenship',
-    'register': '##section## 📋 Situation\nYou need to enroll in the electoral roll.\n\n##section## 🔴 Risk Level\nHigh — Missing the deadline before the roll freezes means you cannot vote.\n\n##section## 🟠 What Could Go Wrong\nNot filing Form 6 in time means no vote in the upcoming election.\n\n##section## ⚡ What You Should Do\n• Go to ECI Voter Portal or use Voter Helpline App\n• Fill out Form 6\n• Submit with address and age proof',
-    'verify': '##section## 📋 Situation\nYou want to make sure your name is on the electoral roll.\n\n##section## 🟡 Risk Level\nMedium — May cause delays or denial at the booth.\n\n##section## 🟠 What Could Go Wrong\nAn outdated address or deleted name means you cannot cast your vote.\n\n##section## ⚡ What You Should Do\n• Go to ECI Electoral Search\n• Search your name or EPIC number\n• Confirm details match your ID',
-    'polling': '##section## 📋 Situation\nYou need to find your polling booth.\n\n##section## 🟡 Risk Level\nMedium — Going to the wrong booth can prevent voting via EVM.\n\n##section## 🟠 What Could Go Wrong\nArriving after polling hours means you cannot vote at all.\n\n##section## ⚡ What You Should Do\n• Use ECI Booth Locator\n• Note Part Number and Serial Number\n• Plan route before Polling Day',
-    'id': '##section## 📋 Situation\nYou need to know about voting ID.\n\n##section## 🟡 Risk Level\nMedium — Missing EPIC or valid ID stops you at the booth.\n\n##section## 🟠 What Could Go Wrong\nBringing an unacceptable ID will result in the polling officer denying your vote.\n\n##section## ⚡ What You Should Do\n• Check ECI list of approved IDs (Aadhaar, PAN, Passport, etc. if EPIC is missing)\n• Bring original valid ID to the booth',
-    'mail': '##section## 📋 Situation\nYou want to vote by postal ballot.\n\n##section## 🔴 Risk Level\nHigh — Postal ballots are only for specific categories (senior citizens 85+, PwD, essential services).\n\n##section## 🟠 What Could Go Wrong\nNot submitting Form 12D within 5 days of election notification means no postal ballot.\n\n##section## ⚡ What You Should Do\n• Check if you fall in the absentee voter category\n• Fill Form 12D\n• Submit to the Returning Officer in time',
-    'early': '##section## 📋 Situation\nYou want to vote before Polling Day.\n\n##section## 🟢 Risk Level\nLow — India generally does not have general early voting, only specific postal ballot provisions.\n\n##section## 🟠 What Could Go Wrong\nAssuming you can vote early like in other countries might make you miss Polling Day.\n\n##section## ⚡ What You Should Do\n• Confirm Polling Day for your constituency\n• Plan to vote on that specific date',
-    'provisional': '##section## 📋 Situation\nYour name is missing at the booth or someone else voted in your name.\n\n##section## 🔴 Risk Level\nHigh — Leaving without checking your options means your vote is gone.\n\n##section## 🟠 What Could Go Wrong\nNot asking for a tendered ballot if someone impersonated you means you lose your right.\n\n##section## ⚡ What You Should Do\n• Talk to the Presiding Officer\n• Ask for a Tendered Ballot if someone else voted for you\n• Provide identity proof',
-    'results': '##section## 📋 Situation\nYou want to know who won.\n\n##section## 🟢 Risk Level\nLow — Checking results is informational only.\n\n##section## 🟠 What Could Go Wrong\nTrusting exit polls can be misleading.\n\n##section## ⚡ What You Should Do\n• Go to the official ECI results portal on Counting Day\n• Look for declared results',
+    'eligibility': '##section## 📋 Situation\n• Mistakes: Assuming you are eligible without checking.\n• Missing steps: Need to verify age and residency.\n• Risks: Being turned away at enrollment.\n\n##section## 🟢 Risk Level\n• Low\n• Checking eligibility is informational only.\n\n##section## 🟠 What Could Go Wrong\nAssuming you are eligible without checking can lead to denied enrollment.\n\n##section## ⚡ What You Should Do\n• Visit ECI Voter Portal\n• Check age and residency rules\n• Confirm Indian citizenship',
+    'register': '##section## 📋 Situation\n• Mistakes: Missing the enrollment deadline.\n• Missing steps: Need to submit Form 6.\n• Risks: Name will not be on the electoral roll.\n\n##section## 🔴 Risk Level\n• High\n• Missing the deadline before the roll freezes means you cannot vote.\n\n##section## 🟠 What Could Go Wrong\nNot filing Form 6 in time means no vote in the upcoming election.\n\n##section## ⚡ What You Should Do\n• Go to ECI Voter Portal or use Voter Helpline App\n• Fill out Form 6\n• Submit with address and age proof',
+    'verify': '##section## 📋 Situation\n• Mistakes: Assuming name is on the roll without checking.\n• Missing steps: Need to search Electoral Roll.\n• Risks: Name deleted or wrong booth assigned.\n\n##section## 🟡 Risk Level\n• Medium\n• May cause delays or denial at the booth.\n\n##section## 🟠 What Could Go Wrong\nAn outdated address or deleted name means you cannot cast your vote.\n\n##section## ⚡ What You Should Do\n• Go to ECI Electoral Search\n• Search your name or EPIC number\n• Confirm details match your ID',
+    'polling': '##section## 📋 Situation\n• Mistakes: Going to the wrong booth or arriving late.\n• Missing steps: Need to find Part Number and Booth Location.\n• Risks: Denied entry to vote.\n\n##section## 🟡 Risk Level\n• Medium\n• Going to the wrong booth can prevent voting via EVM.\n\n##section## 🟠 What Could Go Wrong\nArriving after polling hours means you cannot vote at all.\n\n##section## ⚡ What You Should Do\n• Use ECI Booth Locator\n• Note Part Number and Serial Number\n• Plan route before Polling Day',
+    'id': '##section## 📋 Situation\n• Mistakes: Forgetting EPIC or bringing unapproved ID.\n• Missing steps: Need to check approved ECI ID list.\n• Risks: Not allowed to press EVM.\n\n##section## 🟡 Risk Level\n• Medium\n• Missing EPIC or valid ID stops you at the booth.\n\n##section## 🟠 What Could Go Wrong\nBringing an unacceptable ID will result in the polling officer denying your vote.\n\n##section## ⚡ What You Should Do\n• Check ECI list of approved IDs\n• Bring original valid ID to the booth',
+    'mail': '##section## 📋 Situation\n• Mistakes: Thinking anyone can vote by mail.\n• Missing steps: Need to submit Form 12D in time.\n• Risks: Postal ballot request rejected.\n\n##section## 🔴 Risk Level\n• High\n• Postal ballots are only for specific categories (senior citizens 85+, PwD, essential services).\n\n##section## 🟠 What Could Go Wrong\nNot submitting Form 12D within 5 days of election notification means no postal ballot.\n\n##section## ⚡ What You Should Do\n• Check if you fall in the absentee voter category\n• Fill Form 12D\n• Submit to the Returning Officer in time',
+    'early': '##section## 📋 Situation\n• Mistakes: Assuming early voting exists like in other countries.\n• Missing steps: Need to verify Polling Day date.\n• Risks: Missing the actual Polling Day.\n\n##section## 🟢 Risk Level\n• Low\n• India generally does not have general early voting, only specific postal ballot provisions.\n\n##section## 🟠 What Could Go Wrong\nAssuming you can vote early like in other countries might make you miss Polling Day.\n\n##section## ⚡ What You Should Do\n• Confirm Polling Day for your constituency\n• Plan to vote on that specific date',
+    'provisional': '##section## 📋 Situation\n• Mistakes: Leaving booth without filing a complaint.\n• Missing steps: Need to ask for Tendered Ballot.\n• Risks: Losing your right to vote.\n\n##section## 🔴 Risk Level\n• High\n• Leaving without checking your options means your vote is gone.\n\n##section## 🟠 What Could Go Wrong\nNot asking for a tendered ballot if someone impersonated you means you lose your right.\n\n##section## ⚡ What You Should Do\n• Talk to the Presiding Officer\n• Ask for a Tendered Ballot\n• Provide identity proof',
+    'results': '##section## 📋 Situation\n• Mistakes: Trusting exit polls as final.\n• Missing steps: Need to check ECI certified results.\n• Risks: Misinformation.\n\n##section## 🟢 Risk Level\n• Low\n• Checking results is informational only.\n\n##section## 🟠 What Could Go Wrong\nTrusting exit polls can be misleading.\n\n##section## ⚡ What You Should Do\n• Go to the official ECI results portal on Counting Day\n• Look for declared results',
     'non_india': 'This system is designed only for Indian elections.',
     'location_guard': 'Which state or city in India are you from?',
     'political_guard': 'I can only help you learn how to vote, not who to vote for.',
-    'unverified': '##section## 📋 Situation\nYou asked about something I cannot verify.\n\n##section## 🟡 Risk Level\nMedium — Acting on unverified information can lead to mistakes.\n\n##section## 🟠 What Could Go Wrong\nUsing incorrect information might cause you to miss deadlines or go to the wrong booth.\n\n##section## ⚡ What You Should Do\n• Please verify with official ECI sources.',
-    'default': '##section## 📋 Situation\nI am missing data or unsure about your question.\n\n##section## 🟡 Risk Level\nMedium — Acting on incomplete information can lead to mistakes.\n\n##section## 🟠 What Could Go Wrong\nUsing incorrect information might cause you to miss deadlines or go to the wrong booth.\n\n##section## ⚡ What You Should Do\n• Please verify with official ECI sources.'
+    'unverified': '##section## 📋 Situation\n• Mistakes: Acting on unverified information.\n• Missing steps: Need to consult ECI.\n• Risks: Making wrong decisions based on bad data.\n\n##section## 🟡 Risk Level\n• Medium\n• Acting on unverified information can lead to mistakes.\n\n##section## 🟠 What Could Go Wrong\nUsing incorrect information might cause you to miss deadlines or go to the wrong booth.\n\n##section## ⚡ What You Should Do\n• Please verify with official ECI sources.',
+    'default': '##section## 📋 Situation\n• Mistakes: Proceeding with incomplete data.\n• Missing steps: Need to clarify request.\n• Risks: Misinformation.\n\n##section## 🟡 Risk Level\n• Medium\n• Acting on incomplete information can lead to mistakes.\n\n##section## 🟠 What Could Go Wrong\nUsing incorrect information might cause you to miss deadlines or go to the wrong booth.\n\n##section## ⚡ What You Should Do\n• Please verify with official ECI sources.'
   };
 
   // ─── RISK PREDICTION BANK ───
@@ -973,7 +973,7 @@
 
   /**
    * Extracts context and validates chat response.
-   * If intent is missing or location is needed, it asks ONE short question.
+   * Extracts Voting Stage and Issue, maintains state, asks ONE question if unclear.
    */
   function validateChatResponse(q, key, text) {
     const lower = q.toLowerCase();
@@ -981,6 +981,34 @@
     // EXPLICIT BYPASS: Political Persuasion Guard
     if (key === 'political_guard') {
       return { key, text, isUnverified: false };
+    }
+
+    // Extraction: Voting Stage
+    if (!window._votingStage) {
+      if (/(not register|haven't register|how to register|form 6|new voter)/.test(lower)) {
+        window._votingStage = 'Not Registered';
+      } else if (/(am register|already register)/.test(lower) && !/(verif|check)/.test(lower)) {
+        window._votingStage = 'Registered';
+      } else if (/(verified|checked name|found name|on the roll)/.test(lower)) {
+        window._votingStage = 'Verified';
+      } else if (/(ready to vote|have epic|have voter id|know booth)/.test(lower)) {
+        window._votingStage = 'Ready to Vote';
+      }
+    }
+
+    // Extraction: Issue
+    if (!window._issue && /(lost|missing|wrong|error|didn't receive|someone else)/.test(lower)) {
+      window._issue = q; // rough extraction of the issue
+    }
+
+    // Ask ONE short question if stage is unclear, do not repeat
+    if (!window._votingStage && !window._askedForStage) {
+      window._askedForStage = true;
+      return {
+        key: 'missing_stage',
+        text: '##section## 📋 Situation\nI need to know your current voting stage to help you best.\n\n##section## ⚡ What You Should Do\n• Are you: Not Registered, Registered, Verified, or Ready to Vote?',
+        isUnverified: false
+      };
     }
 
     // Extraction: Intent, Key Issue, Missing Info
@@ -1014,7 +1042,7 @@
   }
 
   function safeDefault(q) {
-    return { key: 'default', text: QA_BANK.default, isUnverified: false };
+    return { key: 'default', text: QA_BANK.default || '##section## 📋 Situation\nI am missing data.\n\n##section## 🟡 Risk Level\nMedium\n\n##section## 🟠 What Could Go Wrong\nMistakes.\n\n##section## ⚡ What You Should Do\n• Verify with ECI.', isUnverified: false };
   }
 
   /**
@@ -1068,6 +1096,12 @@
     let resolvedText = rawText;
     let showRisk     = true;
     let showAction   = true;
+
+    // EXPLICIT BYPASS for guards
+    const guardKeys = ['missing_stage', 'missing_info', 'political_guard', 'location_guard', 'non_india'];
+    if (guardKeys.includes(resolvedKey)) {
+      return { key: resolvedKey, text: resolvedText, showRisk: false, showAction: false, isUnverified: false };
+    }
 
     // CHECK A: Logical prediction
     if (!RISK_BANK[resolvedKey] || !RISK_LEVEL[resolvedKey]) {
@@ -1222,6 +1256,16 @@
     const div = document.createElement('div');
     div.className = 'chat-msg bot';
     let inner = `<div class="msg-label">CivicNavigator</div><div>${formatMsg(safeText)}</div>`;
+    
+    // UI extension for state tracking
+    if (window._votingStage || window._issue) {
+       inner += `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85em; color: #9ca3af;">
+         <strong>Extraction:</strong><br>
+         - Voting Stage: ${window._votingStage || 'Unclear'}<br>
+         ${window._issue ? `- Issue: ${escapeHtml(window._issue)}` : '- Issue: None'}
+       </div>`;
+    }
+
     if (isUnverified) {
       inner += `<div class="msg-unverified">⚠️ Please verify with official ECI sources at eci.gov.in</div>`;
     }
