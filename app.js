@@ -210,6 +210,7 @@ function updateRiskAssessment(idx) {
   const stageVal = el('ra-stage-value');
   if (!stageVal) return;
   stageVal.textContent = d.stage;
+  stageVal.removeAttribute('style');
   el('ra-stage-note').textContent = d.stageNote;
   const pill = el('ra-risk-pill');
   pill.textContent = d.risk;

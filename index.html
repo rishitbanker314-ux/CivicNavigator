@@ -121,43 +121,6 @@
       </div>
     </section>
 
-    <!-- Voting Risk Assessment -->
-    <section id="risk-assessment" class="section ra-section" aria-labelledby="ra-title">
-      <h2 id="ra-title" class="ra-heading">Your Voting Risk Assessment</h2>
-
-      <div class="ra-cards" id="ra-cards">
-        <!-- Card 1 — Voting Stage -->
-        <div class="ra-card" id="ra-card-stage">
-          <div class="ra-icon">🗳️</div>
-          <div class="ra-card-title">Current Stage</div>
-          <div class="ra-card-value" id="ra-stage-value">Unknown</div>
-          <div class="ra-card-note" id="ra-stage-note">Select your stage above</div>
-        </div>
-        <!-- Card 2 — Risk Level -->
-        <div class="ra-card" id="ra-card-risk">
-          <div class="ra-icon">⚠️</div>
-          <div class="ra-card-title">Risk Level</div>
-          <div class="ra-risk-pill" id="ra-risk-pill" style="background: #E5E7EB; color: #4B5563;">PENDING</div>
-          <div class="ra-card-note" id="ra-risk-note">Awaiting profile completion</div>
-        </div>
-        <!-- Card 3 — Biggest Issue -->
-        <div class="ra-card" id="ra-card-issue">
-          <div class="ra-icon">⏰</div>
-          <div class="ra-card-title">Biggest Issue</div>
-          <div class="ra-card-value ra-value-issue" id="ra-issue-value" style="color: #6B7280;">N/A</div>
-          <div class="ra-card-note" id="ra-issue-note">Awaiting profile completion</div>
-        </div>
-      </div>
-
-      <!-- Consequence Card -->
-      <div class="ra-consequence" id="ra-consequence">
-        <div class="ra-consequence-bar"></div>
-        <div class="ra-consequence-body">
-          <div class="ra-consequence-title">⚠️ If You Ignore This:</div>
-          <div class="ra-consequence-text" id="ra-consequence-text">You will not be able to cast your vote on election day. Your name will not appear on the electoral roll and booth officials cannot help you.</div>
-        </div>
-      </div>
-    </section>
 
     <!-- Action Plan -->
     <section id="action-plan" class="section ap-section" aria-labelledby="ap-title">
@@ -215,6 +178,44 @@
             <span class="ap-rc-text">Find Booth via Google Maps<span class="ap-rc-sub">voters.eci.gov.in</span></span>
             <span class="ap-rc-arrow">↗</span>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voting Risk Assessment -->
+    <section id="risk-assessment" class="section ra-section" aria-labelledby="ra-title">
+      <h2 id="ra-title" class="ra-heading">Your Voting Risk</h2>
+
+      <div class="ra-cards" id="ra-cards">
+        <!-- Card 1 — Voting Stage -->
+        <div class="ra-card" id="ra-card-stage">
+          <div class="ra-icon">🗳️</div>
+          <div class="ra-card-title">Current Stage</div>
+          <div class="ra-card-value" id="ra-stage-value" style="color: #2563EB;">Not Registered</div>
+          <div class="ra-card-note" id="ra-stage-note">You need to register to vote</div>
+        </div>
+        <!-- Card 2 — Risk Level -->
+        <div class="ra-card" id="ra-card-risk">
+          <div class="ra-icon">⚠️</div>
+          <div class="ra-card-title">Risk Level</div>
+          <div class="ra-risk-pill ra-pill-high" id="ra-risk-pill" style="background: #FEE2E2; color: #DC2626;">HIGH</div>
+          <div class="ra-card-note ra-note-red" id="ra-risk-note">Your vote may be at risk</div>
+        </div>
+        <!-- Card 3 — Biggest Issue -->
+        <div class="ra-card" id="ra-card-issue">
+          <div class="ra-icon">⏰</div>
+          <div class="ra-card-title">Biggest Issue</div>
+          <div class="ra-card-value ra-value-issue" id="ra-issue-value">Registration Incomplete</div>
+          <div class="ra-card-note ra-note-amber" id="ra-issue-note">Act now to protect your vote</div>
+        </div>
+      </div>
+
+      <!-- Consequence Card -->
+      <div class="ra-consequence" id="ra-consequence">
+        <div class="ra-consequence-bar"></div>
+        <div class="ra-consequence-body">
+          <div class="ra-consequence-title">⚠️ If You Ignore This:</div>
+          <div class="ra-consequence-text" id="ra-consequence-text">You will not be able to cast your vote. Your name will not appear on the electoral roll and booth officials cannot assist you on election day.</div>
         </div>
       </div>
     </section>
