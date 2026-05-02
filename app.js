@@ -488,20 +488,73 @@ function initChat() {
   function addTyping() {
     const div = document.createElement('div');
     div.className = 'ai-msg ai-bot'; div.id = 'ai-typing-indicator';
-    div.innerHTML = `<div class="ai-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>`;
+    div.innerHTML = `<div class="ai-bubble"><div style="display: flex; align-items: center; gap: 8px;">CivicNavigator is analyzing... <div class="ai-typing"><span></span><span></span><span></span></div></div></div>`;
     messages.appendChild(div); messages.scrollTop = messages.scrollHeight;
   }
 
-  function ask(q) {
+  async function ask(q) {
     addMsg(q, 'user');
     if (prompts) prompts.style.display = 'none';
     addTyping();
-    setTimeout(() => {
+
+    const apiKey = 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+
+    const systemInstruction = `You are CivicNavigator, an Indian election guidance AI. 
+You only discuss Indian elections following ECI guidelines. 
+Use terms: EPIC, EVM, Constituency, PIN Code, Polling Booth, NVSP.
+Never reference US elections. Never suggest who to vote for.
+Always respond in this format:
+Stage: [user's voting stage]
+Risk: [High/Medium/Low]
+Issue: [one line]
+If Ignored: [consequence]
+Next Steps: [2-3 bullet points]
+Confidence: [High/Medium/Low]
+Keep response under 120 words.`;
+
+    const requestBody = {
+      contents: [{
+        parts: [
+          { text: systemInstruction + "\n\nUser Question: " + q }
+        ]
+      }]
+    };
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
       const t = document.getElementById('ai-typing-indicator');
       if (t) t.remove();
-      addMsg(getAIResponse(q), 'bot');
+
+      if (!response.ok) {
+        throw new Error('API Error');
+      }
+
+      const data = await response.json();
+      let aiText = "Please verify your query at eci.gov.in";
+      
+      if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+        aiText = data.candidates[0].content.parts[0].text;
+      }
+      
+      // Convert line breaks to HTML breaks for proper display
+      addMsg(aiText.replace(/\n/g, '<br/>'), 'bot');
       if (prompts) prompts.style.display = 'flex';
-    }, 900 + Math.random() * 400);
+
+    } catch (error) {
+      console.error("Gemini API Error:", error);
+      const t = document.getElementById('ai-typing-indicator');
+      if (t) t.remove();
+      addMsg("Please verify your query at eci.gov.in", 'bot');
+      if (prompts) prompts.style.display = 'flex';
+    }
   }
 
   // Welcome message
