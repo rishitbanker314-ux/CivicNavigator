@@ -128,7 +128,7 @@ const AI_KB = {
   'form 6': 'Form 6 is the application form for new voter registration in India. Fill it on nvsp.in with your proof of age, proof of address, and a passport-size photo. You\'ll get an acknowledgement number to track your application.',
   'electoral roll': 'The Electoral Roll is the official list of registered voters in each constituency, maintained by the Election Commission of India. Verify your name at electoralsearch.in. Note your Part Number and Serial Number — these are referenced by the Polling Booth officer on election day.',
   'polling booth': 'Your Polling Booth is the specific voting centre assigned to you based on your registered address. You can only vote at your assigned Polling Booth. Find yours on voters.eci.gov.in or printed on your EPIC slip.',
-  'constituency': 'A constituency (also called a Polling Division or Vidhan Sabha/Lok Sabha Constituency) is the geographic area you are registered in. India has 28 States and 8 Union Territories, divided into Lok Sabha (543) and Vidhan Sabha constituencies.',
+  'constituency': 'A constituency (also called a Polling Division or Vidhan Sabha/Lok Sabha Constituency) is the geographic area you are registered in. India has 28 State/UTs and 8 Union Territories, divided into Lok Sabha (543) and Vidhan Sabha constituencies.',
   'pin code': 'In India, we use PIN Codes (6-digit Postal Index Numbers) instead of Zip Codes. When looking for your Polling Booth, you can use your PIN Code or constituency name on voters.eci.gov.in.',
   'electoralsearch': 'Visit electoralsearch.in (official ECI site) to search if your name is on the Electoral Roll. You can search by name, EPIC number, or address. This is a critical step before election day.',
   'register': 'To register as a voter: 1) Visit nvsp.in 2) Click "New Registration — Form 6" 3) Fill in your details 4) Upload proof of age, address, and photo 5) Submit and note your acknowledgement number. Allow 4–6 weeks for processing.',
@@ -145,7 +145,7 @@ function getAIResponse(q) {
   if (lower.includes('help') || lower.includes('what')) {
     return 'CivicNavigator covers the full ECI voting process for Indian elections. Ask me about: EPIC card, NVSP registration, Form 6, Electoral Roll verification, Polling Booth, EVM voting, eligibility criteria, or constituency details.';
   }
-  return 'This question is best answered by the official ECI resources. Please visit eci.gov.in, nvsp.in, or call the National Voter Helpline at 1950 for authoritative guidance specific to your constituency and state.';
+  return 'This question is best answered by the official ECI resources. Please visit eci.gov.in, nvsp.in, or call the National Voter Helpline at 1950 for authoritative guidance specific to your constituency and State/UT.';
 }
 
 /* ── Journey Stage Data ── */
@@ -214,10 +214,15 @@ function updateRiskAssessment(idx) {
   const pill = el('ra-risk-pill');
   pill.textContent = d.risk;
   pill.className = 'ra-risk-pill ' + d.pillClass;
+  pill.removeAttribute('style'); // remove default styling
   const rn = el('ra-risk-note');
   rn.textContent = d.riskNote;
   rn.className = 'ra-card-note ' + d.riskNoteClass;
-  el('ra-issue-value').textContent = d.issue;
+  
+  const issueVal = el('ra-issue-value');
+  issueVal.textContent = d.issue;
+  issueVal.removeAttribute('style'); // remove default styling
+  
   const inote = el('ra-issue-note');
   inote.textContent = d.issueNote;
   inote.className = 'ra-card-note ' + d.issueNoteClass;
@@ -238,7 +243,17 @@ function renderActionPlan(activeJourneyIdx) {
   if (!container) return;
   // Map journey stage (0-3) to action plan active step (1-4), stage 0 = step 1 active
   const activeStep = activeJourneyIdx + 1;
-  container.innerHTML = ACTION_PLAN_STEPS.map((step, i) => {
+  if (activeJourneyIdx === -1) {
+    // Keep the default HTML state for action plan, do not overwrite
+    return;
+  }
+  
+  container.innerHTML = `
+    <div class="ap-empty-state">
+      <h3 class="ap-default-title" style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 4px;">Your Personalized Plan</h3>
+      <p class="ap-default-desc" style="font-size: 14px; color: #6B7280; margin-bottom: 16px;">Based on your current stage:</p>
+    </div>
+  ` + ACTION_PLAN_STEPS.map((step, i) => {
     const done = i < activeStep;
     const active = i === activeStep;
     const icon = done ? '✅' : active ? '⏳' : '⬜';
@@ -286,6 +301,13 @@ function initJourney() {
       if (i < activeIdx) line.classList.add('jp-line-done');
       else if (i === activeIdx) line.classList.add('jp-line-active');
     });
+    if (activeIdx === -1) {
+      card.innerHTML = `
+        <div class="jc-stage-label" style="color: #6B7280; font-weight: 500;">Please select your voting stage above</div>
+      `;
+      // Don't update risk assessment or action plan if -1
+      return;
+    }
     const data = JOURNEY_STAGES[activeIdx];
     card.innerHTML = `
       <div class="jc-stage-label">Current Stage: <strong>${data.name}</strong></div>
@@ -303,8 +325,8 @@ function initJourney() {
     });
   });
 
-  // Default to stage 0
-  setStage(0);
+  // Start with no stage selected (-1 means default HTML state is preserved)
+  setStage(-1);
 }
 
 /* ── Render: ECI Process Steps ── */
@@ -481,7 +503,7 @@ function initChat() {
   }
 
   // Welcome message
-  addMsg('Namaste! 🙏 I\'m CivicNavigator. Tell me your state or issue and I\'ll guide your exact next step — whether it\'s registration, verification, or finding your booth.', 'bot');
+  addMsg('Namaste! 🙏 I\'m CivicNavigator. Tell me your State/UT or issue and I\'ll guide your exact next step — whether it\'s registration, verification, or finding your booth.', 'bot');
 
   if (form) {
     form.addEventListener('submit', e => {

@@ -27,12 +27,12 @@ const src  = fs.readFileSync(__dirname + '/app.js', 'utf8');
 function matchKey(q) {
   const lower = q.toLowerCase();
   
-  if (/united states|america|us|president|senator|congressman|democrat|republican|federal|state legislature/.test(lower)) {
+  if (/united State/UTs|america|us|president|senator|congressman|democrat|republican|federal|State/UT legislature/.test(lower)) {
     return 'non_india';
   }
 
   // Explicit Location Guard: If asking for location-specific info but unclear
-  if (/(in my state|in my city|local|my district)/.test(lower) && !/delhi|mumbai|maharashtra|karnataka|up|punjab|bengal|kerala|tamil nadu|gujarat|rajasthan|bihar|mp|ap|telangana|odisha/.test(lower)) {
+  if (/(in my State/UT|in my city|local|my district)/.test(lower) && !/delhi|mumbai|maharashtra|karnataka|up|punjab|bengal|kerala|tamil nadu|gujarat|rajasthan|bihar|mp|ap|telangana|odisha/.test(lower)) {
     return 'location_guard';
   }
 
@@ -60,7 +60,7 @@ const RISK_KEYS = ['register','verify','polling','id','mail','early','provisiona
 const TESTS = [
   // [ description, input, expected key ]
   ["First-time voter wants to enroll",           "I'm a first-time voter, how do I apply for Voter ID?", "id"],
-  ["Rural user asking about postal ballot",      "I live in rural area, how do I get a postal ballot?", "mail"],
+  ["Rural user asking about postal EVM (Electronic Voting Machine)",      "I live in rural area, how do I get a postal EVM (Electronic Voting Machine)?", "mail"],
   ["User without EPIC",                          "I don't have my EPIC, can I still vote with Aadhaar?", "id"],
   ["User missed deadline (provisional fallback)","I missed enrollment, what do I do?",               "register"],
   ["Confused user asks who to vote for",         "Who should I vote for?",                             "political_guard"],
@@ -70,7 +70,7 @@ const TESTS = [
   ["User wants early voting info",               "Can I vote early before Polling Day?",               "early"],
   ["User wants to verify enrollment",            "How do I verify my name on the electoral roll?",     "verify"],
   ["User wants polling booth",                   "Where do I vote? How do I find my booth?",           "polling"],
-  ["User asks about tendered ballot",            "Someone voted in my name, what is a tendered ballot?","provisional"],
+  ["User asks about tendered EVM (Electronic Voting Machine)",            "Someone voted in my name, what is a tendered EVM (Electronic Voting Machine)?","provisional"],
   ["User asks about election results",           "Where can I check the exit poll results?",           "results"],
 ];
 

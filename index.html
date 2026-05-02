@@ -69,7 +69,7 @@
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat-item">
           <span class="stat-number">28+8</span>
-          <span class="stat-label">States + UTs</span>
+          <span class="stat-label">State/UTs + UTs</span>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat-item">
@@ -130,22 +130,22 @@
         <div class="ra-card" id="ra-card-stage">
           <div class="ra-icon">🗳️</div>
           <div class="ra-card-title">Current Stage</div>
-          <div class="ra-card-value" id="ra-stage-value">Not Registered</div>
-          <div class="ra-card-note" id="ra-stage-note">You need to register to vote</div>
+          <div class="ra-card-value" id="ra-stage-value">Unknown</div>
+          <div class="ra-card-note" id="ra-stage-note">Select your stage above</div>
         </div>
         <!-- Card 2 — Risk Level -->
         <div class="ra-card" id="ra-card-risk">
           <div class="ra-icon">⚠️</div>
           <div class="ra-card-title">Risk Level</div>
-          <div class="ra-risk-pill ra-pill-high" id="ra-risk-pill">HIGH</div>
-          <div class="ra-card-note ra-note-red" id="ra-risk-note">Your vote may be at risk</div>
+          <div class="ra-risk-pill" id="ra-risk-pill" style="background: #E5E7EB; color: #4B5563;">PENDING</div>
+          <div class="ra-card-note" id="ra-risk-note">Awaiting profile completion</div>
         </div>
         <!-- Card 3 — Biggest Issue -->
         <div class="ra-card" id="ra-card-issue">
           <div class="ra-icon">⏰</div>
           <div class="ra-card-title">Biggest Issue</div>
-          <div class="ra-card-value ra-value-issue" id="ra-issue-value">Registration Incomplete</div>
-          <div class="ra-card-note ra-note-amber" id="ra-issue-note">Act now to protect your vote</div>
+          <div class="ra-card-value ra-value-issue" id="ra-issue-value" style="color: #6B7280;">N/A</div>
+          <div class="ra-card-note" id="ra-issue-note">Awaiting profile completion</div>
         </div>
       </div>
 
@@ -166,7 +166,35 @@
         <div class="ap-left">
           <h2 id="ap-title" class="ap-heading">What You Need To Do</h2>
           <div class="ap-steps" id="ap-steps">
-            <!-- Rendered by JS -->
+            <div class="ap-empty-state">
+              <h3 class="ap-default-title" style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 4px;">Your Starting Point</h3>
+              <p class="ap-default-desc" style="font-size: 14px; color: #6B7280; margin-bottom: 16px;">Most first-time voters begin here:</p>
+            </div>
+            
+            <div class="ap-step">
+              <span class="ap-step-icon">✅</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Check Eligibility</div>
+                <div class="ap-step-desc">Are you 18+, Indian citizen, and resident of your constituency?</div>
+              </div>
+            </div>
+            
+            <div class="ap-step ap-active">
+              <span class="ap-step-icon">⏳</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Register on NVSP</div>
+                <div class="ap-step-desc">Visit nvsp.in or download the Voter Helpline App</div>
+              </div>
+              <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="ap-step-btn">Start →</a>
+            </div>
+            
+            <div class="ap-step">
+              <span class="ap-step-icon">⬜</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Verify Your Name</div>
+                <div class="ap-step-desc">Check electoral roll at electoralsearch.eci.gov.in</div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Right — Quick Resources -->
@@ -230,7 +258,7 @@
     <!-- Status Tracker -->
     <section id="status" class="section status-section" aria-labelledby="status-title">
       <div class="section-header">
-        <span class="section-tag">Your State</span>
+        <span class="section-tag">Your State/UT</span>
         <h2 id="status-title" class="section-title">Where Are You in the Process?</h2>
         <p class="section-desc">Select your current voting stage. CivicNavigator will show your exact next action and any risks.</p>
       </div>
@@ -298,7 +326,7 @@
       <div class="section-header">
         <span class="section-tag">Find Location</span>
         <h2 id="locator-title" class="section-title">Find Your Polling Booth</h2>
-        <p class="section-desc">Enter your PIN Code or Constituency name to locate your assigned Polling Booth via the ECI portal.</p>
+        <p class="section-desc">Enter your Constituency or PIN Code to find your assigned Polling Booth via Google Maps</p>
       </div>
       <div class="locator-container">
         <div class="locator-input-row">
