@@ -10,6 +10,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'hi,gu,ta,bn,te,mr,kn,ml,pa,or',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
 </head>
 <body>
 
@@ -32,6 +43,9 @@
 
       <!-- ECI badge -->
       <span class="nav-eci-badge" aria-label="ECI Aligned">ECI Aligned ✅</span>
+
+      <!-- Google Translate Widget -->
+      <div id="google_translate_element"></div>
 
       <!-- Mobile toggle -->
       <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
