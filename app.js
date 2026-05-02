@@ -498,7 +498,7 @@ function initChat() {
     addTyping();
 
     const apiKey = 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const systemInstruction = `You are CivicNavigator, an Indian election guidance AI. 
 You only discuss Indian elections following ECI guidelines. 
