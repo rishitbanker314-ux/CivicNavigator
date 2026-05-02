@@ -1,5 +1,50 @@
 'use strict';
 
+const ResponseCache = {
+  store: {},
+  ttl: 30 * 60 * 1000, // 30 minutes
+
+  get: function(key) {
+    const item = this.store[key];
+    if (!item) return null;
+    if (Date.now() - item.timestamp > this.ttl) {
+      delete this.store[key];
+      return null;
+    }
+    return item.value;
+  },
+
+  set: function(key, value) {
+    this.store[key] = { value, timestamp: Date.now() };
+  },
+
+  generateKey: function(input) {
+    return input.toLowerCase().trim().replace(/\s+/g, '_');
+  }
+};
+
+function debounce(fn, delay) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+function showLoading(elementId, message) {
+  const el = document.getElementById(elementId);
+  if (el) el.innerHTML = 
+    `<div class="loading-state">
+      <div class="spinner" style="border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; width: 20px; height: 20px; animation: spin 1s ease-in-out infinite;"></div>
+      <span style="margin-left:8px;">${message}</span>
+    </div>`;
+}
+
+function hideLoading(elementId, content) {
+  const el = document.getElementById(elementId);
+  if (el) el.innerHTML = content;
+}
+
 const RateLimiter = {
   timestamps: {},
   check: function(action, limitMs = 2000) {
@@ -518,6 +563,10 @@ function initLocator() {
       </p>
     `;
   }
+  
+  const debouncedSearch = debounce(search, 400);
+  input.addEventListener('input', debouncedSearch);
+  
   btn.addEventListener('click', search);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') search(); });
 }
@@ -551,9 +600,21 @@ function initChat() {
       return;
     }
 
+    const cacheKey = ResponseCache.generateKey(q);
+    const cached = ResponseCache.get(cacheKey);
+    if (cached) {
+      addMsg(q, 'user');
+      addMsg(cached.replace(/\n/g, '<br/>'), 'bot');
+      if (prompts) prompts.style.display = 'flex';
+      return;
+    }
+
     addMsg(q, 'user');
     if (prompts) prompts.style.display = 'none';
-    addTyping();
+    
+    // Using global showLoading instead of addTyping directly on element if available
+    addTyping(); // Legacy fallback
+    showLoading('ai-typing-indicator', 'Analyzing your voting situation...');
 
     // WARNING: API key is loaded from config.js and .gitignore'd 
     // Ideally, use a backend proxy.
@@ -609,6 +670,7 @@ Keep response under 120 words.`;
       }
       
       // Convert line breaks to HTML breaks for proper display
+      ResponseCache.set(cacheKey, aiText);
       addMsg(aiText.replace(/\n/g, '<br/>'), 'bot');
       if (prompts) prompts.style.display = 'flex';
 
@@ -727,4 +789,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initChat();
   initMobileNav();
   initSimulation();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.lazy-section').forEach(el => observer.observe(el));
 });
