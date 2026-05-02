@@ -3,10 +3,17 @@
 // ============================================
 
 function sanitizeInput(input) {
-  if (!input) return '';
-  let sanitized = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  if (sanitized.length > 500) return sanitized.substring(0, 500);
-  return sanitized;
+  if (!input || typeof input !== 'string') return '';
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;')
+    .replace(/\\/g, '&#x5C;')
+    .trim()
+    .slice(0, 500);
 }
 
 function checkEligibility(person) {
@@ -29,9 +36,20 @@ function validatePINCode(pin) {
   return /^[1-9][0-9]{5}$/.test(p);
 }
 
-function isPoliticalContent(text) {
-  const t = text.toLowerCase();
-  return t.includes('who should i vote for') || t.includes('best party') || t.includes('vote for');
+function isPoliticalContent(input) {
+  const blocked = [
+    'vote for', 'best party', 'which party', 'support',
+    'bjp', 'congress', 'aap', 'sp ', 'bsp', 'dmk',
+    'who should i vote', 'which candidate', 'endorse'
+  ];
+  const lower = input.toLowerCase();
+  return blocked.some(term => lower.includes(term));
+}
+
+function handlePoliticalQuery() {
+  return 'CivicNavigator is strictly non-partisan. I can help ' +
+    'with the voting process, registration, and official ECI ' +
+    'procedures — but cannot recommend any party or candidate.';
 }
 
 function handleAPIError(error) {

@@ -1,5 +1,27 @@
 'use strict';
 
+const RateLimiter = {
+  timestamps: {},
+  check: function(action, limitMs = 2000) {
+    const now = Date.now();
+    const last = this.timestamps[action] || 0;
+    if (now - last < limitMs) {
+      this.showWarning(action);
+      return false;
+    }
+    this.timestamps[action] = now;
+    return true;
+  },
+  showWarning: function(action) {
+    const el = document.getElementById('rate-limit-warning');
+    if (el) {
+      el.textContent = 'Please wait a moment before trying again.';
+      el.style.display = 'block';
+      setTimeout(() => el.style.display = 'none', 2000);
+    }
+  }
+};
+
 /* ── ECI Process Steps ── */
 const ECI_STEPS = [
   {
@@ -458,8 +480,12 @@ function initLocator() {
   const resultEl = document.getElementById('locator-result');
   if (!btn) return;
   function search() {
-    const val = input.value.trim();
-    if (!val) { input.focus(); return; }
+    if (!RateLimiter.check('boothSearch', 1000)) return;
+    const rawVal = input.value.trim();
+    if (!rawVal) { input.focus(); return; }
+    
+    // Sanitize input
+    const val = typeof sanitizeInput !== 'undefined' ? sanitizeInput(rawVal) : rawVal;
     
     // Edge case handling
     if (/^\d+$/.test(val)) {
@@ -520,11 +546,18 @@ function initChat() {
   }
 
   async function ask(q) {
+    if (typeof isPoliticalContent !== 'undefined' && isPoliticalContent(q)) {
+      addMsg(typeof handlePoliticalQuery !== 'undefined' ? handlePoliticalQuery() : "CivicNavigator is strictly non-partisan. I cannot recommend any party or candidate.", 'bot');
+      return;
+    }
+
     addMsg(q, 'user');
     if (prompts) prompts.style.display = 'none';
     addTyping();
 
-    const apiKey = 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
+    // WARNING: API key is loaded from config.js and .gitignore'd 
+    // Ideally, use a backend proxy.
+    const apiKey = (window.ENV && window.ENV.GEMINI_API_KEY) || 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const systemInstruction = `You are CivicNavigator, an Indian election guidance AI. 
@@ -602,7 +635,10 @@ Keep response under 120 words.`;
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const q = input.value.trim();
+      if (!RateLimiter.check('aiChat', 2000)) return;
+      const rawQ = input.value.trim();
+      const q = typeof sanitizeInput !== 'undefined' ? sanitizeInput(rawQ) : rawQ;
+      
       if (!q || (typeof validateInput !== 'undefined' && !validateInput(q))) {
         addMsg("Please enter your question", 'bot');
         return;
@@ -613,7 +649,10 @@ Keep response under 120 words.`;
   }
 
   document.querySelectorAll('.ai-prompt-pill').forEach(pill => {
-    pill.addEventListener('click', () => ask(pill.dataset.q));
+    pill.addEventListener('click', () => {
+      if (!RateLimiter.check('aiChat', 2000)) return;
+      ask(pill.dataset.q);
+    });
   });
 }
 
