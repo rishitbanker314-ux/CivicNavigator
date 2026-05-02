@@ -461,9 +461,20 @@ function initLocator() {
     const val = input.value.trim();
     if (!val) { input.focus(); return; }
     resultEl.style.display = 'block';
-    resultEl.innerHTML = `<p style="color:var(--text-secondary)">Redirecting you to the official ECI Electoral Search for "<strong>${val}</strong>"…</p>
-      <p style="margin-top:8px;font-size:0.82rem;color:var(--text-tertiary)">CivicNavigator does not store voter data. All searches are performed directly on ECI's portal.</p>
-      <a href="https://electoralsearch.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:12px;display:inline-flex;">Open electoralsearch.in ↗</a>`;
+    const query = encodeURIComponent(`polling booth ${val} India`);
+    resultEl.innerHTML = `
+      <iframe
+        width="100%"
+        height="400"
+        style="border: 1px solid #E5E7EB; border-radius: 16px; margin-bottom: 12px;"
+        loading="lazy"
+        allowfullscreen
+        src="https://maps.google.com/maps?q=${query}&output=embed">
+      </iframe>
+      <p style="font-size:0.875rem; color:var(--text-tertiary); text-align:center;">
+        📍 Results shown are approximate. Verify your exact booth at <a href="https://electoralsearch.eci.gov.in" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:none;">electoralsearch.eci.gov.in</a>
+      </p>
+    `;
   }
   btn.addEventListener('click', search);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') search(); });
