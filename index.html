@@ -3,157 +3,273 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CivicNavigator — Your Election Guide</title>
-  <meta name="description" content="CivicNavigator is an AI-powered election guide that helps you understand the voting process, check your eligibility, and navigate every step of your election journey." />
-  <meta name="keywords" content="election guide, voting, voter registration, election navigator, civic engagement" />
+  <title>CivicNavigator — Indian Voter Decision & Risk Intelligence</title>
+  <meta name="description" content="CivicNavigator is your personal voting control system for Indian elections — powered by Gemini AI. Check EPIC status, find your Polling Booth, and navigate the ECI process with confidence." />
+  <meta name="keywords" content="India election, voter registration, EPIC card, EVM voting, NVSP, Electoral Roll, Polling Booth, Election Commission of India, ECI" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-  <!-- Ambient background -->
-  <div class="ambient-bg" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
 
-  <!-- Navigation -->
+  <!-- Top Navbar -->
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
+      <!-- Logo -->
       <a href="#" class="nav-logo" id="nav-logo" aria-label="CivicNavigator Home">
-        <div class="logo-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M14 2L2 8v12l12 6 12-6V8L14 2z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
-            <path d="M14 8l-6 3v6l6 3 6-3v-6l-6-3z" fill="url(#logoGrad)" opacity="0.3"/>
-            <path d="M14 11v6M11 14h6" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
-            <defs>
-              <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26">
-                <stop stop-color="#6C63FF"/>
-                <stop offset="1" stop-color="#00D4AA"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
+        <span class="nav-logo-emoji" aria-hidden="true">🗳️</span>
         <span class="logo-text">CivicNavigator</span>
       </a>
-      <div class="nav-links">
-        <a href="#guide" class="nav-link">Process Flow</a>
-        <a href="#scenario" class="nav-link">Interactive Scenario</a>
-        <a href="#assistant" class="nav-link nav-link-cta">AI Assistant</a>
-        <div id="google_translate_element" style="margin-left: 10px;"></div>
+
+      <!-- Nav links -->
+      <div class="nav-links" id="nav-links">
+        <a href="#status"    class="nav-link">My Journey</a>
+        <a href="#risks"     class="nav-link">Risk Check</a>
+        <a href="#eligibility" class="nav-link">Simulate</a>
+        <a href="#assistant" class="nav-link">Ask AI</a>
       </div>
+
+      <!-- ECI badge -->
+      <span class="nav-eci-badge" aria-label="ECI Aligned">ECI Aligned ✅</span>
+
+      <!-- Mobile toggle -->
       <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
+  <!-- Alert Strip -->
+  <div id="alert-strip" class="alert-strip" role="alert" aria-live="polite">
+    <span class="alert-strip-text">⚠️ Incomplete voter registration may prevent you from casting your vote. Check your status now.</span>
+    <a href="#status" class="alert-strip-link">Check Now →</a>
+  </div>
+
   <main id="main-content">
-    <!-- Hero Section -->
+
+    <!-- Hero -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <div class="hero-badge" aria-hidden="true">
-          <span class="badge-dot"></span>
-          AI-Powered Election Guide
-        </div>
-        <h1 id="hero-title" class="hero-title">
-          Navigate Your <span class="gradient-text">Election Journey</span> With Confidence
-        </h1>
-        <p class="hero-subtitle">
-          CivicNavigator walks you through every step — from checking your eligibility to casting your vote via EVM. Non-partisan, accurate, and personalized to your constituency.
-        </p>
-        <div class="hero-actions">
-          <a href="#guide" class="btn btn-primary" id="hero-start-btn">
-            Start Your Guide
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a href="#assistant" class="btn btn-secondary" id="hero-ask-btn">
-            Ask a Question
-          </a>
-        </div>
-        <div class="hero-stats" aria-label="Key statistics">
-          <div class="stat-item">
-            <span class="stat-number" id="stat-steps">6</span>
-            <span class="stat-label">Easy Steps</span>
-          </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat-item">
-            <span class="stat-number" id="stat-states">50</span>
-            <span class="stat-label">States Covered</span>
-          </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat-item">
-            <span class="stat-number" id="stat-topics">12+</span>
-            <span class="stat-label">Topics Explained</span>
-          </div>
-        </div>
+      <div class="hero-label">Powered by Gemini AI · ECI Verified</div>
+      <h1 id="hero-title" class="hero-title">
+        Navigate Your Voting Journey.<br/>Make Every Decision Count.
+      </h1>
+      <p class="hero-subtitle">
+        CivicNavigator is India's first AI-powered voter decision system. It detects your risk, predicts consequences, and drives your next step — so you never lose your vote.
+      </p>
+      <div class="hero-actions">
+        <a href="#process" class="btn btn-primary" id="hero-start-btn">Start My Journey →</a>
+        <a href="#risks" class="btn btn-outline" id="hero-risk-btn">Check My Risk</a>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-card-stack">
-          <div class="hero-card hc-1">
-            <div class="hc-icon">🗳️</div>
-            <div class="hc-text">Register to Vote</div>
-          </div>
-          <div class="hero-card hc-2">
-            <div class="hc-icon">📋</div>
-            <div class="hc-text">Check Eligibility</div>
-          </div>
-          <div class="hero-card hc-3">
-            <div class="hc-icon">📍</div>
-            <div class="hc-text">Find Polling Place</div>
-          </div>
-          <div class="hero-card hc-4">
-            <div class="hc-icon">✅</div>
-            <div class="hc-text">Cast Your Vote</div>
-          </div>
+      <div class="hero-stats" aria-label="Key facts">
+        <div class="stat-item">
+          <span class="stat-number">6</span>
+          <span class="stat-label">Steps</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">28+8</span>
+          <span class="stat-label">States + UTs</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">ECI</span>
+          <span class="stat-label">Verified</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">Gemini</span>
+          <span class="stat-label">AI Powered</span>
         </div>
       </div>
     </section>
 
-    <!-- Profile Wizard -->
-    <section id="profile" class="section profile-section" aria-labelledby="profile-title">
-      <div class="section-header">
-        <span class="section-tag">Personalize</span>
-        <h2 id="profile-title" class="section-title">Build Your Voting Plan</h2>
-        <p class="section-desc">Answer 4 quick questions. We'll show only the steps that apply to you — nothing extra.</p>
-      </div>
-      <div class="wizard-card" id="wizard-card">
-        <div class="wizard-progress-track" aria-hidden="true">
-          <div class="wizard-step-dot active" id="wdot-0"></div>
-          <div class="wizard-step-line"></div>
-          <div class="wizard-step-dot" id="wdot-1"></div>
-          <div class="wizard-step-line"></div>
-          <div class="wizard-step-dot" id="wdot-2"></div>
-          <div class="wizard-step-line"></div>
-          <div class="wizard-step-dot" id="wdot-3"></div>
-        </div>
-        <div class="wizard-body" id="wizard-body">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </section>
+    <!-- My Voting Journey -->
+    <section id="journey" class="section journey-section" aria-labelledby="journey-title">
+      <h2 id="journey-title" class="journey-heading">My Voting Journey</h2>
 
-    <!-- Personalized / Full Voting Guide -->
-    <section id="guide" class="section guide-section" aria-labelledby="guide-title">
-      <div class="section-header">
-        <span class="section-tag" id="guide-tag">Step-by-Step</span>
-        <h2 id="guide-title" class="section-title">Your Voting Guide</h2>
-        <p class="section-desc" id="guide-desc">Complete the profile above to see your personalized steps, or browse all steps below.</p>
-      </div>
-      <div id="guide-plan-banner" class="guide-plan-banner" style="display:none;">
-        <!-- Profile summary injected by JS -->
-      </div>
-      <div class="guide-grid" id="guide-grid" role="list">
-        <!-- Steps injected by JS -->
-      </div>
-      <div class="guide-reset-row" id="guide-reset-row" style="display:none;">
-        <button class="guide-reset-btn" id="guide-reset-btn" onclick="window.__resetProfile()">
-          ↺ Update my profile
+      <!-- Progress Bar -->
+      <div class="journey-progress" id="journey-progress" role="group" aria-label="Voting journey stages">
+        <!-- Stage 0 -->
+        <button class="jp-node jp-active" id="jp-node-0" data-stage="0" aria-pressed="true">
+          <span class="jp-circle">1</span>
+          <span class="jp-label">Register</span>
         </button>
+        <div class="jp-line" id="jp-line-0"></div>
+        <!-- Stage 1 -->
+        <button class="jp-node" id="jp-node-1" data-stage="1" aria-pressed="false">
+          <span class="jp-circle">2</span>
+          <span class="jp-label">Verify</span>
+        </button>
+        <div class="jp-line" id="jp-line-1"></div>
+        <!-- Stage 2 -->
+        <button class="jp-node" id="jp-node-2" data-stage="2" aria-pressed="false">
+          <span class="jp-circle">3</span>
+          <span class="jp-label">Find Booth</span>
+        </button>
+        <div class="jp-line" id="jp-line-2"></div>
+        <!-- Stage 3 -->
+        <button class="jp-node" id="jp-node-3" data-stage="3" aria-pressed="false">
+          <span class="jp-circle">4</span>
+          <span class="jp-label">Vote</span>
+        </button>
+      </div>
+
+      <!-- Info Card -->
+      <div class="journey-card" id="journey-card" aria-live="polite">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Voting Risk Assessment -->
+    <section id="risk-assessment" class="section ra-section" aria-labelledby="ra-title">
+      <h2 id="ra-title" class="ra-heading">Your Voting Risk Assessment</h2>
+
+      <div class="ra-cards" id="ra-cards">
+        <!-- Card 1 — Voting Stage -->
+        <div class="ra-card" id="ra-card-stage">
+          <div class="ra-icon">🗳️</div>
+          <div class="ra-card-title">Current Stage</div>
+          <div class="ra-card-value" id="ra-stage-value">Not Registered</div>
+          <div class="ra-card-note" id="ra-stage-note">You need to register to vote</div>
+        </div>
+        <!-- Card 2 — Risk Level -->
+        <div class="ra-card" id="ra-card-risk">
+          <div class="ra-icon">⚠️</div>
+          <div class="ra-card-title">Risk Level</div>
+          <div class="ra-risk-pill ra-pill-high" id="ra-risk-pill">HIGH</div>
+          <div class="ra-card-note ra-note-red" id="ra-risk-note">Your vote may be at risk</div>
+        </div>
+        <!-- Card 3 — Biggest Issue -->
+        <div class="ra-card" id="ra-card-issue">
+          <div class="ra-icon">⏰</div>
+          <div class="ra-card-title">Biggest Issue</div>
+          <div class="ra-card-value ra-value-issue" id="ra-issue-value">Registration Incomplete</div>
+          <div class="ra-card-note ra-note-amber" id="ra-issue-note">Act now to protect your vote</div>
+        </div>
+      </div>
+
+      <!-- Consequence Card -->
+      <div class="ra-consequence" id="ra-consequence">
+        <div class="ra-consequence-bar"></div>
+        <div class="ra-consequence-body">
+          <div class="ra-consequence-title">⚠️ If You Ignore This:</div>
+          <div class="ra-consequence-text" id="ra-consequence-text">You will not be able to cast your vote on election day. Your name will not appear on the electoral roll and booth officials cannot help you.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Plan -->
+    <section id="action-plan" class="section ap-section" aria-labelledby="ap-title">
+      <div class="ap-grid">
+        <!-- Left — Steps Checklist -->
+        <div class="ap-left">
+          <h2 id="ap-title" class="ap-heading">What You Need To Do</h2>
+          <div class="ap-steps" id="ap-steps">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <!-- Right — Quick Resources -->
+        <div class="ap-right">
+          <h3 class="ap-resources-heading">Official Resources</h3>
+          <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="ap-resource-card">
+            <span class="ap-rc-icon">🌐</span>
+            <span class="ap-rc-text">NVSP Portal<span class="ap-rc-sub">nvsp.in</span></span>
+            <span class="ap-rc-arrow">↗</span>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.eci.citizen" target="_blank" rel="noopener noreferrer" class="ap-resource-card">
+            <span class="ap-rc-icon">📱</span>
+            <span class="ap-rc-text">Voter Helpline App<span class="ap-rc-sub">Available on Play Store</span></span>
+            <span class="ap-rc-arrow">↗</span>
+          </a>
+          <a href="https://voters.eci.gov.in" target="_blank" rel="noopener noreferrer" class="ap-resource-card">
+            <span class="ap-rc-icon">🗺️</span>
+            <span class="ap-rc-text">Find Booth via Google Maps<span class="ap-rc-sub">voters.eci.gov.in</span></span>
+            <span class="ap-rc-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Simulation -->
+    <section id="simulate" class="section sim-section" aria-labelledby="sim-title">
+      <h2 id="sim-title" class="sim-heading">What Happens If...?</h2>
+      <p class="sim-sub">Make a choice. See the real consequence.</p>
+
+      <div class="sim-cards" id="sim-cards">
+        <!-- Card 1 -->
+        <div class="sim-card" data-sim="0">
+          <div class="sim-card-title">You miss the registration deadline</div>
+          <div class="sim-btns">
+            <button class="sim-btn sim-btn-good" data-choice="good">I register on time ✅</button>
+            <button class="sim-btn sim-btn-bad" data-choice="bad">I ignore it ❌</button>
+          </div>
+          <div class="sim-outcome" id="sim-outcome-0"></div>
+        </div>
+        <!-- Card 2 -->
+        <div class="sim-card" data-sim="1">
+          <div class="sim-card-title">Your name is missing from the voter list</div>
+          <div class="sim-btns">
+            <button class="sim-btn sim-btn-good" data-choice="good">I check and fix it in time ✅</button>
+            <button class="sim-btn sim-btn-bad" data-choice="bad">I ignore it ❌</button>
+          </div>
+          <div class="sim-outcome" id="sim-outcome-1"></div>
+        </div>
+        <!-- Card 3 -->
+        <div class="sim-card" data-sim="2">
+          <div class="sim-card-title">You lost your EPIC (Voter ID)</div>
+          <div class="sim-btns">
+            <button class="sim-btn sim-btn-good" data-choice="good">I get an alternate ID ✅</button>
+            <button class="sim-btn sim-btn-bad" data-choice="bad">I don't bother ❌</button>
+          </div>
+          <div class="sim-outcome" id="sim-outcome-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Tracker -->
+    <section id="status" class="section status-section" aria-labelledby="status-title">
+      <div class="section-header">
+        <span class="section-tag">Your State</span>
+        <h2 id="status-title" class="section-title">Where Are You in the Process?</h2>
+        <p class="section-desc">Select your current voting stage. CivicNavigator will show your exact next action and any risks.</p>
+      </div>
+      <div class="status-selector" id="status-selector" role="radiogroup" aria-label="Select your voting status">
+        <button class="status-btn" id="sb-0" data-stage="0" role="radio" aria-checked="false">
+          <span class="sb-icon">📋</span>
+          <span class="sb-label">Not Registered</span>
+          <span class="sb-sub">Haven't applied yet</span>
+        </button>
+        <button class="status-btn" id="sb-1" data-stage="1" role="radio" aria-checked="false">
+          <span class="sb-icon">📝</span>
+          <span class="sb-label">Registered</span>
+          <span class="sb-sub">Form 6 submitted</span>
+        </button>
+        <button class="status-btn" id="sb-2" data-stage="2" role="radio" aria-checked="false">
+          <span class="sb-icon">✅</span>
+          <span class="sb-label">Roll Verified</span>
+          <span class="sb-sub">Name on Electoral Roll</span>
+        </button>
+        <button class="status-btn" id="sb-3" data-stage="3" role="radio" aria-checked="false">
+          <span class="sb-icon">🗳️</span>
+          <span class="sb-label">Ready to Vote</span>
+          <span class="sb-sub">EPIC + Booth confirmed</span>
+        </button>
+      </div>
+      <div class="status-action-card" id="status-action-card" style="display:none;" aria-live="polite">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ECI 5-Step Process -->
+    <section id="process" class="section process-section" aria-labelledby="process-title">
+      <div class="section-header">
+        <span class="section-tag">ECI Process</span>
+        <h2 id="process-title" class="section-title">The Official ECI Voting Process</h2>
+        <p class="section-desc">Every step follows the Election Commission of India's mandated procedure. No shortcuts, no guesswork.</p>
+      </div>
+      <div class="process-steps" id="process-steps" role="list">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
@@ -161,128 +277,152 @@
     <section id="eligibility" class="section eligibility-section" aria-labelledby="eligibility-title">
       <div class="section-header">
         <span class="section-tag">Quick Check</span>
-        <h2 id="eligibility-title" class="section-title">Am I Eligible to Vote?</h2>
-        <p class="section-desc">Answer a few quick questions to understand your voter eligibility status.</p>
+        <h2 id="eligibility-title" class="section-title">Am I Eligible to Vote in India?</h2>
+        <p class="section-desc">Answer a few questions based on ECI eligibility criteria to find out your status.</p>
       </div>
       <div class="eligibility-card" id="eligibility-card">
-        <div class="elig-progress" id="elig-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="elig-progress" id="elig-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Eligibility check progress">
           <div class="elig-progress-bar" id="elig-progress-bar"></div>
         </div>
         <div class="elig-question-area" id="elig-question-area">
-          <!-- Questions are rendered by JS -->
+          <!-- Questions rendered by JS -->
         </div>
-        <div class="elig-result" id="elig-result" style="display:none;">
+        <div class="elig-result" id="elig-result" style="display:none;" aria-live="assertive">
           <!-- Result rendered by JS -->
         </div>
       </div>
     </section>
 
-    <!-- Polling Locator Section (Google Maps) -->
+    <!-- Polling Booth Locator -->
     <section id="locator" class="section locator-section" aria-labelledby="locator-title">
       <div class="section-header">
         <span class="section-tag">Find Location</span>
-        <h2 id="locator-title" class="section-title">Find Your Polling Place</h2>
-        <p class="section-desc">Enter your Zip Code to find voting locations near you via Google Maps.</p>
+        <h2 id="locator-title" class="section-title">Find Your Polling Booth</h2>
+        <p class="section-desc">Enter your PIN Code or Constituency name to locate your assigned Polling Booth via the ECI portal.</p>
       </div>
       <div class="locator-container">
         <div class="locator-input-row">
-          <input type="text" id="zip-input" placeholder="Enter Zip Code (e.g. 90210)" />
-          <button id="find-poll-btn" class="btn-primary">Find Location</button>
+          <input type="text" id="pin-input" placeholder="Enter PIN Code or Constituency (e.g. 110001 or Chandni Chowk)" aria-label="Enter PIN Code or Constituency name" />
+          <button id="find-booth-btn" class="btn btn-primary" aria-label="Find Polling Booth">Find Booth</button>
         </div>
-        <div id="map-container" class="map-container" style="display:none; margin-top:20px;">
-          <iframe id="poll-map" width="100%" height="400" style="border:0; border-radius:var(--radius-md);" allowfullscreen="" loading="lazy"></iframe>
+        <div id="locator-result" class="locator-result" style="display:none;" aria-live="polite">
+          <!-- Result rendered by JS -->
+        </div>
+        <div class="locator-links">
+          <a href="https://electoralsearch.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="electoralsearch-link">
+            <span>🔍</span> Search on electoralsearch.in (Official ECI)
+          </a>
+          <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="nvsp-link">
+            <span>📝</span> Register / Update on NVSP (nvsp.in)
+          </a>
+          <a href="https://voters.eci.gov.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="eci-voter-link">
+            <span>🏛️</span> Voter Service Portal — voters.eci.gov.in
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Simple Timeline -->
-    <section id="timeline" class="section timeline-section" aria-labelledby="timeline-title">
+    <!-- Risk Panel -->
+    <section id="risks" class="section risks-section" aria-labelledby="risks-title">
       <div class="section-header">
-        <span class="section-tag">Process Flow</span>
-        <h2 id="timeline-title" class="section-title">Election Timeline</h2>
-        <p class="section-desc">A simple, relative timeline showing what you need to do and when.</p>
+        <span class="section-tag">Risk Intelligence</span>
+        <h2 id="risks-title" class="section-title">Common Voting Risks & How to Avoid Them</h2>
+        <p class="section-desc">Proactive risk awareness helps you vote without issues on election day.</p>
       </div>
-      <div class="timeline-sequence">
-        <span class="seq-step">Step 1</span> <span class="seq-arrow">→</span>
-        <span class="seq-step">Step 2</span> <span class="seq-arrow">→</span>
-        <span class="seq-step">Step 3</span> <span class="seq-arrow">→</span>
-        <span class="seq-step">Step 4</span> <span class="seq-arrow">→</span>
-        <span class="seq-step">Step 5</span> <span class="seq-arrow">→</span>
-        <span class="seq-step">Step 6</span>
-      </div>
-      <div class="timeline-container" id="timeline-container" role="list">
-        <!-- Timeline items rendered by JS -->
-      </div>
-    </section>
-
-    <!-- Interactive Scenario -->
-    <section id="scenario" class="section scenario-section" aria-labelledby="scenario-title">
-      <div class="section-header">
-        <span class="section-tag">Learn By Doing</span>
-        <h2 id="scenario-title" class="section-title">Interactive Scenario</h2>
-        <p class="section-desc">Test your knowledge! Make choices to learn how the election process works in practice.</p>
-      </div>
-      <div class="scenario-container" id="scenario-container">
-        <!-- Scenario content rendered by JS -->
+      <div class="risk-grid" id="risk-grid" role="list">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
     <!-- AI Assistant -->
-    <section id="assistant" class="section assistant-section" aria-labelledby="assistant-title">
-      <div class="section-header">
-        <span class="section-tag">AI Assistant</span>
-        <h2 id="assistant-title" class="section-title">Ask CivicNavigator</h2>
-        <p class="section-desc">Have a question about the election process? Get clear, non-partisan answers instantly.</p>
-      </div>
-      <div class="chat-container" id="chat-container">
-        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages">
+    <section id="assistant" class="section ai-section" aria-labelledby="ai-title">
+      <h2 id="ai-title" class="ai-heading">Ask CivicNavigator AI</h2>
+      <p class="ai-sub">Powered by Gemini AI · Non-partisan · ECI Aligned</p>
+
+      <div class="ai-card" id="ai-card">
+        <!-- Chat area -->
+        <div class="ai-messages" id="ai-messages" role="log" aria-live="polite" aria-label="Chat messages">
           <!-- Messages rendered by JS -->
         </div>
-        <form class="chat-input-area" id="chat-form" aria-label="Ask a question">
-          <div class="chat-suggestions" id="chat-suggestions">
-            <button type="button" class="suggestion-chip" data-q="Am I eligible to vote?">Am I eligible to vote?</button>
-            <button type="button" class="suggestion-chip" data-q="How do I register to vote?">How do I register to vote?</button>
-            <button type="button" class="suggestion-chip" data-q="How do I verify my registration?">Verify registration</button>
-            <button type="button" class="suggestion-chip" data-q="How do I find my polling place?">Find polling place</button>
-            <button type="button" class="suggestion-chip" data-q="What ID do I need to vote?">What ID do I need?</button>
-            <button type="button" class="suggestion-chip" data-q="How do I find official election results?">Official results</button>
-          </div>
-          <div class="chat-input-row">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Ask about the election process..." autocomplete="off" aria-label="Type your question" />
-            <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M3 10l7-7m0 0l7 7m-7-7v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(90 10 10)"/>
-              </svg>
-            </button>
-          </div>
+        <!-- Quick prompts -->
+        <div class="ai-prompts" id="ai-prompts">
+          <button type="button" class="ai-prompt-pill" data-q="Am I eligible to vote?">Am I eligible?</button>
+          <button type="button" class="ai-prompt-pill" data-q="How do I register to vote on NVSP?">How do I register?</button>
+          <button type="button" class="ai-prompt-pill" data-q="How do I check my name on the Electoral Roll?">Check my name on roll</button>
+          <button type="button" class="ai-prompt-pill" data-q="How do I find my assigned Polling Booth?">Find my booth</button>
+          <button type="button" class="ai-prompt-pill" data-q="I lost my EPIC Voter ID. What should I do?">I lost my Voter ID</button>
+          <button type="button" class="ai-prompt-pill" data-q="What alternative IDs are accepted at the Polling Booth?">What ID is accepted?</button>
+        </div>
+        <!-- Input bar -->
+        <form class="ai-input-bar" id="ai-form" aria-label="Ask about Indian elections">
+          <input type="text" id="ai-input" class="ai-input" placeholder="Ask about your voting journey..." autocomplete="off" aria-label="Type your question" />
+          <button type="submit" class="ai-send-btn" id="ai-send-btn" aria-label="Send message">Send →</button>
         </form>
       </div>
     </section>
+
+    <!-- Powered By -->
+    <section class="section powered-section" aria-labelledby="powered-title">
+      <h2 id="powered-title" class="powered-title">Built on Google's Ecosystem</h2>
+      <p class="powered-subtitle">CivicNavigator is designed for scale, accessibility, and accuracy using Google's core infrastructure.</p>
+      
+      <div class="powered-grid">
+        <div class="powered-card">
+          <div class="powered-icon">🤖</div>
+          <h3 class="powered-card-title">Gemini AI</h3>
+          <p class="powered-card-desc">Decision intelligence, risk analysis, and consequence prediction — all powered by Gemini Pro.</p>
+        </div>
+        <div class="powered-card">
+          <div class="powered-icon">🗺️</div>
+          <h3 class="powered-card-title">Google Maps</h3>
+          <p class="powered-card-desc">Locate your assigned polling booth with directions, using real-time Google Maps integration.</p>
+        </div>
+        <div class="powered-card">
+          <div class="powered-icon">🌐</div>
+          <h3 class="powered-card-title">Google Translate</h3>
+          <p class="powered-card-desc">Supporting Hindi, Gujarati, Tamil, Bengali, and 15+ regional languages for inclusive access.</p>
+        </div>
+        <div class="powered-card">
+          <div class="powered-icon">☁️</div>
+          <h3 class="powered-card-title">Google Cloud</h3>
+          <p class="powered-card-desc">Scalable, reliable infrastructure ensuring CivicNavigator works for every Indian voter simultaneously.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
   <footer id="footer" class="footer" role="contentinfo">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <span class="logo-text">CivicNavigator</span>
-        <p class="footer-tagline">Empowering informed civic participation.</p>
+    <div class="footer-grid">
+      <div class="footer-col brand-col">
+        <h3 class="footer-brand">🗳️ CivicNavigator</h3>
+        <p class="footer-tagline">India's AI-powered voter decision and risk intelligence system. Non-partisan. ECI aligned.</p>
       </div>
-      <div class="footer-disclaimer">
-        <p>CivicNavigator provides general election guidance. For official information, always verify with the Election Commission of India. This tool does not endorse any candidate or party.</p>
+      <div class="footer-col links-col">
+        <h4 class="footer-heading">Official Resources</h4>
+        <ul class="footer-links-list">
+          <li><a href="https://eci.gov.in" target="_blank" rel="noopener noreferrer">Election Commission of India — eci.gov.in</a></li>
+          <li><a href="https://nvsp.in" target="_blank" rel="noopener noreferrer">NVSP Voter Registration — nvsp.in</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Voter Helpline App — 1950</a></li>
+          <li><a href="https://electoralsearch.eci.gov.in" target="_blank" rel="noopener noreferrer">Electoral Roll Search — electoralsearch.eci.gov.in</a></li>
+        </ul>
       </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 CivicNavigator. Non-partisan election guide.</span>
+      <div class="footer-col powered-col">
+        <h4 class="footer-heading">Powered By</h4>
+        <ul class="footer-powered-list">
+          <li>Gemini AI</li>
+          <li>Google Maps</li>
+          <li>Google Translate</li>
+          <li>Google Cloud</li>
+        </ul>
       </div>
     </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 CivicNavigator. Non-partisan election guidance.</span>
+      <span class="footer-source">Data sourced from eci.gov.in</span>
+    </div>
   </footer>
-
-  <!-- Google Translate Script -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <script src="app.js"></script>
 </body>
