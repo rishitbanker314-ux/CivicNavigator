@@ -460,6 +460,22 @@ function initLocator() {
   function search() {
     const val = input.value.trim();
     if (!val) { input.focus(); return; }
+    
+    // Edge case handling
+    if (/^\d+$/.test(val)) {
+      if (typeof validatePINCode !== 'undefined' && !validatePINCode(val)) {
+        resultEl.style.display = 'block';
+        resultEl.innerHTML = `<p style="color:#DC2626; font-size:14px; text-align:center; padding: 20px;">Please enter a valid 6-digit PIN Code</p>`;
+        return;
+      }
+    } else {
+      if (typeof validateInput !== 'undefined' && (!validateInput(val) || val.length < 3)) {
+        resultEl.style.display = 'block';
+        resultEl.innerHTML = `<p style="color:#DC2626; font-size:14px; text-align:center; padding: 20px;">Try searching at electoralsearch.eci.gov.in directly</p>`;
+        return;
+      }
+    }
+
     resultEl.style.display = 'block';
     const query = encodeURIComponent(`polling booth ${val} India`);
     resultEl.innerHTML = `
@@ -533,13 +549,17 @@ Keep response under 120 words.`;
     };
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify(requestBody),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
 
       const t = document.getElementById('ai-typing-indicator');
       if (t) t.remove();
@@ -563,7 +583,15 @@ Keep response under 120 words.`;
       console.error("Gemini API Error:", error);
       const t = document.getElementById('ai-typing-indicator');
       if (t) t.remove();
-      addMsg("Please verify your query at eci.gov.in", 'bot');
+      
+      let errMsg = "Please verify your query at eci.gov.in";
+      if (error.name === 'AbortError' && typeof handleAPIError !== 'undefined') {
+        errMsg = handleAPIError({ message: 'Timeout' });
+      } else if (typeof handleAPIError !== 'undefined') {
+        errMsg = handleAPIError(error);
+      }
+      
+      addMsg(errMsg, 'bot');
       if (prompts) prompts.style.display = 'flex';
     }
   }
@@ -575,7 +603,10 @@ Keep response under 120 words.`;
     form.addEventListener('submit', e => {
       e.preventDefault();
       const q = input.value.trim();
-      if (!q) return;
+      if (!q || (typeof validateInput !== 'undefined' && !validateInput(q))) {
+        addMsg("Please enter your question", 'bot');
+        return;
+      }
       input.value = '';
       ask(q);
     });
