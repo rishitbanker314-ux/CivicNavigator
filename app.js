@@ -232,11 +232,12 @@ function updateRiskAssessment(idx) {
 
 /* ── Action Plan Steps ── */
 const ACTION_PLAN_STEPS = [
-  { name: 'Check Eligibility', desc: 'Indian citizen, age 18+, resident of constituency' },
-  { name: 'Register on NVSP', desc: 'Visit nvsp.in or Voter Helpline App', href: 'https://nvsp.in' },
-  { name: 'Verify Electoral Roll', desc: 'Confirm your name appears on the list', href: 'https://electoralsearch.in' },
-  { name: 'Download EPIC', desc: 'Your Electors Photo Identity Card', href: 'https://nvsp.in' },
-  { name: 'Locate Polling Booth', desc: 'Find your assigned booth via Google Maps', href: 'https://voters.eci.gov.in' }
+  { name: 'Check Eligibility', desc: 'Confirm you are 18+, Indian citizen, and resident of your constituency' },
+  { name: 'Register on NVSP', desc: 'Submit Form 6 on nvsp.in or via the Voter Helpline App', href: 'https://nvsp.in' },
+  { name: 'Verify Electoral Roll', desc: 'Confirm your name at electoralsearch.eci.gov.in before the final roll date', href: 'https://electoralsearch.eci.gov.in' },
+  { name: 'Receive EPIC', desc: 'Download or collect your Electors Photo Identity Card', href: 'https://nvsp.in' },
+  { name: 'Locate Polling Booth', desc: 'Find your assigned booth via the ECI Booth App or Google Maps', href: 'https://voters.eci.gov.in' },
+  { name: 'Cast Your Vote', desc: 'Vote using the Electronic Voting Machine (EVM) at your assigned booth on election day' }
 ];
 
 function renderActionPlan(activeJourneyIdx) {
