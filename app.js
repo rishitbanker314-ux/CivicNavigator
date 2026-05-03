@@ -518,57 +518,58 @@ function initEligibility() {
   render();
 }
 
-/* ── Polling Booth Locator ── */
-function initLocator() {
-  const btn = document.getElementById('find-booth-btn');
-  const input = document.getElementById('pin-input');
-  const resultEl = document.getElementById('locator-result');
-  if (!btn) return;
-  function search() {
-    if (!RateLimiter.check('boothSearch', 1000)) return;
-    const rawVal = input.value.trim();
-    if (!rawVal) { input.focus(); return; }
-    
-    // Sanitize input
-    const val = typeof sanitizeInput !== 'undefined' ? sanitizeInput(rawVal) : rawVal;
-    
-    // Edge case handling
-    if (/^\d+$/.test(val)) {
-      if (typeof validatePINCode !== 'undefined' && !validatePINCode(val)) {
-        resultEl.style.display = 'block';
-        resultEl.innerHTML = `<p style="color:#DC2626; font-size:14px; text-align:center; padding: 20px;">Please enter a valid 6-digit PIN Code</p>`;
-        return;
-      }
-    } else {
-      if (typeof validateInput !== 'undefined' && (!validateInput(val) || val.length < 3)) {
-        resultEl.style.display = 'block';
-        resultEl.innerHTML = `<p style="color:#DC2626; font-size:14px; text-align:center; padding: 20px;">Try searching at electoralsearch.eci.gov.in directly</p>`;
-        return;
-      }
-    }
+/* ── Polling Booth Locator (Google Maps Embed) ── */
+function loadBoothMap() {
+  const input = document.getElementById('booth-search-input');
+  if (!input) return;
 
-    resultEl.style.display = 'block';
-    const query = encodeURIComponent(`polling booth ${val} India`);
-    resultEl.innerHTML = `
-      <iframe
-        width="100%"
-        height="400"
-        style="border: 1px solid #E5E7EB; border-radius: 16px; margin-bottom: 12px;"
-        loading="lazy"
-        allowfullscreen
-        src="https://maps.google.com/maps?q=${query}&output=embed">
-      </iframe>
-      <p style="font-size:0.875rem; color:var(--text-tertiary); text-align:center;">
-        📍 Results shown are approximate. Verify your exact booth at <a href="https://electoralsearch.eci.gov.in" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:none;">electoralsearch.eci.gov.in</a>
-      </p>
-    `;
+  if (!RateLimiter.check('boothSearch', 1000)) return;
+
+  const rawVal = input.value.trim();
+  const val = typeof sanitizeInput !== 'undefined' ? sanitizeInput(rawVal) : rawVal;
+
+  if (!val) {
+    input.focus();
+    alert('Please enter a PIN Code or Constituency name');
+    return;
   }
-  
-  const debouncedSearch = debounce(search, 400);
+
+  // Validate PIN code format if purely numeric
+  if (/^\d+$/.test(val)) {
+    if (typeof validatePINCode !== 'undefined' && !validatePINCode(val)) {
+      alert('Please enter a valid 6-digit PIN Code');
+      return;
+    }
+  } else if (val.length < 3) {
+    alert('Please enter at least 3 characters');
+    return;
+  }
+
+  const query = encodeURIComponent('polling booth ' + val + ' India election');
+  const mapEl = document.getElementById('booth-map');
+  const container = document.getElementById('map-container');
+  const disclaimer = document.getElementById('map-disclaimer');
+
+  if (mapEl) mapEl.src = `https://maps.google.com/maps?q=${query}&output=embed&hl=en`;
+  if (container) container.style.display = 'block';
+  if (disclaimer) disclaimer.style.display = 'block';
+}
+
+function initLocator() {
+  const input = document.getElementById('booth-search-input');
+  if (!input) return;
+
+  // Enter key triggers search
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      loadBoothMap();
+    }
+  });
+
+  // Debounced live-search on input
+  const debouncedSearch = debounce(loadBoothMap, 600);
   input.addEventListener('input', debouncedSearch);
-  
-  btn.addEventListener('click', search);
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') search(); });
 }
 
 /* ── Chat / AI Assistant ── */
@@ -707,6 +708,16 @@ Keep response under 120 words.`;
       }
       input.value = '';
       ask(q);
+    });
+  }
+
+  // Keyboard: Enter key on chat input
+  if (input) {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (form) form.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
     });
   }
 

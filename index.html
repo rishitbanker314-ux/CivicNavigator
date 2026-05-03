@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' translate.google.com translate.googleapis.com; connect-src 'self' generativelanguage.googleapis.com translate.googleapis.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; frame-src 'self' https://maps.google.com https://www.google.com;">
   <title>CivicNavigator — Indian Voter Decision & Risk Intelligence</title>
-  <meta name="description" content="CivicNavigator is your personal voting control system for Indian elections — powered by Gemini AI. Check EPIC status, find your Polling Booth, and navigate the ECI process with confidence." />
+  <meta name="description" content="CivicNavigator — India's AI-powered voter guidance system. Non-partisan. ECI aligned. Powered by Gemini AI." />
   <meta name="keywords" content="India election, voter registration, EPIC card, EVM voting, NVSP, Electoral Roll, Polling Booth, Election Commission of India, ECI" />
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="CivicNavigator — Indian Voter Decision System">
+  <meta property="og:description" content="Detect your voting risk, predict consequences, and take the right action — powered by Gemini AI and ECI data.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://generativelanguage.googleapis.com">
@@ -20,14 +24,21 @@
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'hi,gu,ta,bn,te,mr,kn,ml,pa,or',
+        includedLanguages: 'hi,gu,ta,bn,te,mr,kn,ml,pa,or,as',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
+        autoDisplay: false,
+        multilanguagePage: true
       }, 'google_translate_element');
     }
   </script>
 </head>
 <body>
+
+  <!-- Skip Link for Screen Readers -->
+  <a href="#main-content" class="skip-link" id="skip-to-main"
+    onfocus="this.classList.add('skip-link-visible')" onblur="this.classList.remove('skip-link-visible')">
+    Skip to main content
+  </a>
 
   <div id="rate-limit-warning" style="display:none; position:fixed; top:0; left:0; right:0; background-color:#DC2626; color:white; text-align:center; padding:12px; font-weight:600; z-index:1000;">
     Please wait a moment before trying again.
@@ -54,7 +65,12 @@
       <span class="nav-eci-badge" aria-label="ECI Aligned">ECI Aligned ✅</span>
 
       <!-- Google Translate Widget -->
-      <div id="google_translate_element"></div>
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <div id="google_translate_element" style="font-size:13px;"></div>
+        <small style="font-size:10px;color:#6B7280;display:block;text-align:center;">
+          🌐 11 Languages
+        </small>
+      </div>
 
       <!-- Mobile toggle -->
       <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -69,7 +85,7 @@
     <a href="#status" class="alert-strip-link">Check Now →</a>
   </div>
 
-  <main id="main-content">
+  <main id="main-content" role="main" aria-label="CivicNavigator Election Guide">
 
     <!-- Hero -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
@@ -230,7 +246,7 @@
     </section>
 
     <!-- Voting Risk Assessment -->
-    <section id="risk-assessment" class="section ra-section" aria-labelledby="ra-title">
+    <section id="risk-assessment" class="section ra-section" aria-labelledby="ra-title" aria-label="Risk Assessment Dashboard">
       <h2 id="ra-title" class="ra-heading">Your Voting Risk</h2>
 
       <div class="ra-cards" id="ra-cards">
@@ -338,7 +354,7 @@
     </section>
 
     <!-- ECI 5-Step Process -->
-    <section id="process" class="section process-section" aria-labelledby="process-title">
+    <section id="process" class="section process-section" aria-labelledby="process-title" aria-label="Voting Steps">
       <div class="section-header">
         <span class="section-tag">ECI Process</span>
         <h2 id="process-title" class="section-title">The Official ECI Voting Process</h2>
@@ -376,15 +392,28 @@
         <h2 id="locator-title" class="section-title">Find Your Polling Booth — Powered by Google Maps 🗺️</h2>
         <p class="section-desc">Enter your Constituency or PIN Code to find your assigned Polling Booth via Google Maps</p>
       </div>
-      <div class="locator-container">
-        <div class="locator-input-row">
-          <input type="text" id="pin-input" placeholder="Enter PIN Code or Constituency (e.g. 110001 or Chandni Chowk)" aria-label="Enter PIN Code or Constituency name" />
-          <button id="find-booth-btn" class="btn btn-primary" aria-label="Find Polling Booth">Find Booth</button>
+      <div id="booth-finder-section" class="locator-container">
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+          <input id="booth-search-input" 
+            type="text" 
+            placeholder="Enter PIN Code or Constituency name (e.g. 400001 or Andheri)" 
+            aria-label="Enter PIN Code or Constituency name to find your polling booth"
+            style="flex:1;height:44px;padding:0 16px;border:1px solid #E5E7EB;border-radius:10px;font-size:14px;"
+            maxlength="100">
+          <button onclick="loadBoothMap()" 
+            aria-label="Find your assigned polling booth on Google Maps"
+            style="height:44px;padding:0 20px;background:#2563EB;color:white;border:none;border-radius:10px;font-size:14px;cursor:pointer;">
+            Find Booth 🗺️
+          </button>
         </div>
-        <div id="locator-result" class="locator-result" style="display:none;" aria-live="polite">
-          <!-- Result rendered by JS -->
+        <div id="map-container" style="width:100%;height:400px;border-radius:16px;border:1px solid #E5E7EB;overflow:hidden;display:none;">
+          <iframe id="booth-map" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" title="Google Maps showing polling booth location"></iframe>
         </div>
-        <div class="locator-links">
+        <p id="map-disclaimer" style="font-size:12px;color:#6B7280;margin-top:8px;display:none;">
+          📍 Results are approximate. Verify your exact booth at 
+          <a href="https://electoralsearch.eci.gov.in" target="_blank" style="color:#2563EB;">electoralsearch.eci.gov.in</a>
+        </p>
+        <div class="locator-links" style="margin-top: 16px;">
           <a href="https://electoralsearch.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="electoralsearch-link">
             <span>🔍</span> Search on electoralsearch.in (Official ECI)
           </a>
@@ -431,8 +460,8 @@
         </div>
         <!-- Input bar -->
         <form class="ai-input-bar" id="ai-form" aria-label="Ask about Indian elections">
-          <input type="text" id="ai-input" class="ai-input" placeholder="Ask about your voting journey..." autocomplete="off" aria-label="Type your question" />
-          <button type="submit" class="ai-send-btn" id="ai-send-btn" aria-label="Send message">Send →</button>
+          <input type="text" id="ai-input" class="ai-input" placeholder="Ask about your voting journey..." autocomplete="off" aria-label="Enter your voting question" />
+          <button type="submit" class="ai-send-btn" id="ai-send-btn" aria-label="Send message to CivicNavigator AI">Send →</button>
         </form>
       </div>
     </section>

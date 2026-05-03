@@ -45,6 +45,33 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 img, svg { display: block; }
 
+/* ── Accessibility: Focus Visible ── */
+*:focus-visible {
+  outline: 2px solid #2563EB;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Skip Link for Screen Readers ── */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2563EB;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+.skip-link-visible,
+.skip-link:focus {
+  top: 0;
+}
+
 /* ── Nav ── */
 #main-nav {
   position: sticky; top: 0; z-index: 100;
@@ -860,4 +887,31 @@ img, svg { display: block; }
 }
 body {
   top: 0px !important;
+}
+
+/* ── Accessibility: Lazy Section Transitions ── */
+.lazy-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.lazy-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Spinner Animation ── */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Loading State ── */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: var(--text-secondary);
+  font-size: 14px;
 }
