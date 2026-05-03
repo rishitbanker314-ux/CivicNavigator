@@ -643,53 +643,72 @@ Keep response under 120 words.`;
       }]
     };
 
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody),
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
+    const maxRetries = 3;
+    let lastError = null;
 
-      const t = document.getElementById('ai-typing-indicator');
-      if (t) t.remove();
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw new Error('API Error');
+        // Handle rate limiting with retry
+        if (response.status === 429 && attempt < maxRetries - 1) {
+          const waitMs = Math.pow(2, attempt + 1) * 1000; // 2s, 4s
+          await new Promise(r => setTimeout(r, waitMs));
+          continue;
+        }
+
+        const t = document.getElementById('ai-typing-indicator');
+        if (t) t.remove();
+
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        let aiText = "I couldn't process that query. Please try again or verify at eci.gov.in";
+        
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+          aiText = data.candidates[0].content.parts[0].text;
+        }
+        
+        // Convert line breaks to HTML breaks for proper display
+        ResponseCache.set(cacheKey, aiText);
+        addMsg(aiText.replace(/\n/g, '<br/>'), 'bot');
+        if (prompts) prompts.style.display = 'flex';
+        return; // Success — exit the retry loop
+
+      } catch (error) {
+        lastError = error;
+        if (error.name !== 'AbortError' && attempt < maxRetries - 1) {
+          const waitMs = Math.pow(2, attempt + 1) * 1000;
+          await new Promise(r => setTimeout(r, waitMs));
+          continue;
+        }
       }
-
-      const data = await response.json();
-      let aiText = "Please verify your query at eci.gov.in";
-      
-      if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
-        aiText = data.candidates[0].content.parts[0].text;
-      }
-      
-      // Convert line breaks to HTML breaks for proper display
-      ResponseCache.set(cacheKey, aiText);
-      addMsg(aiText.replace(/\n/g, '<br/>'), 'bot');
-      if (prompts) prompts.style.display = 'flex';
-
-    } catch (error) {
-      console.error("Gemini API Error:", error);
-      const t = document.getElementById('ai-typing-indicator');
-      if (t) t.remove();
-      
-      let errMsg = "Please verify your query at eci.gov.in";
-      if (error.name === 'AbortError' && typeof handleAPIError !== 'undefined') {
-        errMsg = handleAPIError({ message: 'Timeout' });
-      } else if (typeof handleAPIError !== 'undefined') {
-        errMsg = handleAPIError(error);
-      }
-      
-      addMsg(errMsg, 'bot');
-      if (prompts) prompts.style.display = 'flex';
     }
+
+    // All retries failed
+    console.error("Gemini API Error after retries:", lastError);
+    const t = document.getElementById('ai-typing-indicator');
+    if (t) t.remove();
+    
+    let errMsg = "⚠️ CivicNavigator AI is temporarily unavailable due to high demand. Please try again in a few seconds, or visit <a href='https://eci.gov.in' target='_blank' style='color:#2563EB;'>eci.gov.in</a> directly.";
+    if (lastError && lastError.name === 'AbortError') {
+      errMsg = "⏱️ The request timed out. Please check your internet connection and try again.";
+    }
+    
+    addMsg(errMsg, 'bot');
+    if (prompts) prompts.style.display = 'flex';
   }
 
   // Welcome message
