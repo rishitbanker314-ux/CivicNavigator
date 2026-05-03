@@ -2278,7 +2278,7 @@ function initChat() {
   function addTyping() {
     const div = document.createElement('div');
     div.className = 'ai-msg ai-bot'; div.id = 'ai-typing-indicator';
-    div.innerHTML = `<div class="ai-bubble"><div style="display: flex; align-items: center; gap: 8px;">CivicNavigator is analyzing... <div class="ai-typing"><span></span><span></span><span></span></div></div></div>`;
+    div.innerHTML = `<div class="ai-bubble"><div style="display:flex;align-items:center;gap:8px;">🔍 Analyzing your voting situation... <div class="ai-typing"><span></span><span></span><span></span></div></div></div>`;
     messages.appendChild(div); messages.scrollTop = messages.scrollHeight;
   }
 
@@ -2299,28 +2299,23 @@ function initChat() {
 
     addMsg(q, 'user');
     if (prompts) prompts.style.display = 'none';
-    
-    // Using global showLoading instead of addTyping directly on element if available
-    addTyping(); // Legacy fallback
-    showLoading('ai-typing-indicator', 'Analyzing your voting situation...');
+    addTyping();
 
     // WARNING: API key is loaded from config.js and .gitignore'd 
     // Ideally, use a backend proxy.
     const apiKey = (window.ENV && window.ENV.GEMINI_API_KEY) || 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-    const systemInstruction = `You are CivicNavigator, an Indian election guidance AI. 
-You only discuss Indian elections following ECI guidelines. 
-Use terms: EPIC, EVM, Constituency, PIN Code, Polling Booth, NVSP.
-Never reference US elections. Never suggest who to vote for.
-Always respond in this format:
-Stage: [user's voting stage]
-Risk: [High/Medium/Low]
+    const systemInstruction = `You are CivicNavigator India election AI. Only Indian elections. Use EPIC, EVM, Constituency, PIN Code, Polling Booth, NVSP. Never recommend parties. Format your response exactly like this:
+🗳️ Stage: [stage]
+⚠️ Risk: [HIGH/MEDIUM/LOW]
 Issue: [one line]
 If Ignored: [consequence]
-Next Steps: [2-3 bullet points]
+Next Steps:
+• [step 1]
+• [step 2]
 Confidence: [High/Medium/Low]
-Keep response under 120 words.`;
+Max 120 words.`;
 
     const requestBody = {
       contents: [{
@@ -2430,7 +2425,9 @@ Keep response under 120 words.`;
   document.querySelectorAll('.ai-prompt-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       if (!RateLimiter.check('aiChat', 2000)) return;
-      ask(pill.dataset.q);
+      const q = pill.dataset.q;
+      if (input) input.value = '';
+      ask(q);
     });
   });
 }
