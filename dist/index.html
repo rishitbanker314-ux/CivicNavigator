@@ -956,28 +956,19 @@ body {
     import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
 
     const firebaseConfig = {
-      apiKey: "demo-civicnavigator-key",
-      authDomain: "civicnavigator.firebaseapp.com",
+      apiKey: "demo-key",
       projectId: "civicnavigator",
-      storageBucket: "civicnavigator.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "1:123456789:web:civicnavigator",
-      measurementId: "G-CIVICNAV001"
+      measurementId: "G-CIVICNAV2026"
     };
 
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-    // Expose global tracker for use across the app
-    window.trackEvent = function(eventName, params) {
-      logEvent(analytics, eventName, params || {});
-    };
+    // Expose global tracker
+    window.trackEvent = (name, params) => logEvent(analytics, name, params);
 
     // Auto-track page view
-    logEvent(analytics, 'page_view', {
-      page_title: 'CivicNavigator',
-      page_location: window.location.href
-    });
+    logEvent(analytics, 'page_view', { country: 'India' });
 
     // Track simulation interactions
     document.addEventListener('DOMContentLoaded', () => {
@@ -1520,6 +1511,9 @@ body {
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 CivicNavigator. Non-partisan election guidance.</span>
       <span class="footer-source">Data sourced from eci.gov.in</span>
+    </div>
+    <div style="text-align:center;padding:8px 24px 4px;font-size:12px;color:#94A3B8;border-top:1px solid rgba(255,255,255,0.08);">
+      ☁️ Google Cloud Run &nbsp;·&nbsp; 🔥 Firebase Analytics &nbsp;·&nbsp; 🤖 Gemini AI &nbsp;·&nbsp; 🗺️ Google Maps &nbsp;·&nbsp; 🌐 Google Translate
     </div>
     <div style="text-align:center;padding:12px;font-size:11px;color:#94A3B8;border-top:1px solid #E5E7EB;">
       🔒 CivicNavigator does not collect or store personal data. 
