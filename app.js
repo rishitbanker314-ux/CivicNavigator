@@ -155,12 +155,30 @@ const STAGE_ACTIONS = [
 
 /* ── Risk Items ── */
 const RISKS = [
-  { icon: '⚠️', sev: 'high', sevLabel: 'High', title: 'Name Not on Electoral Roll', desc: 'The most common issue — if your name isn\'t on the roll, you cannot vote even if you have an EPIC.', fix: 'Fix: Verify at electoralsearch.in at least 30 days before election day.' },
-  { icon: '🪪', sev: 'high', sevLabel: 'High', title: 'Expired or Damaged EPIC', desc: 'An unreadable EPIC will be rejected at the Polling Booth. You must carry a valid ID.', fix: 'Fix: Apply for a duplicate EPIC on NVSP or carry an alternate ECI-approved ID.' },
-  { icon: '📍', sev: 'med', sevLabel: 'Medium', title: 'Wrong Polling Booth', desc: 'Voters must vote at their assigned Booth — you cannot vote at a different Booth even in the same constituency.', fix: 'Fix: Confirm your exact Booth number on voters.eci.gov.in before election day.' },
-  { icon: '⏰', sev: 'med', sevLabel: 'Medium', title: 'Missing the Deadline', desc: 'Voter registration has a cutoff date before each election. Late applications are rejected.', fix: 'Fix: Register on NVSP at least 60 days before the expected election date.' },
-  { icon: '📱', sev: 'med', sevLabel: 'Medium', title: 'Incorrect Address on Roll', desc: 'If you\'ve moved, your old address may place you in the wrong constituency.', fix: 'Fix: Update address via Form 8A on NVSP before the registration deadline.' },
-  { icon: '🖋️', sev: 'low', sevLabel: 'Low', title: 'Indelible Ink Mark from Previous Vote', desc: 'BLOs may flag voters with existing ink marks as having already voted.', fix: 'Fix: Ensure ink from a previous election has fully faded; this is usually not an issue.' }
+  {
+    icon: '🔴',
+    sev: 'high',
+    sevLabel: 'HIGH',
+    title: 'Missing from Electoral Roll',
+    desc: 'Your name may not appear even after registration. Always verify at electoralsearch.eci.gov.in before election day.',
+    fix: 'File Form 6 immediately if missing.'
+  },
+  {
+    icon: '🟡',
+    sev: 'med',
+    sevLabel: 'MEDIUM',
+    title: 'No Valid ID on Voting Day',
+    desc: 'ECI accepts 12 alternate documents if EPIC is unavailable — including Aadhaar, Passport, PAN card, Driving Licence, and MNREGA Job Card.',
+    fix: 'Keep at least 2 valid photo IDs ready before election day.'
+  },
+  {
+    icon: '🟡',
+    sev: 'med',
+    sevLabel: 'MEDIUM',
+    title: 'Wrong Booth Assignment',
+    desc: 'Your booth can change between elections. Always re-verify your assigned booth at voters.eci.gov.in at least 3 days before voting day.',
+    fix: 'Check your booth assignment after every revision of the Electoral Roll.'
+  }
 ];
 
 /* ── Eligibility Questions ── */
