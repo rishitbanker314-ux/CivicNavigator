@@ -620,7 +620,7 @@ function initChat() {
     // WARNING: API key is loaded from config.js and .gitignore'd 
     // Ideally, use a backend proxy.
     const apiKey = (window.ENV && window.ENV.GEMINI_API_KEY) || 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     const systemInstruction = `You are CivicNavigator, an Indian election guidance AI. 
 You only discuss Indian elections following ECI guidelines. 
@@ -645,7 +645,7 @@ Keep response under 120 words.`;
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
