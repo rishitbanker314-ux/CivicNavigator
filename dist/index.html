@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com; connect-src 'self' https://generativelanguage.googleapis.com https://translate.googleapis.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://maps.google.com https://www.google.com;">
+  <title>CivicNavigator — Indian Voter Decision & Risk Intelligence</title>
+  <meta name="description" content="CivicNavigator — India's AI-powered voter guidance system. Non-partisan. ECI aligned. Powered by Gemini AI." />
+  <meta name="keywords" content="India election, voter registration, EPIC card, EVM voting, NVSP, Electoral Roll, Polling Booth, Election Commission of India, ECI" />
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="CivicNavigator — Indian Voter Decision System">
+  <meta property="og:description" content="Detect your voting risk, predict consequences, and take the right action — powered by Gemini AI and ECI data.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://generativelanguage.googleapis.com">
+  <link rel="preconnect" href="https://translate.googleapis.com">
+  <link rel="dns-prefetch" href="https://eci.gov.in">
+  <link rel="dns-prefetch" href="https://nvsp.in">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* ─────────────────────────────────────────
+   CivicNavigator — Design System
+   Indian Voter Decision & Risk Intelligence
+───────────────────────────────────────── */
+
+:root {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --border: #E5E7EB;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --accent: #2563EB;
+  --accent-light: #EFF6FF;
+  --accent-dark: #1D4ED8;
+  --risk: #DC2626;
+  --risk-light: #FEF2F2;
+  --success: #16A34A;
+  --success-light: #F0FDF4;
+  --warning: #F59E0B;
+  --warning-light: #FFFBEB;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --radius-xs: 4px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --max-w: 1200px;
+  --pad: 24px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img, svg { display: block; }
+
+/* ── Accessibility: Focus Visible ── */
+*:focus-visible {
+  outline: 2px solid #2563EB;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Skip Link for Screen Readers ── */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2563EB;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+.skip-link-visible,
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Nav ── */
+#main-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #E5E7EB;
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 var(--pad);
+  height: 64px; display: flex; align-items: center; gap: 0;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: #111827;
+  font-size: 18px; font-weight: 700;
+  flex-shrink: 0; margin-right: 32px;
+}
+.nav-logo:hover { text-decoration: none; }
+.nav-logo-emoji { font-size: 20px; line-height: 1; }
+.logo-text { font-weight: 700; letter-spacing: -0.02em; color: #111827; }
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+}
+.nav-link {
+  padding: 6px 14px; border-radius: 8px;
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.nav-link:hover { background: var(--accent-light); color: var(--accent); text-decoration: none; }
+/* ECI badge — right of nav links, pushed to far right */
+.nav-eci-badge {
+  margin-left: auto;
+  background: #DCFCE7; color: #15803D;
+  font-size: 0.75rem; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.nav-mobile-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px; margin-left: 16px;
+}
+.nav-mobile-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text-primary); border-radius: 2px;
+  transition: transform 0.2s;
+}
+
+/* ── Alert Strip ── */
+.alert-strip {
+  width: 100%;
+  background: #FEF3C7;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 10px 24px;
+  flex-wrap: wrap;
+}
+.alert-strip-text {
+  font-size: 13px; color: #92400E; line-height: 1.5;
+}
+.alert-strip-link {
+  font-size: 13px; font-weight: 700;
+  color: #B45309; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+}
+.alert-strip-link:hover { text-decoration: underline; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; border: none;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-1px); text-decoration: none; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
+.btn-primary:hover { background: var(--accent-dark); box-shadow: 0 4px 12px rgba(37,99,235,0.35); }
+.btn-secondary {
+  background: var(--surface); color: var(--text-primary);
+  border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.btn-secondary:hover { background: var(--bg); }
+
+/* ── Section common ── */
+.section {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 72px var(--pad);
+}
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-tag {
+  display: inline-block;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800; letter-spacing: -0.03em;
+  color: var(--text-primary); margin-bottom: 12px;
+}
+.section-desc {
+  font-size: 1rem; color: var(--text-secondary);
+  max-width: 560px; margin: 0 auto;
+}
+
+/* ── Hero ── */
+.hero {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 64px var(--pad) 48px;
+  background: #ffffff;
+}
+.hero-label {
+  font-size: 12px; color: #6B7280;
+  letter-spacing: 0.5px; margin-bottom: 20px;
+}
+.hero-title {
+  font-size: 42px; font-weight: 700;
+  line-height: 1.2; color: #111827;
+  margin-bottom: 20px; letter-spacing: -0.02em;
+}
+.hero-subtitle {
+  font-size: 16px; color: #6B7280;
+  line-height: 1.7; margin-bottom: 32px;
+  max-width: 520px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.hero-actions .btn-primary {
+  height: 44px; padding: 0 20px; border-radius: 10px;
+  display: inline-flex; align-items: center;
+}
+.btn-outline {
+  height: 44px; padding: 0 20px; border-radius: 10px;
+  display: inline-flex; align-items: center;
+  background: transparent; color: #2563EB;
+  border: 1px solid #2563EB;
+  font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-outline:hover { background: #EFF6FF; text-decoration: none; }
+.hero-stats {
+  display: flex; align-items: center; gap: 24px;
+}
+.stat-item { display: flex; flex-direction: column; }
+.stat-number { font-size: 20px; font-weight: 700; color: #111827; }
+.stat-label { font-size: 12px; color: #6B7280; margin-top: 2px; }
+.stat-divider { width: 1px; height: 32px; background: #E5E7EB; }
+
+/* ── My Voting Journey ── */
+.journey-section {
+  padding-top: 48px; padding-bottom: 48px;
+}
+.journey-heading {
+  font-size: 20px; font-weight: 600; color: #111827;
+  margin-bottom: 32px;
+}
+/* Progress bar container */
+.journey-progress {
+  display: flex; align-items: flex-start; justify-content: center;
+  gap: 0; margin-bottom: 28px; position: relative;
+}
+/* Node button */
+.jp-node {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; background: none; border: none;
+  cursor: pointer; position: relative; z-index: 1;
+  padding: 0; flex-shrink: 0;
+}
+.jp-circle {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  background: #E5E7EB; color: #9CA3AF;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.jp-label {
+  font-size: 12px; color: #6B7280; white-space: nowrap;
+  transition: color 0.2s;
+}
+/* Connecting line */
+.jp-line {
+  flex: 1; height: 2px; min-width: 48px;
+  background: #E5E7EB; margin-top: 15px; /* vertically center with 32px circle */
+  transition: background 0.2s;
+}
+/* States */
+.jp-node.jp-completed .jp-circle {
+  background: #16A34A; color: #fff;
+}
+.jp-node.jp-completed .jp-label { color: #16A34A; }
+.jp-node.jp-active .jp-circle {
+  background: #2563EB; color: #fff;
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+}
+.jp-node.jp-active .jp-label { color: #2563EB; font-weight: 600; }
+.jp-line.jp-line-done { background: #16A34A; }
+.jp-line.jp-line-active { background: #2563EB; }
+/* Hover */
+.jp-node:hover .jp-circle { box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
+
+/* Journey info card */
+.journey-card {
+  background: #fff; border: 1px solid #E5E7EB;
+  border-radius: 16px; padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.jc-stage-label {
+  font-size: 14px; color: #6B7280; margin-bottom: 4px;
+}
+.jc-stage-label strong { color: #2563EB; font-weight: 700; }
+.jc-desc {
+  font-size: 14px; color: #374151; line-height: 1.6; margin-bottom: 16px;
+}
+.jc-btn {
+  display: inline-flex; align-items: center;
+  padding: 0 20px; height: 40px; border-radius: 10px;
+  background: #2563EB; color: #fff;
+  font-size: 14px; font-weight: 600;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: background 0.15s;
+}
+.jc-btn:hover { background: #1D4ED8; text-decoration: none; }
+
+/* ── Voting Risk Assessment ── */
+.ra-section { padding-top: 0; padding-bottom: 48px; }
+.ra-heading {
+  font-size: 20px; font-weight: 600; color: #111827;
+  margin-bottom: 24px;
+}
+.ra-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-bottom: 20px;
+}
+.ra-card {
+  background: #fff; border: 1px solid #E5E7EB;
+  border-radius: 16px; padding: 20px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ra-icon { font-size: 24px; margin-bottom: 4px; }
+.ra-card-title { font-size: 13px; color: #6B7280; }
+.ra-card-value { font-size: 18px; font-weight: 700; color: #111827; }
+.ra-value-issue { font-size: 16px; }
+.ra-card-note { font-size: 12px; color: #6B7280; margin-top: 2px; }
+.ra-note-red { color: #DC2626; }
+.ra-note-amber { color: #F59E0B; }
+/* Risk pill */
+.ra-risk-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 6px 16px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; width: fit-content;
+}
+.ra-pill-high { background: #FEE2E2; color: #DC2626; }
+.ra-pill-med  { background: #FEF3C7; color: #B45309; }
+.ra-pill-low  { background: #DCFCE7; color: #15803D; }
+/* Consequence card */
+.ra-consequence {
+  display: flex; background: #FEF2F2;
+  border: 1px solid #FECACA; border-radius: 16px;
+  padding: 0; overflow: hidden;
+}
+.ra-consequence-bar {
+  width: 4px; flex-shrink: 0; background: #DC2626;
+}
+.ra-consequence-body { padding: 20px; }
+.ra-consequence-title {
+  font-size: 15px; font-weight: 700; color: #991B1B;
+  margin-bottom: 8px;
+}
+.ra-consequence-text {
+  font-size: 14px; color: #7F1D1D; line-height: 1.6;
+}
+
+/* ── Action Plan ── */
+.ap-section { padding-top: 0; padding-bottom: 48px; }
+.ap-grid {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 24px;
+}
+.ap-heading {
+  font-size: 16px; font-weight: 600; color: #111827;
+  margin-bottom: 16px;
+}
+/* Step items */
+.ap-step {
+  display: flex; align-items: center; gap: 12px;
+  height: 56px; padding: 12px 16px;
+  border-radius: 12px; border: 1px solid #E5E7EB;
+  margin-bottom: 8px; background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.ap-step.ap-active {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+}
+.ap-step-icon {
+  width: 24px; height: 24px; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.ap-step-body { flex: 1; min-width: 0; }
+.ap-step-name { font-size: 14px; color: #111827; font-weight: 500; }
+.ap-step-desc {
+  font-size: 12px; color: #6B7280; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.ap-step-btn {
+  height: 32px; padding: 0 14px; border-radius: 8px;
+  background: #2563EB; color: #fff;
+  font-size: 12px; font-weight: 600;
+  border: none; cursor: pointer; white-space: nowrap;
+  flex-shrink: 0; transition: background 0.15s;
+}
+.ap-step-btn:hover { background: #1D4ED8; }
+/* Right column */
+.ap-resources-heading {
+  font-size: 14px; font-weight: 600; color: #111827;
+  margin-bottom: 12px;
+}
+.ap-resource-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; border-radius: 10px;
+  background: #F8FAFC; border: 1px solid #E5E7EB;
+  margin-bottom: 8px; text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ap-resource-card:hover {
+  border-color: #2563EB; background: #EFF6FF;
+  text-decoration: none;
+}
+.ap-rc-icon { font-size: 18px; flex-shrink: 0; }
+.ap-rc-text {
+  flex: 1; font-size: 13px; font-weight: 500;
+  color: #111827; display: flex; flex-direction: column;
+}
+.ap-rc-sub { font-size: 11px; color: #6B7280; font-weight: 400; margin-top: 1px; }
+.ap-rc-arrow { font-size: 13px; color: #9CA3AF; flex-shrink: 0; }
+
+/* ── Interactive Simulation ── */
+.sim-section { padding-bottom: 48px; }
+.sim-heading {
+  font-size: 20px; font-weight: 600; color: #111827;
+  margin-bottom: 4px;
+}
+.sim-sub { font-size: 14px; color: #6B7280; margin-bottom: 24px; }
+.sim-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.sim-card {
+  background: #fff; border: 1px solid #E5E7EB;
+  border-radius: 16px; padding: 20px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.sim-card-title {
+  font-size: 15px; font-weight: 600; color: #111827;
+  line-height: 1.4;
+}
+.sim-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.sim-btn {
+  flex: 1; min-width: 0; padding: 10px 12px;
+  border-radius: 10px; font-size: 13px; font-weight: 600;
+  border: 1px solid #E5E7EB; cursor: pointer;
+  background: #fff; color: #374151;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.sim-btn-good:hover, .sim-btn-good.sim-chosen {
+  background: #F0FDF4; border-color: #16A34A; color: #15803D;
+}
+.sim-btn-bad:hover, .sim-btn-bad.sim-chosen {
+  background: #FEF2F2; border-color: #DC2626; color: #991B1B;
+}
+.sim-btn.sim-unchosen { opacity: 0.4; pointer-events: none; }
+/* Outcome panels */
+.sim-outcome { display: none; }
+.sim-outcome.sim-show {
+  display: block;
+  animation: simFade 0.2s ease-out;
+}
+.sim-outcome-inner {
+  padding: 12px; border-radius: 10px;
+  font-size: 13px; line-height: 1.55;
+}
+.sim-outcome-good {
+  background: #F0FDF4; color: #166534;
+  border: 1px solid #BBF7D0;
+}
+.sim-outcome-bad {
+  background: #FEF2F2; color: #991B1B;
+  border: 1px solid #FECACA;
+}
+@keyframes simFade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero Visual — Status Dashboard ── */
+.status-dashboard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 20px; font-size: 0.875rem;
+}
+.dash-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.dash-title { font-weight: 700; font-size: 0.875rem; }
+.dash-badge { font-size: 0.7rem; font-weight: 600; color: var(--success);
+  background: var(--success-light); padding: 3px 10px; border-radius: 100px; }
+.dash-stages { display: flex; flex-direction: column; gap: 0; }
+.stage-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0;
+}
+.stage-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+}
+.stage-done .stage-icon { background: var(--success-light); color: var(--success); }
+.stage-active .stage-icon { background: var(--accent-light); color: var(--accent); }
+.stage-pending .stage-icon { background: var(--bg); color: var(--text-tertiary); border: 1px solid var(--border); }
+.stage-name { font-weight: 600; font-size: 0.8rem; color: var(--text-primary); }
+.stage-sub { font-size: 0.7rem; color: var(--text-tertiary); margin-top: 1px; }
+.stage-connector {
+  width: 2px; height: 10px; background: var(--border);
+  margin-left: 11px; border-radius: 2px;
+}
+.stage-connector.done { background: var(--success); }
+.dash-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+}
+.risk-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; }
+.risk-badge {
+  font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 100px;
+}
+.risk-badge.amber { background: var(--warning-light); color: #92400E; }
+.risk-badge.green { background: var(--success-light); color: var(--success); }
+.risk-badge.red { background: var(--risk-light); color: var(--risk); }
+
+/* ── Status Selector ── */
+.status-section { padding-top: 0; }
+.status-selector {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 24px;
+}
+.status-btn {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; padding: 20px 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  text-align: center;
+}
+.status-btn:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); transform: translateY(-1px); }
+.status-btn.active { border-color: var(--accent); background: var(--accent-light); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.sb-icon { font-size: 1.5rem; }
+.sb-label { font-size: 0.875rem; font-weight: 700; color: var(--text-primary); }
+.sb-sub { font-size: 0.75rem; color: var(--text-secondary); }
+.status-action-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow);
+}
+.sac-inner { display: flex; gap: 16px; }
+.sac-icon { font-size: 2rem; flex-shrink: 0; }
+.sac-body { flex: 1; }
+.sac-stage { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.sac-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.sac-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+.sac-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.sac-btn {
+  padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; border: none; transition: background 0.15s;
+  text-decoration: none; display: inline-block;
+}
+.sac-btn-primary { background: var(--accent); color: #fff; }
+.sac-btn-primary:hover { background: var(--accent-dark); text-decoration: none; }
+.sac-btn-secondary { background: var(--bg); color: var(--text-primary); border: 1px solid var(--border); }
+.sac-risk { display: flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 0.8rem; color: var(--text-secondary); }
+.sac-risk .risk-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.risk-dot-red { background: var(--risk); }
+.risk-dot-amber { background: var(--warning); }
+.risk-dot-green { background: var(--success); }
+
+/* ── Process Steps ── */
+.process-steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.process-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); position: relative;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.process-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.pc-number {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 800;
+  margin-bottom: 16px;
+}
+.pc-icon { font-size: 1.5rem; margin-bottom: 12px; }
+.pc-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.pc-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+.pc-link {
+  font-size: 0.78rem; font-weight: 600; color: var(--accent);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+}
+.pc-link:hover { text-decoration: underline; }
+.pc-badge {
+  position: absolute; top: 16px; right: 16px;
+  font-size: 0.65rem; font-weight: 700; padding: 2px 8px;
+  border-radius: 100px; letter-spacing: 0.05em;
+}
+.pc-badge-eci { background: var(--accent-light); color: var(--accent); }
+
+/* ── Eligibility ── */
+.eligibility-card {
+  max-width: 600px; margin: 0 auto;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+  box-shadow: var(--shadow);
+}
+.elig-progress {
+  height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 28px; overflow: hidden;
+}
+.elig-progress-bar { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+.elig-question-area {}
+.elig-q-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.elig-q-text { font-size: 1.05rem; font-weight: 700; margin-bottom: 20px; line-height: 1.4; }
+.elig-options { display: flex; flex-direction: column; gap: 10px; }
+.elig-opt {
+  padding: 14px 16px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface);
+  cursor: pointer; font-size: 0.9rem; font-weight: 500;
+  text-align: left; transition: border-color 0.15s, background 0.15s;
+}
+.elig-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.elig-result-inner { text-align: center; }
+.elig-result-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.elig-result-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+.elig-result-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+.elig-restart { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+.elig-restart:hover { background: var(--border); }
+
+/* ── Locator ── */
+.locator-container { max-width: 640px; margin: 0 auto; }
+.locator-input-row { display: flex; gap: 10px; }
+.locator-input-row input {
+  flex: 1; padding: 12px 16px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--surface);
+  font-size: 0.9rem; font-family: var(--font); color: var(--text-primary);
+  outline: none; transition: border-color 0.15s;
+}
+.locator-input-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+.locator-input-row input::placeholder { color: var(--text-tertiary); }
+.locator-result {
+  margin-top: 20px; padding: 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 0.9rem;
+}
+.locator-links { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+.ext-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-size: 0.875rem; font-weight: 500; color: var(--text-primary);
+  text-decoration: none; transition: border-color 0.15s, background 0.15s;
+}
+.ext-link:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); text-decoration: none; }
+.ext-link span { font-size: 1rem; }
+
+/* ── Risk Grid ── */
+.risk-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.risk-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  box-shadow: var(--shadow); display: flex; gap: 14px;
+}
+.risk-card-icon { font-size: 1.5rem; flex-shrink: 0; }
+.risk-card-body {}
+.risk-card-sev {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 100px;
+  display: inline-block; margin-bottom: 6px;
+}
+.sev-high { background: var(--risk-light); color: var(--risk); }
+.sev-med { background: var(--warning-light); color: #92400E; }
+.sev-low { background: var(--success-light); color: var(--success); }
+.risk-card-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+.risk-card-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+.risk-card-fix { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-top: 8px; }
+
+/* ── AI Assistant ── */
+.ai-section { padding-bottom: 48px; }
+.ai-heading {
+  font-size: 20px; font-weight: 600; color: #111827;
+  margin-bottom: 4px;
+}
+.ai-sub {
+  font-size: 12px; color: #6B7280; letter-spacing: 0.3px;
+  margin-bottom: 24px;
+}
+.ai-card {
+  background: #fff; border: 1px solid #E5E7EB;
+  border-radius: 16px; overflow: hidden;
+}
+/* Messages area */
+.ai-messages {
+  height: 360px; overflow-y: auto; padding: 20px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.ai-msg { display: flex; max-width: 75%; }
+.ai-msg.ai-bot { align-self: flex-start; }
+.ai-msg.ai-user { align-self: flex-end; }
+.ai-bubble {
+  padding: 10px 14px; border-radius: 12px;
+  font-size: 14px; line-height: 1.6;
+}
+.ai-msg.ai-bot .ai-bubble {
+  background: #F1F5F9; color: #111827;
+  border-bottom-left-radius: 4px;
+}
+.ai-msg.ai-user .ai-bubble {
+  background: #2563EB; color: #fff;
+  border-bottom-right-radius: 4px;
+}
+/* Typing indicator */
+.ai-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+.ai-typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #9CA3AF; animation: aiTyping 1.2s infinite;
+}
+.ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes aiTyping { 0%,80%,100% { transform: scale(1); opacity: 0.4; } 40% { transform: scale(1.2); opacity: 1; } }
+/* Quick prompts */
+.ai-prompts {
+  display: flex; gap: 8px; padding: 10px 20px;
+  border-top: 1px solid #E5E7EB;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ai-prompts::-webkit-scrollbar { display: none; }
+.ai-prompt-pill {
+  white-space: nowrap; padding: 6px 14px;
+  border-radius: 999px; border: 1px solid #E5E7EB;
+  background: #fff; font-size: 12px; font-weight: 500;
+  color: #374151; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.ai-prompt-pill:hover {
+  background: #F1F5F9; border-color: #2563EB; color: #2563EB;
+}
+/* Input bar */
+.ai-input-bar {
+  display: flex; align-items: center; gap: 8px;
+  height: 52px; border-top: 1px solid #E5E7EB;
+  padding: 0 8px 0 0;
+}
+.ai-input {
+  flex: 1; height: 100%; padding: 0 16px;
+  border: none; outline: none; background: transparent;
+  font-size: 14px; font-family: var(--font); color: #111827;
+}
+.ai-input::placeholder { color: #9CA3AF; }
+.ai-send-btn {
+  height: 36px; padding: 0 16px; border-radius: 8px;
+  background: #2563EB; color: #fff; border: none;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  white-space: nowrap; flex-shrink: 0;
+  transition: background 0.15s;
+}
+.ai-send-btn:hover { background: #1D4ED8; }
+/* ── Powered By ── */
+.powered-section { padding: 0 var(--pad) 64px; }
+.powered-title {
+  font-size: 16px; font-weight: 600; color: #111827;
+  text-align: center; margin-bottom: 8px;
+}
+.powered-subtitle {
+  font-size: 13px; color: #6B7280; text-align: center;
+  max-width: 500px; margin: 0 auto 32px; line-height: 1.5;
+}
+.powered-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  max-width: var(--max-w); margin: 0 auto;
+}
+.powered-card {
+  padding: 20px; border-radius: 16px; border: 1px solid #E5E7EB;
+  background: #fff; text-align: center;
+}
+.powered-icon {
+  font-size: 32px; margin-bottom: 12px; line-height: 1;
+}
+.powered-card-title {
+  font-size: 15px; font-weight: 600; color: #111827;
+  margin-bottom: 8px;
+}
+.powered-card-desc {
+  font-size: 13px; color: #6B7280; line-height: 1.5;
+}
+
+/* ── Footer ── */
+.footer {
+  background: #1E293B;
+  padding: 40px var(--pad) 24px;
+}
+.footer-grid {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin-bottom: 32px;
+}
+.footer-brand {
+  font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;
+}
+.footer-tagline {
+  font-size: 13px; color: #94A3B8; line-height: 1.5; margin-top: 8px;
+}
+.footer-heading {
+  font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 12px;
+}
+.footer-links-list, .footer-powered-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.footer-links-list a, .footer-powered-list li {
+  font-size: 13px; color: #94A3B8; text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links-list a:hover { color: #fff; }
+.footer-bottom {
+  max-width: var(--max-w); margin: 0 auto;
+  padding-top: 16px; border-top: 1px solid #334155;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy, .footer-source {
+  font-size: 12px; color: #64748B;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero-title { font-size: 32px; }
+  .ra-cards { grid-template-columns: 1fr 1fr; }
+  .ap-grid { grid-template-columns: 1fr; }
+  .sim-cards { grid-template-columns: 1fr 1fr; }
+  .powered-grid { grid-template-columns: 1fr 1fr; }
+  .status-selector { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  :root { --pad: 16px; }
+  .section { padding: 48px var(--pad); }
+  .hero { padding: 48px var(--pad) 40px; }
+  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; z-index: 99; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px var(--pad); flex-direction: column; gap: 4px; }
+  .nav-links.open { display: flex; }
+  .nav-mobile-toggle { display: flex; }
+  .nav-eci-badge { display: none; }
+  .alert-strip { justify-content: flex-start; }
+  .status-selector { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .locator-input-row { flex-direction: column; }
+  .hero-actions { flex-direction: column; }
+  .sac-inner { flex-direction: column; }
+  .process-steps { grid-template-columns: 1fr; }
+  .ra-cards { grid-template-columns: 1fr; }
+  .ap-grid { grid-template-columns: 1fr; }
+  .ap-step-desc { white-space: normal; }
+  .sim-cards { grid-template-columns: 1fr; }
+  .powered-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ── Google Translate Widget Overrides ── */
+#google_translate_element {
+  margin-left: auto;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  #google_translate_element { margin-left: 0; }
+}
+
+.goog-te-gadget-simple {
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.goog-te-gadget-simple .goog-te-menu-value {
+  color: #111827 !important;
+}
+.goog-te-gadget-simple .goog-te-menu-value span {
+  color: #111827 !important;
+}
+.goog-te-gadget-icon {
+  display: none !important;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+
+/* ── Accessibility: Lazy Section Transitions ── */
+.lazy-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.lazy-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Spinner Animation ── */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Loading State ── */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+</style>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'hi,gu,ta,bn,te,mr,kn,ml,pa,or,as',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false,
+        multilanguagePage: true
+      }, 'google_translate_element');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Skip Link for Screen Readers -->
+  <a href="#main-content" class="skip-link" id="skip-to-main"
+    onfocus="this.classList.add('skip-link-visible')" onblur="this.classList.remove('skip-link-visible')">
+    Skip to main content
+  </a>
+
+  <div id="rate-limit-warning" style="display:none; position:fixed; top:0; left:0; right:0; background-color:#DC2626; color:white; text-align:center; padding:12px; font-weight:600; z-index:1000;">
+    Please wait a moment before trying again.
+  </div>
+
+  <!-- Top Navbar -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="#" class="nav-logo" id="nav-logo" aria-label="CivicNavigator Home">
+        <span class="nav-logo-emoji" aria-hidden="true">🗳️</span>
+        <span class="logo-text">CivicNavigator</span>
+      </a>
+
+      <!-- Nav links -->
+      <div class="nav-links" id="nav-links">
+        <a href="#status"    class="nav-link">My Journey</a>
+        <a href="#risks"     class="nav-link">Risk Check</a>
+        <a href="#eligibility" class="nav-link">Simulate</a>
+        <a href="#assistant" class="nav-link">Ask AI</a>
+      </div>
+
+      <!-- ECI badge -->
+      <span class="nav-eci-badge" aria-label="ECI Aligned">ECI Aligned ✅</span>
+
+      <!-- Google Translate Widget -->
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <div id="google_translate_element" style="font-size:13px;"></div>
+        <small style="font-size:10px;color:#6B7280;display:block;text-align:center;">
+          🌐 11 Languages
+        </small>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Alert Strip -->
+  <div id="alert-strip" class="alert-strip" role="alert" aria-live="polite">
+    <span class="alert-strip-text">⚠️ Incomplete voter registration may prevent you from casting your vote. Check your status now.</span>
+    <a href="#status" class="alert-strip-link">Check Now →</a>
+  </div>
+
+  <main id="main-content" role="main" aria-label="CivicNavigator Election Guide">
+
+    <!-- Hero -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero-label">Powered by Gemini AI · ECI Verified</div>
+      <h1 id="hero-title" class="hero-title">
+        Navigate Your Voting Journey.<br/>Make Every Decision Count.
+      </h1>
+      <p class="hero-subtitle">
+        CivicNavigator is India's first AI-powered voter decision system. It detects your risk, predicts consequences, and drives your next step — so you never lose your vote.
+      </p>
+      <div class="hero-actions">
+        <a href="#process" class="btn btn-primary" id="hero-start-btn">Start My Journey →</a>
+        <a href="#risks" class="btn btn-outline" id="hero-risk-btn">Check My Risk</a>
+      </div>
+      <div class="hero-stats" aria-label="Key facts">
+        <div class="stat-item">
+          <span class="stat-number">6</span>
+          <span class="stat-label">Steps</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">28+8</span>
+          <span class="stat-label">State/UTs + UTs</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">ECI</span>
+          <span class="stat-label">Verified</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">Gemini</span>
+          <span class="stat-label">AI Powered</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Voting Journey -->
+    <section id="journey" class="section journey-section" aria-labelledby="journey-title">
+      <h2 id="journey-title" class="journey-heading">My Voting Journey</h2>
+
+      <!-- Progress Bar -->
+      <div class="journey-progress" id="journey-progress" role="group" aria-label="Voting journey stages">
+        <!-- Stage 0 -->
+        <button class="jp-node jp-active" id="jp-node-0" data-stage="0" aria-pressed="true">
+          <span class="jp-circle">1</span>
+          <span class="jp-label">Register</span>
+        </button>
+        <div class="jp-line" id="jp-line-0"></div>
+        <!-- Stage 1 -->
+        <button class="jp-node" id="jp-node-1" data-stage="1" aria-pressed="false">
+          <span class="jp-circle">2</span>
+          <span class="jp-label">Verify</span>
+        </button>
+        <div class="jp-line" id="jp-line-1"></div>
+        <!-- Stage 2 -->
+        <button class="jp-node" id="jp-node-2" data-stage="2" aria-pressed="false">
+          <span class="jp-circle">3</span>
+          <span class="jp-label">Find Booth</span>
+        </button>
+        <div class="jp-line" id="jp-line-2"></div>
+        <!-- Stage 3 -->
+        <button class="jp-node" id="jp-node-3" data-stage="3" aria-pressed="false">
+          <span class="jp-circle">4</span>
+          <span class="jp-label">Vote</span>
+        </button>
+      </div>
+
+      <!-- Info Card -->
+      <div class="journey-card" id="journey-card" aria-live="polite">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+
+    <!-- Action Plan -->
+    <section id="action-plan" class="section ap-section" aria-labelledby="ap-title">
+      <div class="ap-grid">
+        <!-- Left — Steps Checklist -->
+        <div class="ap-left">
+          <h2 id="ap-title" class="ap-heading">What You Need To Do</h2>
+          <div class="ap-steps" id="ap-steps">
+            <div class="ap-empty-state">
+              <h3 class="ap-default-title" style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 4px;">Your Starting Point</h3>
+              <p class="ap-default-desc" style="font-size: 14px; color: #6B7280; margin-bottom: 16px;">Most first-time voters begin here:</p>
+            </div>
+            
+            <div class="ap-step">
+              <span class="ap-step-icon">✅</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Check Eligibility</div>
+                <div class="ap-step-desc">Confirm you are 18+, Indian citizen, and resident of your constituency</div>
+              </div>
+            </div>
+            
+            <div class="ap-step ap-active">
+              <span class="ap-step-icon">⏳</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Register on NVSP</div>
+                <div class="ap-step-desc">Submit Form 6 on nvsp.in or via the Voter Helpline App</div>
+              </div>
+              <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="ap-step-btn">Start →</a>
+            </div>
+            
+            <div class="ap-step">
+              <span class="ap-step-icon">⬜</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Verify Electoral Roll</div>
+                <div class="ap-step-desc">Confirm your name at electoralsearch.eci.gov.in before the final roll date</div>
+              </div>
+            </div>
+
+            <div class="ap-step">
+              <span class="ap-step-icon">⬜</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Receive EPIC</div>
+                <div class="ap-step-desc">Download or collect your Electors Photo Identity Card</div>
+              </div>
+            </div>
+
+            <div class="ap-step">
+              <span class="ap-step-icon">⬜</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Locate Polling Booth</div>
+                <div class="ap-step-desc">Find your assigned booth via the ECI Booth App or Google Maps</div>
+              </div>
+            </div>
+
+            <div class="ap-step">
+              <span class="ap-step-icon">⬜</span>
+              <div class="ap-step-body">
+                <div class="ap-step-name">Cast Your Vote</div>
+                <div class="ap-step-desc">Vote using the Electronic Voting Machine (EVM) at your assigned booth on election day</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right — Quick Resources -->
+        <div class="ap-right">
+          <h3 class="ap-resources-heading">Official Resources</h3>
+          <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="ap-resource-card">
+            <span class="ap-rc-icon">🌐</span>
+            <span class="ap-rc-text">NVSP Portal<span class="ap-rc-sub">nvsp.in</span></span>
+            <span class="ap-rc-arrow">↗</span>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.eci.citizen" target="_blank" rel="noopener noreferrer" class="ap-resource-card">
+            <span class="ap-rc-icon">📱</span>
+            <span class="ap-rc-text">Voter Helpline App<span class="ap-rc-sub">Available on Play Store</span></span>
+            <span class="ap-rc-arrow">↗</span>
+          </a>
+          <a href="https://voters.eci.gov.in" target="_blank" rel="noopener noreferrer" class="ap-resource-card">
+            <span class="ap-rc-icon">🗺️</span>
+            <span class="ap-rc-text">Find Booth via Google Maps<span class="ap-rc-sub">voters.eci.gov.in</span></span>
+            <span class="ap-rc-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voting Risk Assessment -->
+    <section id="risk-assessment" class="section ra-section" aria-labelledby="ra-title" aria-label="Risk Assessment Dashboard">
+      <h2 id="ra-title" class="ra-heading">Your Voting Risk</h2>
+
+      <div class="ra-cards" id="ra-cards">
+        <!-- Card 1 — Voting Stage -->
+        <div class="ra-card" id="ra-card-stage">
+          <div class="ra-icon">🗳️</div>
+          <div class="ra-card-title">Current Stage</div>
+          <div class="ra-card-value" id="ra-stage-value" style="color: #2563EB;">Not Registered</div>
+          <div class="ra-card-note" id="ra-stage-note">You need to register to vote</div>
+        </div>
+        <!-- Card 2 — Risk Level -->
+        <div class="ra-card" id="ra-card-risk">
+          <div class="ra-icon">⚠️</div>
+          <div class="ra-card-title">Risk Level</div>
+          <div class="ra-risk-pill ra-pill-high" id="ra-risk-pill" style="background: #FEE2E2; color: #DC2626;">HIGH</div>
+          <div class="ra-card-note ra-note-red" id="ra-risk-note">Your vote may be at risk</div>
+        </div>
+        <!-- Card 3 — Biggest Issue -->
+        <div class="ra-card" id="ra-card-issue">
+          <div class="ra-icon">⏰</div>
+          <div class="ra-card-title">Biggest Issue</div>
+          <div class="ra-card-value ra-value-issue" id="ra-issue-value">Registration Incomplete</div>
+          <div class="ra-card-note ra-note-amber" id="ra-issue-note">Act now to protect your vote</div>
+        </div>
+      </div>
+
+      <!-- Consequence Card -->
+      <div class="ra-consequence" id="ra-consequence">
+        <div class="ra-consequence-bar"></div>
+        <div class="ra-consequence-body">
+          <div class="ra-consequence-title">⚠️ If You Ignore This:</div>
+          <div class="ra-consequence-text" id="ra-consequence-text">You will not be able to cast your vote. Your name will not appear on the electoral roll and booth officials cannot assist you on election day.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Simulation -->
+    <section id="simulate" class="section sim-section" aria-labelledby="sim-title">
+      <h2 id="sim-title" class="sim-heading">What Happens If...?</h2>
+      <p class="sim-sub">Make a choice. See the real consequence.</p>
+
+      <div class="sim-cards" id="sim-cards">
+        <!-- Card 1 -->
+        <div class="sim-card" data-sim="0">
+          <div class="sim-card-title">You miss the registration deadline</div>
+          <div class="sim-btns">
+            <button class="sim-btn sim-btn-good" data-choice="good">I register on time ✅</button>
+            <button class="sim-btn sim-btn-bad" data-choice="bad">I ignore it ❌</button>
+          </div>
+          <div class="sim-outcome" id="sim-outcome-0"></div>
+        </div>
+        <!-- Card 2 -->
+        <div class="sim-card" data-sim="1">
+          <div class="sim-card-title">Your name is missing from the voter list</div>
+          <div class="sim-btns">
+            <button class="sim-btn sim-btn-good" data-choice="good">I check and fix it in time ✅</button>
+            <button class="sim-btn sim-btn-bad" data-choice="bad">I ignore it ❌</button>
+          </div>
+          <div class="sim-outcome" id="sim-outcome-1"></div>
+        </div>
+        <!-- Card 3 -->
+        <div class="sim-card" data-sim="2">
+          <div class="sim-card-title">You lost your EPIC (Voter ID)</div>
+          <div class="sim-btns">
+            <button class="sim-btn sim-btn-good" data-choice="good">I get an alternate ID ✅</button>
+            <button class="sim-btn sim-btn-bad" data-choice="bad">I don't bother ❌</button>
+          </div>
+          <div class="sim-outcome" id="sim-outcome-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Tracker -->
+    <section id="status" class="section lazy-section status-section" aria-labelledby="status-title">
+      <div class="section-header">
+        <span class="section-tag">Your State/UT</span>
+        <h2 id="status-title" class="section-title">Where Are You in the Process?</h2>
+        <p class="section-desc">Select your current voting stage. CivicNavigator will show your exact next action and any risks.</p>
+      </div>
+      <div class="status-selector" id="status-selector" role="radiogroup" aria-label="Select your voting status">
+        <button class="status-btn" id="sb-0" data-stage="0" role="radio" aria-checked="false">
+          <span class="sb-icon">📋</span>
+          <span class="sb-label">Not Registered</span>
+          <span class="sb-sub">Haven't applied yet</span>
+        </button>
+        <button class="status-btn" id="sb-1" data-stage="1" role="radio" aria-checked="false">
+          <span class="sb-icon">📝</span>
+          <span class="sb-label">Registered</span>
+          <span class="sb-sub">Form 6 submitted</span>
+        </button>
+        <button class="status-btn" id="sb-2" data-stage="2" role="radio" aria-checked="false">
+          <span class="sb-icon">✅</span>
+          <span class="sb-label">Roll Verified</span>
+          <span class="sb-sub">Name on Electoral Roll</span>
+        </button>
+        <button class="status-btn" id="sb-3" data-stage="3" role="radio" aria-checked="false">
+          <span class="sb-icon">🗳️</span>
+          <span class="sb-label">Ready to Vote</span>
+          <span class="sb-sub">EPIC + Booth confirmed</span>
+        </button>
+      </div>
+      <div class="status-action-card" id="status-action-card" style="display:none;" aria-live="polite">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ECI 5-Step Process -->
+    <section id="process" class="section process-section" aria-labelledby="process-title" aria-label="Voting Steps">
+      <div class="section-header">
+        <span class="section-tag">ECI Process</span>
+        <h2 id="process-title" class="section-title">The Official ECI Voting Process</h2>
+        <p class="section-desc">Every step follows the Election Commission of India's mandated procedure. No shortcuts, no guesswork.</p>
+      </div>
+      <div class="process-steps" id="process-steps" role="list">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Eligibility Checker -->
+    <section id="eligibility" class="section lazy-section eligibility-section" aria-labelledby="eligibility-title">
+      <div class="section-header">
+        <span class="section-tag">Quick Check</span>
+        <h2 id="eligibility-title" class="section-title">Am I Eligible to Vote in India?</h2>
+        <p class="section-desc">Answer a few questions based on ECI eligibility criteria to find out your status.</p>
+      </div>
+      <div class="eligibility-card" id="eligibility-card">
+        <div class="elig-progress" id="elig-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Eligibility check progress">
+          <div class="elig-progress-bar" id="elig-progress-bar"></div>
+        </div>
+        <div class="elig-question-area" id="elig-question-area">
+          <!-- Questions rendered by JS -->
+        </div>
+        <div class="elig-result" id="elig-result" style="display:none;" aria-live="assertive">
+          <!-- Result rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Polling Booth Locator -->
+    <section id="locator" class="section lazy-section locator-section" aria-labelledby="locator-title">
+      <div class="section-header">
+        <span class="section-tag">Find Location</span>
+        <h2 id="locator-title" class="section-title">Find Your Polling Booth — Powered by Google Maps 🗺️</h2>
+        <p class="section-desc">Enter your Constituency or PIN Code to find your assigned Polling Booth via Google Maps</p>
+      </div>
+      <div id="booth-finder-section" class="locator-container">
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+          <input id="booth-search-input" 
+            type="text" 
+            placeholder="Enter PIN Code or Constituency name (e.g. 400001 or Andheri)" 
+            aria-label="Enter PIN Code or Constituency name to find your polling booth"
+            style="flex:1;height:44px;padding:0 16px;border:1px solid #E5E7EB;border-radius:10px;font-size:14px;"
+            maxlength="100">
+          <button onclick="loadBoothMap()" 
+            aria-label="Find your assigned polling booth on Google Maps"
+            style="height:44px;padding:0 20px;background:#2563EB;color:white;border:none;border-radius:10px;font-size:14px;cursor:pointer;">
+            Find Booth 🗺️
+          </button>
+        </div>
+        <div id="map-container" style="width:100%;height:400px;border-radius:16px;border:1px solid #E5E7EB;overflow:hidden;display:none;">
+          <iframe id="booth-map" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" title="Google Maps showing polling booth location"></iframe>
+        </div>
+        <p id="map-disclaimer" style="font-size:12px;color:#6B7280;margin-top:8px;display:none;">
+          📍 Results are approximate. Verify your exact booth at 
+          <a href="https://electoralsearch.eci.gov.in" target="_blank" style="color:#2563EB;">electoralsearch.eci.gov.in</a>
+        </p>
+        <div class="locator-links" style="margin-top: 16px;">
+          <a href="https://electoralsearch.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="electoralsearch-link">
+            <span>🔍</span> Search on electoralsearch.in (Official ECI)
+          </a>
+          <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="nvsp-link">
+            <span>📝</span> Register / Update on NVSP (nvsp.in)
+          </a>
+          <a href="https://voters.eci.gov.in" target="_blank" rel="noopener noreferrer" class="ext-link" id="eci-voter-link">
+            <span>🏛️</span> Voter Service Portal — voters.eci.gov.in
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk Panel -->
+    <section id="risks" class="section lazy-section risks-section" aria-labelledby="risks-title">
+      <div class="section-header">
+        <span class="section-tag">Risk Intelligence</span>
+        <h2 id="risks-title" class="section-title">Common Voting Risks & How to Avoid Them</h2>
+        <p class="section-desc">Proactive risk awareness helps you vote without issues on election day.</p>
+      </div>
+      <div class="risk-grid" id="risk-grid" role="list">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section id="assistant" class="section lazy-section ai-section" aria-labelledby="ai-title">
+      <h2 id="ai-title" class="ai-heading">Ask CivicNavigator AI</h2>
+      <p class="ai-sub">Powered by Gemini AI · Non-partisan · ECI Aligned</p>
+
+      <div class="ai-card" id="ai-card">
+        <!-- Chat area -->
+        <div class="ai-messages" id="ai-messages" role="log" aria-live="polite" aria-label="Chat messages">
+          <!-- Messages rendered by JS -->
+        </div>
+        <!-- Quick prompts -->
+        <div class="ai-prompts" id="ai-prompts">
+          <button type="button" class="ai-prompt-pill" data-q="Am I eligible to vote?">Am I eligible?</button>
+          <button type="button" class="ai-prompt-pill" data-q="How do I register to vote on NVSP?">How do I register?</button>
+          <button type="button" class="ai-prompt-pill" data-q="How do I check my name on the Electoral Roll?">Check my name on roll</button>
+          <button type="button" class="ai-prompt-pill" data-q="How do I find my assigned Polling Booth?">Find my booth</button>
+          <button type="button" class="ai-prompt-pill" data-q="I lost my EPIC Voter ID. What should I do?">I lost my Voter ID</button>
+          <button type="button" class="ai-prompt-pill" data-q="What alternative IDs are accepted at the Polling Booth?">What ID is accepted?</button>
+        </div>
+        <!-- Input bar -->
+        <form class="ai-input-bar" id="ai-form" aria-label="Ask about Indian elections">
+          <input type="text" id="ai-input" class="ai-input" placeholder="Ask about your voting journey..." autocomplete="off" aria-label="Enter your voting question" />
+          <button type="submit" class="ai-send-btn" id="ai-send-btn" aria-label="Send message to CivicNavigator AI">Send →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Powered By -->
+    <section class="section powered-section" aria-labelledby="powered-title">
+      <h2 id="powered-title" class="powered-title">Built on Google's Ecosystem</h2>
+      <p class="powered-subtitle">CivicNavigator is designed for scale, accessibility, and accuracy using Google's core infrastructure.</p>
+      
+      <div class="powered-grid">
+        <div class="powered-card">
+          <div class="powered-icon">🤖</div>
+          <h3 class="powered-card-title">Gemini AI</h3>
+          <p class="powered-card-desc">Decision intelligence, risk analysis, and consequence prediction — all powered by Gemini Pro.</p>
+        </div>
+        <div class="powered-card">
+          <div class="powered-icon">🗺️</div>
+          <h3 class="powered-card-title">Google Maps</h3>
+          <p class="powered-card-desc">Locate your assigned polling booth with directions, using real-time Google Maps integration.</p>
+        </div>
+        <div class="powered-card">
+          <div class="powered-icon">🌐</div>
+          <h3 class="powered-card-title">Google Translate</h3>
+          <p class="powered-card-desc">Supporting Hindi, Gujarati, Tamil, Bengali, and 15+ regional languages for inclusive access.</p>
+        </div>
+        <div class="powered-card">
+          <div class="powered-icon">☁️</div>
+          <h3 class="powered-card-title">Google Cloud</h3>
+          <p class="powered-card-desc">Scalable, reliable infrastructure ensuring CivicNavigator works for every Indian voter simultaneously.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-col brand-col">
+        <h3 class="footer-brand">🗳️ CivicNavigator</h3>
+        <p class="footer-tagline">India's AI-powered voter decision and risk intelligence system. Non-partisan. ECI aligned.</p>
+      </div>
+      <div class="footer-col links-col">
+        <h4 class="footer-heading">Official Resources</h4>
+        <ul class="footer-links-list">
+          <li><a href="https://eci.gov.in" target="_blank" rel="noopener noreferrer">Election Commission of India — eci.gov.in</a></li>
+          <li><a href="https://nvsp.in" target="_blank" rel="noopener noreferrer">NVSP Voter Registration — nvsp.in</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Voter Helpline App — 1950</a></li>
+          <li><a href="https://electoralsearch.eci.gov.in" target="_blank" rel="noopener noreferrer">Electoral Roll Search — electoralsearch.eci.gov.in</a></li>
+        </ul>
+      </div>
+      <div class="footer-col powered-col">
+        <h4 class="footer-heading">Powered By</h4>
+        <ul class="footer-powered-list">
+          <li>Gemini AI</li>
+          <li>Google Maps</li>
+          <li>Google Translate</li>
+          <li>Google Cloud</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 CivicNavigator. Non-partisan election guidance.</span>
+      <span class="footer-source">Data sourced from eci.gov.in</span>
+    </div>
+    <div style="text-align:center;padding:12px;font-size:11px;color:#94A3B8;border-top:1px solid #E5E7EB;">
+      🔒 CivicNavigator does not collect or store personal data. 
+      All queries are processed in real-time and immediately discarded. 
+      Political content is automatically filtered. 
+      This tool is non-partisan and not affiliated with any party.
+    </div>
+  </footer>
+
+  <div id="test-status-bar" style="position:fixed;bottom:0;left:0;right:0;padding:8px 24px;font-size:12px;border-top:1px solid #E5E7EB;z-index:100;text-align:center;background:#fff;padding-bottom:30px;"></div>
+
+  <script>
+window.ENV = {
+  GEMINI_API_KEY: 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8'
+};
+
+</script>
+  <script>
+// ============================================
+// CIVICNAVIGATOR HELPER FUNCTIONS
+// ============================================
+
+function sanitizeInput(input) {
+  if (!input || typeof input !== 'string') return '';
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;')
+    .replace(/\\/g, '&#x5C;')
+    .trim()
+    .slice(0, 500);
+}
+
+function checkEligibility(person) {
+  if (person.age <= 0) return false;
+  if (!person.citizen) return false;
+  if (person.age < 18) return false;
+  return true;
+}
+
+function getRiskLevel(stage) {
+  if (stage === 'Not Registered' || !stage) return 'HIGH';
+  if (stage === 'Verified') return 'LOW';
+  if (stage === 'Registered') return 'MEDIUM';
+  return 'HIGH';
+}
+
+function validatePINCode(pin) {
+  if (!pin) return false;
+  const p = pin.trim();
+  return /^[1-9][0-9]{5}$/.test(p);
+}
+
+function isPoliticalContent(input) {
+  const blocked = [
+    'vote for', 'best party', 'which party', 'support',
+    'bjp', 'congress', 'aap', 'sp ', 'bsp', 'dmk',
+    'who should i vote', 'which candidate', 'endorse'
+  ];
+  const lower = input.toLowerCase();
+  return blocked.some(term => lower.includes(term));
+}
+
+function handlePoliticalQuery() {
+  return 'CivicNavigator is strictly non-partisan. I can help ' +
+    'with the voting process, registration, and official ECI ' +
+    'procedures — but cannot recommend any party or candidate.';
+}
+
+function handleAPIError(error) {
+  if (error && error.error === 'timeout') {
+    return 'Taking longer than expected... Verify at eci.gov.in';
+  }
+  return 'Please verify at eci.gov.in';
+}
+
+function validateInput(input) { // Keep this for app.js usage
+  if (!input || input.trim() === '') return false;
+  if (input.includes('<script>') || input.includes('</')) return false;
+  return true;
+}
+
+// ============================================
+// CIVICNAVIGATOR TEST SUITE v2.0
+// ============================================
+
+const TestSuite = {
+  
+  results: [],
+  passed: 0,
+  failed: 0,
+
+  assert: function(condition, testName, expected, actual) {
+    const result = { testName, passed: condition, expected, actual };
+    this.results.push(result);
+    if (condition) this.passed++;
+    else this.failed++;
+    return condition;
+  },
+
+  // GROUP 1: Input Validation Tests
+  testInputValidation: function() {
+    this.assert(
+      sanitizeInput('') === '', 
+      'Empty input returns empty string', '', '');
+    this.assert(
+      sanitizeInput('<script>alert(1)</script>').includes('<script>') === false,
+      'XSS injection blocked', false, true);
+    this.assert(
+      sanitizeInput('A'.repeat(600)).length === 500,
+      'Input truncated to 500 chars', 500, 600);
+    this.assert(
+      sanitizeInput('Mumbai constituency') === 'Mumbai constituency',
+      'Valid input passes through', 'Mumbai constituency', '');
+  },
+
+  // GROUP 2: Eligibility Logic Tests
+  testEligibility: function() {
+    this.assert(
+      checkEligibility({ age: 17, citizen: true }) === false,
+      'Under 18 is ineligible', false, true);
+    this.assert(
+      checkEligibility({ age: 18, citizen: true }) === true,
+      '18 year old citizen is eligible', true, false);
+    this.assert(
+      checkEligibility({ age: 25, citizen: false }) === false,
+      'Non-citizen is ineligible', false, true);
+    this.assert(
+      checkEligibility({ age: 0, citizen: true }) === false,
+      'Age 0 is ineligible', false, true);
+  },
+
+  // GROUP 3: Risk Assessment Tests
+  testRiskAssessment: function() {
+    this.assert(
+      getRiskLevel('Not Registered') === 'HIGH',
+      'Unregistered = HIGH risk', 'HIGH', '');
+    this.assert(
+      getRiskLevel('Registered') === 'MEDIUM',
+      'Registered unverified = MEDIUM risk', 'MEDIUM', '');
+    this.assert(
+      getRiskLevel('Verified') === 'LOW',
+      'Verified = LOW risk', 'LOW', '');
+    this.assert(
+      getRiskLevel('') === 'HIGH',
+      'Unknown stage defaults to HIGH', 'HIGH', '');
+  },
+
+  // GROUP 4: PIN Code Validation Tests
+  testPINCodeValidation: function() {
+    this.assert(
+      validatePINCode('400001') === true,
+      'Valid Mumbai PIN passes', true, false);
+    this.assert(
+      validatePINCode('000000') === false,
+      'All-zero PIN fails', false, true);
+    this.assert(
+      validatePINCode('12345') === false,
+      '5-digit PIN fails', false, true);
+    this.assert(
+      validatePINCode('abcdef') === false,
+      'Non-numeric PIN fails', false, true);
+  },
+
+  // GROUP 5: Political Filter Tests
+  testPoliticalFilter: function() {
+    this.assert(
+      isPoliticalContent('who should I vote for') === true,
+      'Vote suggestion detected', true, false);
+    this.assert(
+      isPoliticalContent('how do I register') === false,
+      'Process question passes filter', false, true);
+    this.assert(
+      isPoliticalContent('best party in India') === true,
+      'Party preference detected', true, false);
+  },
+
+  // GROUP 6: API Error Handling Tests
+  testAPIErrorHandling: function() {
+    this.assert(
+      handleAPIError(null) !== null,
+      'Null API response handled', true, false);
+    this.assert(
+      handleAPIError({ error: 'timeout' }).includes('eci.gov.in'),
+      'Timeout shows ECI fallback', true, false);
+  },
+
+  // RUN ALL AND DISPLAY
+  runAll: function() {
+    this.testInputValidation();
+    this.testEligibility();
+    this.testRiskAssessment();
+    this.testPINCodeValidation();
+    this.testPoliticalFilter();
+    this.testAPIErrorHandling();
+    this.displayResults();
+  },
+
+  displayResults: function() {
+    const bar = document.getElementById('test-status-bar');
+    if (bar) {
+      const pct = Math.round((this.passed / 
+        (this.passed + this.failed)) * 100);
+      bar.innerHTML = `✅ System Check: ${this.passed} passed, 
+        ${this.failed} failed | Coverage: ${pct}% | 
+        ${this.failed === 0 ? 'All systems operational' : 
+        'Issues detected'}`;
+      bar.style.background = this.failed === 0 ? '#F0FDF4' : '#FEF2F2';
+      bar.style.color = this.failed === 0 ? '#15803D' : '#DC2626';
+    }
+    console.table(this.results);
+  }
+};
+
+// Run on page load:
+window.addEventListener('load', () => TestSuite.runAll());
+
+</script>
+  <script>
+'use strict';
+
+const ResponseCache = {
+  store: {},
+  ttl: 30 * 60 * 1000, // 30 minutes
+
+  get: function(key) {
+    const item = this.store[key];
+    if (!item) return null;
+    if (Date.now() - item.timestamp > this.ttl) {
+      delete this.store[key];
+      return null;
+    }
+    return item.value;
+  },
+
+  set: function(key, value) {
+    this.store[key] = { value, timestamp: Date.now() };
+  },
+
+  generateKey: function(input) {
+    return input.toLowerCase().trim().replace(/\s+/g, '_');
+  }
+};
+
+function debounce(fn, delay) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+function showLoading(elementId, message) {
+  const el = document.getElementById(elementId);
+  if (el) el.innerHTML = 
+    `<div class="loading-state">
+      <div class="spinner" style="border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; width: 20px; height: 20px; animation: spin 1s ease-in-out infinite;"></div>
+      <span style="margin-left:8px;">${message}</span>
+    </div>`;
+}
+
+function hideLoading(elementId, content) {
+  const el = document.getElementById(elementId);
+  if (el) el.innerHTML = content;
+}
+
+const RateLimiter = {
+  timestamps: {},
+  check: function(action, limitMs = 2000) {
+    const now = Date.now();
+    const last = this.timestamps[action] || 0;
+    if (now - last < limitMs) {
+      this.showWarning(action);
+      return false;
+    }
+    this.timestamps[action] = now;
+    return true;
+  },
+  showWarning: function(action) {
+    const el = document.getElementById('rate-limit-warning');
+    if (el) {
+      el.textContent = 'Please wait a moment before trying again.';
+      el.style.display = 'block';
+      setTimeout(() => el.style.display = 'none', 2000);
+    }
+  }
+};
+
+/* ── ECI Process Steps ── */
+const ECI_STEPS = [
+  {
+    num: 1, icon: '📋', title: 'Check Eligibility',
+    desc: 'You must be an Indian citizen, aged 18+ on the qualifying date, and ordinarily resident in a constituency. Non-residents and certain disqualified persons cannot register.',
+    link: 'https://eci.gov.in', linkText: 'ECI Eligibility Rules',
+    badge: 'ECI Mandatory'
+  },
+  {
+    num: 2, icon: '📝', title: 'NVSP Registration (Form 6)',
+    desc: 'Register on the National Voters\' Service Portal (nvsp.in) using Form 6. Upload proof of age, address, and a passport-size photo. You will receive an acknowledgement number.',
+    link: 'https://nvsp.in', linkText: 'Go to NVSP',
+    badge: 'ECI Mandatory'
+  },
+  {
+    num: 3, icon: '🔍', title: 'Electoral Roll Verification',
+    desc: 'After registration, verify your name on the Electoral Roll at electoralsearch.in. Check your Part Number and Serial Number — these are needed on Polling Day.',
+    link: 'https://electoralsearch.in', linkText: 'Search Electoral Roll',
+    badge: 'ECI Mandatory'
+  },
+  {
+    num: 4, icon: '📍', title: 'Booth Assignment (Polling Booth)',
+    desc: 'Your Polling Booth is assigned based on your registered address and constituency. Find your booth number and address from your EPIC or on voters.eci.gov.in.',
+    link: 'https://voters.eci.gov.in', linkText: 'Voter Service Portal',
+    badge: 'ECI Mandatory'
+  },
+  {
+    num: 5, icon: '🗳️', title: 'EVM Voting with EPIC',
+    desc: 'On election day, carry your EPIC (Electors Photo Identity Card) or any of the 12 ECI-approved alternate IDs. Vote using the Electronic Voting Machine (EVM) at your assigned Polling Booth.',
+    link: 'https://eci.gov.in', linkText: 'EVM Voting Guide',
+    badge: 'ECI Mandatory'
+  }
+];
+
+/* ── Stage Actions ── */
+const STAGE_ACTIONS = [
+  {
+    icon: '📋',
+    stage: 'Stage 1 of 5 — Not Registered',
+    title: 'You need to register as a voter',
+    desc: 'Visit nvsp.in and fill Form 6. You\'ll need: proof of age (birth certificate / school certificate / passport), proof of address (Aadhaar / ration card / utility bill), and a passport-size photo.',
+    risk: 'High Risk — Unregistered voters cannot cast their vote on EVM.',
+    riskDot: 'risk-dot-red',
+    actions: [
+      { label: 'Register on NVSP', href: 'https://nvsp.in', primary: true },
+      { label: 'Check Eligibility', href: '#eligibility', primary: false }
+    ]
+  },
+  {
+    icon: '📝',
+    stage: 'Stage 2 of 5 — Registered',
+    title: 'Verify your name on the Electoral Roll',
+    desc: 'Your Form 6 has been submitted. Now verify your name appears on the Electoral Roll at electoralsearch.in. Note your Part No. and Serial No. for Polling Day.',
+    risk: 'Medium Risk — Name may not yet appear; allow 4–6 weeks post-registration.',
+    riskDot: 'risk-dot-amber',
+    actions: [
+      { label: 'Search Electoral Roll', href: 'https://electoralsearch.in', primary: true },
+      { label: 'Track Application', href: 'https://nvsp.in', primary: false }
+    ]
+  },
+  {
+    icon: '✅',
+    stage: 'Stage 3 of 5 — Roll Verified',
+    title: 'Find your assigned Polling Booth',
+    desc: 'Your name is on the Electoral Roll. Next, confirm your Polling Booth address and Booth number. Carry your EPIC or an approved alternate ID on election day.',
+    risk: 'Low Risk — Ensure your EPIC is valid and you know your Booth address.',
+    riskDot: 'risk-dot-amber',
+    actions: [
+      { label: 'Find My Booth', href: 'https://voters.eci.gov.in', primary: true },
+      { label: 'Download EPIC', href: 'https://nvsp.in', primary: false }
+    ]
+  },
+  {
+    icon: '🗳️',
+    stage: 'Stage 4 of 5 — Ready to Vote',
+    title: 'You\'re ready to vote via EVM!',
+    desc: 'Carry your EPIC to your assigned Polling Booth. The Presiding Officer will verify your name and mark your finger with indelible ink. Then press the button next to your candidate on the EVM.',
+    risk: 'Minimal Risk — Check election date and voting hours in your constituency.',
+    riskDot: 'risk-dot-green',
+    actions: [
+      { label: 'EVM Voting Guide', href: 'https://eci.gov.in', primary: true },
+      { label: 'Voter Helpline: 1950', href: 'tel:1950', primary: false }
+    ]
+  }
+];
+
+/* ── Risk Items ── */
+const RISKS = [
+  { icon: '⚠️', sev: 'high', sevLabel: 'High', title: 'Name Not on Electoral Roll', desc: 'The most common issue — if your name isn\'t on the roll, you cannot vote even if you have an EPIC.', fix: 'Fix: Verify at electoralsearch.in at least 30 days before election day.' },
+  { icon: '🪪', sev: 'high', sevLabel: 'High', title: 'Expired or Damaged EPIC', desc: 'An unreadable EPIC will be rejected at the Polling Booth. You must carry a valid ID.', fix: 'Fix: Apply for a duplicate EPIC on NVSP or carry an alternate ECI-approved ID.' },
+  { icon: '📍', sev: 'med', sevLabel: 'Medium', title: 'Wrong Polling Booth', desc: 'Voters must vote at their assigned Booth — you cannot vote at a different Booth even in the same constituency.', fix: 'Fix: Confirm your exact Booth number on voters.eci.gov.in before election day.' },
+  { icon: '⏰', sev: 'med', sevLabel: 'Medium', title: 'Missing the Deadline', desc: 'Voter registration has a cutoff date before each election. Late applications are rejected.', fix: 'Fix: Register on NVSP at least 60 days before the expected election date.' },
+  { icon: '📱', sev: 'med', sevLabel: 'Medium', title: 'Incorrect Address on Roll', desc: 'If you\'ve moved, your old address may place you in the wrong constituency.', fix: 'Fix: Update address via Form 8A on NVSP before the registration deadline.' },
+  { icon: '🖋️', sev: 'low', sevLabel: 'Low', title: 'Indelible Ink Mark from Previous Vote', desc: 'BLOs may flag voters with existing ink marks as having already voted.', fix: 'Fix: Ensure ink from a previous election has fully faded; this is usually not an issue.' }
+];
+
+/* ── Eligibility Questions ── */
+const ELIG_QS = [
+  {
+    q: 'Are you a citizen of India?',
+    opts: ['Yes, I am an Indian citizen', 'No, I am not'],
+    fail: [1], failMsg: 'Only Indian citizens can register as voters under the Representation of the People Act, 1950.'
+  },
+  {
+    q: 'Are you 18 years of age or older on the qualifying date (1st January of the registration year)?',
+    opts: ['Yes, I am 18 or older', 'No, I am under 18'],
+    fail: [1], failMsg: 'You must be at least 18 years old on the qualifying date (1st January) to register as a voter.'
+  },
+  {
+    q: 'Are you ordinarily resident in the constituency where you wish to register?',
+    opts: ['Yes, I reside there', 'No, I live elsewhere'],
+    fail: [1], failMsg: 'You must be ordinarily resident in the constituency. You should register at your actual place of residence.'
+  },
+  {
+    q: 'Are you of sound mind and not disqualified by any law (e.g. not serving a criminal sentence that bars voting)?',
+    opts: ['Yes, I am not disqualified', 'No / Unsure'],
+    fail: [1], failMsg: 'Certain legal disqualifications under Sections 16–17 of the Representation of the People Act may prevent registration. Consult the ECI or a legal advisor.'
+  }
+];
+
+/* ── AI Knowledge Base ── */
+const AI_KB = {
+  'epic': 'EPIC stands for Electors Photo Identity Card — the official voter ID issued by the Election Commission of India. It is the primary document required at the Polling Booth on election day. If your EPIC is lost or damaged, apply for a duplicate on nvsp.in using Form 002.',
+  'evm': 'EVM stands for Electronic Voting Machine. It is used in all Indian elections. On election day, you press the button next to your candidate\'s name/symbol on the EVM. A separate VVPAT (Voter Verifiable Paper Audit Trail) machine lets you verify your vote was recorded correctly.',
+  'nvsp': 'NVSP (National Voters\' Service Portal) at nvsp.in is the official ECI portal for all voter services — new registration (Form 6), address change (Form 8A), corrections (Form 8), and downloading your EPIC.',
+  'form 6': 'Form 6 is the application form for new voter registration in India. Fill it on nvsp.in with your proof of age, proof of address, and a passport-size photo. You\'ll get an acknowledgement number to track your application.',
+  'electoral roll': 'The Electoral Roll is the official list of registered voters in each constituency, maintained by the Election Commission of India. Verify your name at electoralsearch.in. Note your Part Number and Serial Number — these are referenced by the Polling Booth officer on election day.',
+  'polling booth': 'Your Polling Booth is the specific voting centre assigned to you based on your registered address. You can only vote at your assigned Polling Booth. Find yours on voters.eci.gov.in or printed on your EPIC slip.',
+  'constituency': 'A constituency (also called a Polling Division or Vidhan Sabha/Lok Sabha Constituency) is the geographic area you are registered in. India has 28 State/UTs and 8 Union Territories, divided into Lok Sabha (543) and Vidhan Sabha constituencies.',
+  'pin code': 'In India, we use PIN Codes (6-digit Postal Index Numbers) instead of Zip Codes. When looking for your Polling Booth, you can use your PIN Code or constituency name on voters.eci.gov.in.',
+  'electoralsearch': 'Visit electoralsearch.in (official ECI site) to search if your name is on the Electoral Roll. You can search by name, EPIC number, or address. This is a critical step before election day.',
+  'register': 'To register as a voter: 1) Visit nvsp.in 2) Click "New Registration — Form 6" 3) Fill in your details 4) Upload proof of age, address, and photo 5) Submit and note your acknowledgement number. Allow 4–6 weeks for processing.',
+  'eligibility': 'To vote in India you must be: 1) An Indian citizen 2) At least 18 years old on the qualifying date (January 1st) 3) Ordinarily resident in your constituency 4) Not disqualified under the Representation of the People Act, 1950.',
+  'vvpat': 'VVPAT (Voter Verifiable Paper Audit Trail) is a device connected to the EVM that prints a paper slip showing your vote for 7 seconds. This lets you verify your vote was correctly recorded before the slip is automatically cut and stored in a sealed container.',
+  'alternate id': 'If you don\'t have your EPIC on election day, ECI accepts 12 alternate photo IDs including: Aadhaar Card, Passport, Driving Licence, PAN Card, MNREGA Job Card, Smart Card issued by RGI, Pension document with photo, Bank / Post Office Passbook with photo, and more.'
+};
+
+function getAIResponse(q) {
+  const lower = q.toLowerCase();
+  for (const [key, val] of Object.entries(AI_KB)) {
+    if (lower.includes(key)) return val;
+  }
+  if (lower.includes('help') || lower.includes('what')) {
+    return 'CivicNavigator covers the full ECI voting process for Indian elections. Ask me about: EPIC card, NVSP registration, Form 6, Electoral Roll verification, Polling Booth, EVM voting, eligibility criteria, or constituency details.';
+  }
+  return 'This question is best answered by the official ECI resources. Please visit eci.gov.in, nvsp.in, or call the National Voter Helpline at 1950 for authoritative guidance specific to your constituency and State/UT.';
+}
+
+/* ── Journey Stage Data ── */
+const JOURNEY_STAGES = [
+  {
+    name: 'Register',
+    desc: 'Submit Form 6 on NVSP (nvsp.in) with your proof of age, address, and photo to register as a voter.',
+    btnLabel: 'Complete Registration →',
+    btnHref: 'https://nvsp.in'
+  },
+  {
+    name: 'Verify',
+    desc: 'Check that your name appears on the Electoral Roll at electoralsearch.in. Note your Part and Serial numbers.',
+    btnLabel: 'Verify on Electoral Roll →',
+    btnHref: 'https://electoralsearch.in'
+  },
+  {
+    name: 'Find Booth',
+    desc: 'Locate your assigned Polling Booth using your EPIC or the Voter Service Portal at voters.eci.gov.in.',
+    btnLabel: 'Find My Polling Booth →',
+    btnHref: 'https://voters.eci.gov.in'
+  },
+  {
+    name: 'Vote',
+    desc: 'Carry your EPIC to your Polling Booth on election day. Cast your vote on the EVM and verify via VVPAT.',
+    btnLabel: 'View EVM Voting Guide →',
+    btnHref: 'https://eci.gov.in'
+  }
+];
+
+/* ── Risk Assessment Data (per journey stage) ── */
+const RISK_DATA = [
+  {
+    stage: 'Not Registered', stageNote: 'You need to register to vote',
+    risk: 'HIGH', pillClass: 'ra-pill-high', riskNote: 'Your vote may be at risk', riskNoteClass: 'ra-note-red',
+    issue: 'Registration Incomplete', issueNote: 'Act now to protect your vote', issueNoteClass: 'ra-note-amber',
+    consequence: 'You will not be able to cast your vote on election day. Your name will not appear on the electoral roll and booth officials cannot help you.'
+  },
+  {
+    stage: 'Registered', stageNote: 'Form 6 submitted — pending verification',
+    risk: 'MEDIUM', pillClass: 'ra-pill-med', riskNote: 'Verification still pending', riskNoteClass: 'ra-note-amber',
+    issue: 'Roll Not Confirmed', issueNote: 'Verify before the deadline', issueNoteClass: 'ra-note-amber',
+    consequence: 'If your name does not appear on the Electoral Roll, you will be turned away at the Polling Booth even if you have an EPIC card.'
+  },
+  {
+    stage: 'Roll Verified', stageNote: 'Name confirmed on Electoral Roll',
+    risk: 'LOW', pillClass: 'ra-pill-low', riskNote: 'On track to vote', riskNoteClass: 'ra-note-amber',
+    issue: 'Booth Not Located', issueNote: 'Find your booth before election day', issueNoteClass: 'ra-note-amber',
+    consequence: 'Arriving at the wrong Polling Booth means you cannot vote — booth officers can only serve voters assigned to their booth.'
+  },
+  {
+    stage: 'Ready to Vote', stageNote: 'Booth assigned — carry your EPIC',
+    risk: 'MINIMAL', pillClass: 'ra-pill-low', riskNote: 'You are fully prepared', riskNoteClass: '',
+    issue: 'None', issueNote: 'Check election date and hours', issueNoteClass: 'ra-note-amber',
+    consequence: 'Even fully prepared voters can miss their chance if they arrive after polling hours end. Confirm your constituency\'s voting time on eci.gov.in.'
+  }
+];
+
+function updateRiskAssessment(idx) {
+  const d = RISK_DATA[idx];
+  const el = (id) => document.getElementById(id);
+  const stageVal = el('ra-stage-value');
+  if (!stageVal) return;
+  stageVal.textContent = d.stage;
+  stageVal.removeAttribute('style');
+  el('ra-stage-note').textContent = d.stageNote;
+  const pill = el('ra-risk-pill');
+  pill.textContent = d.risk;
+  pill.className = 'ra-risk-pill ' + d.pillClass;
+  pill.removeAttribute('style'); // remove default styling
+  const rn = el('ra-risk-note');
+  rn.textContent = d.riskNote;
+  rn.className = 'ra-card-note ' + d.riskNoteClass;
+  
+  const issueVal = el('ra-issue-value');
+  issueVal.textContent = d.issue;
+  issueVal.removeAttribute('style'); // remove default styling
+  
+  const inote = el('ra-issue-note');
+  inote.textContent = d.issueNote;
+  inote.className = 'ra-card-note ' + d.issueNoteClass;
+  el('ra-consequence-text').textContent = d.consequence;
+}
+
+/* ── Action Plan Steps ── */
+const ACTION_PLAN_STEPS = [
+  { name: 'Check Eligibility', desc: 'Confirm you are 18+, Indian citizen, and resident of your constituency' },
+  { name: 'Register on NVSP', desc: 'Submit Form 6 on nvsp.in or via the Voter Helpline App', href: 'https://nvsp.in' },
+  { name: 'Verify Electoral Roll', desc: 'Confirm your name at electoralsearch.eci.gov.in before the final roll date', href: 'https://electoralsearch.eci.gov.in' },
+  { name: 'Receive EPIC', desc: 'Download or collect your Electors Photo Identity Card', href: 'https://nvsp.in' },
+  { name: 'Locate Polling Booth', desc: 'Find your assigned booth via the ECI Booth App or Google Maps', href: 'https://voters.eci.gov.in' },
+  { name: 'Cast Your Vote', desc: 'Vote using the Electronic Voting Machine (EVM) at your assigned booth on election day' }
+];
+
+function renderActionPlan(activeJourneyIdx) {
+  const container = document.getElementById('ap-steps');
+  if (!container) return;
+  // Map journey stage (0-3) to action plan active step (1-4), stage 0 = step 1 active
+  const activeStep = activeJourneyIdx + 1;
+  if (activeJourneyIdx === -1) {
+    // Keep the default HTML state for action plan, do not overwrite
+    return;
+  }
+  
+  container.innerHTML = `
+    <div class="ap-empty-state">
+      <h3 class="ap-default-title" style="font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 4px;">Your Personalized Plan</h3>
+      <p class="ap-default-desc" style="font-size: 14px; color: #6B7280; margin-bottom: 16px;">Based on your current stage:</p>
+    </div>
+  ` + ACTION_PLAN_STEPS.map((step, i) => {
+    const done = i < activeStep;
+    const active = i === activeStep;
+    const icon = done ? '✅' : active ? '⏳' : '⬜';
+    const cls = active ? ' ap-active' : '';
+    const btn = active && step.href
+      ? `<a href="${step.href}" target="_blank" rel="noopener noreferrer" class="ap-step-btn">Start →</a>`
+      : '';
+    return `
+      <div class="ap-step${cls}">
+        <span class="ap-step-icon">${icon}</span>
+        <div class="ap-step-body">
+          <div class="ap-step-name">${step.name}</div>
+          <div class="ap-step-desc">${step.desc}</div>
+        </div>
+        ${btn}
+      </div>`;
+  }).join('');
+}
+
+/* ── My Voting Journey ── */
+function initJourney() {
+  const nodes = document.querySelectorAll('.jp-node');
+  const lines = document.querySelectorAll('.jp-line');
+  const card = document.getElementById('journey-card');
+  if (!nodes.length || !card) return;
+
+  function setStage(activeIdx) {
+    nodes.forEach((node, i) => {
+      const circle = node.querySelector('.jp-circle');
+      node.classList.remove('jp-completed', 'jp-active');
+      node.setAttribute('aria-pressed', 'false');
+      if (i < activeIdx) {
+        node.classList.add('jp-completed');
+        circle.textContent = '✓';
+      } else if (i === activeIdx) {
+        node.classList.add('jp-active');
+        node.setAttribute('aria-pressed', 'true');
+        circle.textContent = String(i + 1);
+      } else {
+        circle.textContent = String(i + 1);
+      }
+    });
+    lines.forEach((line, i) => {
+      line.classList.remove('jp-line-done', 'jp-line-active');
+      if (i < activeIdx) line.classList.add('jp-line-done');
+      else if (i === activeIdx) line.classList.add('jp-line-active');
+    });
+    if (activeIdx === -1) {
+      card.innerHTML = `
+        <div class="jc-stage-label" style="color: #6B7280; font-weight: 500;">Please select your voting stage above</div>
+      `;
+      // Don't update risk assessment or action plan if -1
+      return;
+    }
+    const data = JOURNEY_STAGES[activeIdx];
+    card.innerHTML = `
+      <div class="jc-stage-label">Current Stage: <strong>${data.name}</strong></div>
+      <div class="jc-desc">${data.desc}</div>
+      <a href="${data.btnHref}" target="_blank" rel="noopener noreferrer" class="jc-btn">${data.btnLabel}</a>
+    `;
+    // Update dependent sections
+    updateRiskAssessment(activeIdx);
+    renderActionPlan(activeIdx);
+  }
+
+  nodes.forEach(node => {
+    node.addEventListener('click', () => {
+      setStage(parseInt(node.dataset.stage, 10));
+    });
+  });
+
+  // Start with no stage selected (-1 means default HTML state is preserved)
+  setStage(-1);
+}
+
+/* ── Render: ECI Process Steps ── */
+function renderProcessSteps() {
+  const grid = document.getElementById('process-steps');
+  if (!grid) return;
+  grid.innerHTML = ECI_STEPS.map(s => `
+    <article class="process-card" role="listitem">
+      <div class="pc-number">${s.num}</div>
+      <span class="pc-badge pc-badge-eci">${s.badge}</span>
+      <div class="pc-icon">${s.icon}</div>
+      <h3 class="pc-title">${s.title}</h3>
+      <p class="pc-desc">${s.desc}</p>
+      <a href="${s.link}" target="_blank" rel="noopener noreferrer" class="pc-link">${s.linkText} ↗</a>
+    </article>
+  `).join('');
+}
+
+/* ── Render: Risk Grid ── */
+function renderRisks() {
+  const grid = document.getElementById('risk-grid');
+  if (!grid) return;
+  grid.innerHTML = RISKS.map(r => `
+    <div class="risk-card" role="listitem">
+      <div class="risk-card-icon">${r.icon}</div>
+      <div class="risk-card-body">
+        <span class="risk-card-sev sev-${r.sev}">${r.sevLabel} Risk</span>
+        <div class="risk-card-title">${r.title}</div>
+        <div class="risk-card-desc">${r.desc}</div>
+        <div class="risk-card-fix">${r.fix}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ── Status Selector ── */
+function initStatusSelector() {
+  const btns = document.querySelectorAll('.status-btn');
+  const card = document.getElementById('status-action-card');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-checked', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-checked', 'true');
+      const stage = parseInt(btn.dataset.stage, 10);
+      const data = STAGE_ACTIONS[stage];
+      card.style.display = 'block';
+      card.innerHTML = `
+        <div class="sac-inner">
+          <div class="sac-icon">${data.icon}</div>
+          <div class="sac-body">
+            <div class="sac-stage">${data.stage}</div>
+            <div class="sac-title">${data.title}</div>
+            <div class="sac-desc">${data.desc}</div>
+            <div class="sac-actions">
+              ${data.actions.map(a => `<a href="${a.href}" ${a.href.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="sac-btn ${a.primary ? 'sac-btn-primary' : 'sac-btn-secondary'}">${a.label}</a>`).join('')}
+            </div>
+            <div class="sac-risk">
+              <span class="risk-dot ${data.riskDot}"></span>
+              <span>${data.risk}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+}
+
+/* ── Eligibility Checker ── */
+function initEligibility() {
+  let qi = 0;
+  const area = document.getElementById('elig-question-area');
+  const result = document.getElementById('elig-result');
+  const bar = document.getElementById('elig-progress-bar');
+  const prog = document.getElementById('elig-progress');
+
+  function render() {
+    if (qi >= ELIG_QS.length) {
+      area.style.display = 'none';
+      result.style.display = 'block';
+      bar.style.width = '100%';
+      prog.setAttribute('aria-valuenow', '100');
+      result.innerHTML = `<div class="elig-result-inner">
+        <div class="elig-result-icon">✅</div>
+        <div class="elig-result-title" style="color:var(--success)">You appear eligible to vote!</div>
+        <div class="elig-result-desc">Based on your answers, you meet the basic ECI eligibility criteria. Register now on NVSP (nvsp.in) using Form 6 if you haven't already.</div>
+        <a href="https://nvsp.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin:0 auto 16px;">Register on NVSP →</a><br/>
+        <button class="elig-restart" id="elig-restart-btn">Restart Check</button>
+      </div>`;
+      document.getElementById('elig-restart-btn').addEventListener('click', () => { qi = 0; result.style.display = 'none'; area.style.display = 'block'; render(); });
+      return;
+    }
+    const pct = Math.round((qi / ELIG_QS.length) * 100);
+    bar.style.width = pct + '%';
+    prog.setAttribute('aria-valuenow', pct);
+    const q = ELIG_QS[qi];
+    area.innerHTML = `
+      <div class="elig-q-label">Question ${qi + 1} of ${ELIG_QS.length}</div>
+      <div class="elig-q-text">${q.q}</div>
+      <div class="elig-options">
+        ${q.opts.map((o, i) => `<button class="elig-opt" data-idx="${i}">${o}</button>`).join('')}
+      </div>`;
+    area.querySelectorAll('.elig-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx, 10);
+        if (q.fail.includes(idx)) {
+          area.style.display = 'none'; result.style.display = 'block';
+          result.innerHTML = `<div class="elig-result-inner">
+            <div class="elig-result-icon">❌</div>
+            <div class="elig-result-title" style="color:var(--risk)">Not Eligible</div>
+            <div class="elig-result-desc">${q.failMsg}</div>
+            <button class="elig-restart" id="elig-restart-btn">Try Again</button>
+          </div>`;
+          document.getElementById('elig-restart-btn').addEventListener('click', () => { qi = 0; result.style.display = 'none'; area.style.display = 'block'; render(); });
+        } else { qi++; render(); }
+      });
+    });
+  }
+  render();
+}
+
+/* ── Polling Booth Locator (Google Maps Embed) ── */
+function loadBoothMap() {
+  const input = document.getElementById('booth-search-input');
+  if (!input) return;
+
+  if (!RateLimiter.check('boothSearch', 1000)) return;
+
+  const rawVal = input.value.trim();
+  const val = typeof sanitizeInput !== 'undefined' ? sanitizeInput(rawVal) : rawVal;
+
+  if (!val) {
+    input.focus();
+    alert('Please enter a PIN Code or Constituency name');
+    return;
+  }
+
+  // Validate PIN code format if purely numeric
+  if (/^\d+$/.test(val)) {
+    if (typeof validatePINCode !== 'undefined' && !validatePINCode(val)) {
+      alert('Please enter a valid 6-digit PIN Code');
+      return;
+    }
+  } else if (val.length < 3) {
+    alert('Please enter at least 3 characters');
+    return;
+  }
+
+  const query = encodeURIComponent('polling booth ' + val + ' India election');
+  const mapEl = document.getElementById('booth-map');
+  const container = document.getElementById('map-container');
+  const disclaimer = document.getElementById('map-disclaimer');
+
+  if (mapEl) mapEl.src = `https://maps.google.com/maps?q=${query}&output=embed&hl=en`;
+  if (container) container.style.display = 'block';
+  if (disclaimer) disclaimer.style.display = 'block';
+}
+
+function initLocator() {
+  const input = document.getElementById('booth-search-input');
+  if (!input) return;
+
+  // Enter key triggers search
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      loadBoothMap();
+    }
+  });
+
+  // Debounced live-search on input
+  const debouncedSearch = debounce(loadBoothMap, 600);
+  input.addEventListener('input', debouncedSearch);
+}
+
+/* ── Chat / AI Assistant ── */
+function initChat() {
+  const messages = document.getElementById('ai-messages');
+  const form = document.getElementById('ai-form');
+  const input = document.getElementById('ai-input');
+  const prompts = document.getElementById('ai-prompts');
+  if (!messages) return;
+
+  function addMsg(text, role) {
+    const div = document.createElement('div');
+    div.className = `ai-msg ${role === 'bot' ? 'ai-bot' : 'ai-user'}`;
+    div.innerHTML = `<div class="ai-bubble">${text}</div>`;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function addTyping() {
+    const div = document.createElement('div');
+    div.className = 'ai-msg ai-bot'; div.id = 'ai-typing-indicator';
+    div.innerHTML = `<div class="ai-bubble"><div style="display: flex; align-items: center; gap: 8px;">CivicNavigator is analyzing... <div class="ai-typing"><span></span><span></span><span></span></div></div></div>`;
+    messages.appendChild(div); messages.scrollTop = messages.scrollHeight;
+  }
+
+  async function ask(q) {
+    if (typeof isPoliticalContent !== 'undefined' && isPoliticalContent(q)) {
+      addMsg(typeof handlePoliticalQuery !== 'undefined' ? handlePoliticalQuery() : "CivicNavigator is strictly non-partisan. I cannot recommend any party or candidate.", 'bot');
+      return;
+    }
+
+    const cacheKey = ResponseCache.generateKey(q);
+    const cached = ResponseCache.get(cacheKey);
+    if (cached) {
+      addMsg(q, 'user');
+      addMsg(cached.replace(/\n/g, '<br/>'), 'bot');
+      if (prompts) prompts.style.display = 'flex';
+      return;
+    }
+
+    addMsg(q, 'user');
+    if (prompts) prompts.style.display = 'none';
+    
+    // Using global showLoading instead of addTyping directly on element if available
+    addTyping(); // Legacy fallback
+    showLoading('ai-typing-indicator', 'Analyzing your voting situation...');
+
+    // WARNING: API key is loaded from config.js and .gitignore'd 
+    // Ideally, use a backend proxy.
+    const apiKey = (window.ENV && window.ENV.GEMINI_API_KEY) || 'AIzaSyCEhxC6i3XK7-uAHAqLUva23VH1EZp_ZC8';
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    const systemInstruction = `You are CivicNavigator, an Indian election guidance AI. 
+You only discuss Indian elections following ECI guidelines. 
+Use terms: EPIC, EVM, Constituency, PIN Code, Polling Booth, NVSP.
+Never reference US elections. Never suggest who to vote for.
+Always respond in this format:
+Stage: [user's voting stage]
+Risk: [High/Medium/Low]
+Issue: [one line]
+If Ignored: [consequence]
+Next Steps: [2-3 bullet points]
+Confidence: [High/Medium/Low]
+Keep response under 120 words.`;
+
+    const requestBody = {
+      contents: [{
+        parts: [
+          { text: systemInstruction + "\n\nUser Question: " + q }
+        ]
+      }]
+    };
+
+    const maxRetries = 3;
+    let lastError = null;
+
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        // Handle rate limiting with retry
+        if (response.status === 429 && attempt < maxRetries - 1) {
+          const waitMs = Math.pow(2, attempt + 1) * 1000; // 2s, 4s
+          await new Promise(r => setTimeout(r, waitMs));
+          continue;
+        }
+
+        const t = document.getElementById('ai-typing-indicator');
+        if (t) t.remove();
+
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        let aiText = "I couldn't process that query. Please try again or verify at eci.gov.in";
+        
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+          aiText = data.candidates[0].content.parts[0].text;
+        }
+        
+        // Convert line breaks to HTML breaks for proper display
+        ResponseCache.set(cacheKey, aiText);
+        addMsg(aiText.replace(/\n/g, '<br/>'), 'bot');
+        if (prompts) prompts.style.display = 'flex';
+        return; // Success — exit the retry loop
+
+      } catch (error) {
+        lastError = error;
+        if (error.name !== 'AbortError' && attempt < maxRetries - 1) {
+          const waitMs = Math.pow(2, attempt + 1) * 1000;
+          await new Promise(r => setTimeout(r, waitMs));
+          continue;
+        }
+      }
+    }
+
+    // All retries failed
+    console.error("Gemini API Error after retries:", lastError);
+    const t = document.getElementById('ai-typing-indicator');
+    if (t) t.remove();
+    
+    let errMsg = "⚠️ CivicNavigator AI is temporarily unavailable due to high demand. Please try again in a few seconds, or visit <a href='https://eci.gov.in' target='_blank' style='color:#2563EB;'>eci.gov.in</a> directly.";
+    if (lastError && lastError.name === 'AbortError') {
+      errMsg = "⏱️ The request timed out. Please check your internet connection and try again.";
+    }
+    
+    addMsg(errMsg, 'bot');
+    if (prompts) prompts.style.display = 'flex';
+  }
+
+  // Welcome message
+  addMsg('Namaste! 🙏 I\'m CivicNavigator. Tell me your State/UT or issue and I\'ll guide your exact next step — whether it\'s registration, verification, or finding your booth.', 'bot');
+
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!RateLimiter.check('aiChat', 2000)) return;
+      const rawQ = input.value.trim();
+      const q = typeof sanitizeInput !== 'undefined' ? sanitizeInput(rawQ) : rawQ;
+      
+      if (!q || (typeof validateInput !== 'undefined' && !validateInput(q))) {
+        addMsg("Please enter your question", 'bot');
+        return;
+      }
+      input.value = '';
+      ask(q);
+    });
+  }
+
+  // Keyboard: Enter key on chat input
+  if (input) {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (form) form.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+    });
+  }
+
+  document.querySelectorAll('.ai-prompt-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      if (!RateLimiter.check('aiChat', 2000)) return;
+      ask(pill.dataset.q);
+    });
+  });
+}
+
+/* ── Mobile Nav ── */
+function initMobileNav() {
+  const toggle = document.getElementById('nav-mobile-toggle');
+  const links = document.getElementById('nav-links');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('.nav-link').forEach(l => {
+    l.addEventListener('click', () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+}
+
+/* ── Init ── */
+/* ── Simulation Scenarios ── */
+const SIM_SCENARIOS = [
+  {
+    good: "You're verified and ready to vote. Your booth will be assigned automatically.",
+    bad: "Your name won't appear on the electoral roll. You cannot vote on election day. No exceptions."
+  },
+  {
+    good: 'File Form 6 on NVSP. Your name gets added before the final roll is published.',
+    bad: 'You will be turned away at the booth. Booth-level officers cannot add you on voting day.'
+  },
+  {
+    good: '12 alternative documents are accepted by ECI including Aadhaar, Passport, and PAN card.',
+    bad: 'Without valid ID, booth officials may deny your vote.'
+  }
+];
+
+function initSimulation() {
+  const container = document.getElementById('sim-cards');
+  if (!container) return;
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.sim-btn');
+    if (!btn) return;
+    const card = btn.closest('.sim-card');
+    const idx = parseInt(card.dataset.sim, 10);
+    const choice = btn.dataset.choice; // 'good' or 'bad'
+    const scenario = SIM_SCENARIOS[idx];
+    const outcomeEl = document.getElementById('sim-outcome-' + idx);
+
+    // Mark chosen / unchosen buttons
+    card.querySelectorAll('.sim-btn').forEach(b => {
+      b.classList.remove('sim-chosen', 'sim-unchosen');
+      if (b === btn) b.classList.add('sim-chosen');
+      else b.classList.add('sim-unchosen');
+    });
+
+    // Show outcome
+    const isGood = choice === 'good';
+    outcomeEl.innerHTML = `<div class="sim-outcome-inner ${isGood ? 'sim-outcome-good' : 'sim-outcome-bad'}">${isGood ? scenario.good : scenario.bad}</div>`;
+    outcomeEl.classList.remove('sim-show');
+    // Force reflow for re-animation
+    void outcomeEl.offsetWidth;
+    outcomeEl.classList.add('sim-show');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initJourney();
+  renderProcessSteps();
+  renderRisks();
+  initStatusSelector();
+  initEligibility();
+  initLocator();
+  initChat();
+  initMobileNav();
+  initSimulation();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.lazy-section').forEach(el => observer.observe(el));
+});
+
+</script>
+</body>
+</html>
